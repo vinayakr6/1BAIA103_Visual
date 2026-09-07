@@ -1,74 +1,375 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="AI History & Types — Module 1 interactive lesson">
-<title>Lesson 02: AI History & Types | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module1.css"></head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 02 — History & Types of Artificial Intelligence</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#5c6878;--line:#dce3ed;--p:#4f46e5;--c:#0891b2;--g:#15803d;--o:#c2410c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.65}
+.top{position:sticky;top:0;z-index:10;background:#111827;color:#fff;padding:12px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;box-shadow:0 4px 20px #0002}.top a{color:#fff;text-decoration:none;border:1px solid #ffffff30;padding:6px 10px;border-radius:8px;font-size:.9rem}
+.wrap{max-width:1200px;margin:auto;padding:28px 18px 70px}.hero{padding:38px;border-radius:24px;background:linear-gradient(135deg,#eef2ff,#ecfeff);border:1px solid #dbe4ff;margin-bottom:22px}.badge{display:inline-block;background:#e0e7ff;color:#3730a3;border-radius:999px;padding:5px 12px;font-size:.8rem;font-weight:800}.hero h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.05;margin:15px 0 10px}.lead{font-size:1.12rem;color:var(--muted);max-width:950px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:23px;margin:18px 0;box-shadow:0 6px 24px #18223009}.kicker{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:var(--p)}h2{margin-top:4px;font-size:1.65rem}h3{margin-bottom:7px}.small{color:var(--muted);font-size:.94rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:15px}.mini{padding:17px;border:1px solid var(--line);border-radius:14px;background:#fafbfe}.icon{font-size:2rem}
+.callout{padding:15px 18px;border-left:5px solid var(--p);background:#f5f3ff;border-radius:0 12px 12px 0}.warn{border-left-color:#ea580c;background:#fff7ed}.good{border-left-color:#16a34a;background:#f0fdf4}
+.timeline{position:relative;margin:25px 0;padding-left:25px}.timeline:before{content:"";position:absolute;left:9px;top:0;bottom:0;width:4px;background:#c7d2fe;border-radius:5px}.event{position:relative;margin:0 0 17px;padding:17px 18px 17px 25px;background:#fff;border:1px solid var(--line);border-radius:14px}.event:before{content:"";position:absolute;left:-23px;top:25px;width:15px;height:15px;background:var(--p);border:4px solid #eef2ff;border-radius:50%}.year{font-weight:900;color:var(--p);font-size:1.1rem}
+.tree{display:flex;justify-content:center;margin:20px 0}.root{border:3px solid var(--p);background:#eef2ff;border-radius:20px;padding:20px;text-align:center;font-weight:900}.branches{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:25px}.branch{border:2px solid var(--line);border-radius:18px;padding:18px;position:relative}.branch:before{content:"";position:absolute;top:-19px;left:50%;height:19px;border-left:2px dashed #94a3b8}.branch h3{margin-top:0}.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px}.type{border:1px solid var(--line);border-radius:16px;padding:19px;background:#fff}.type .tag{display:inline-block;padding:4px 9px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:800;font-size:.75rem}.meter{height:14px;background:#e5e7eb;border-radius:99px;overflow:hidden}.meter i{display:block;height:100%;transition:.35s}
+.compare{width:100%;border-collapse:collapse}.compare th,.compare td{border-bottom:1px solid var(--line);padding:12px;text-align:left;vertical-align:top}.compare th{background:#f8fafc}
+.lab{background:#0f172a;color:#e5e7eb;border-radius:20px;padding:24px}.lab h2{color:#fff}.panel{background:#172033;border:1px solid #334155;border-radius:15px;padding:18px;margin-top:15px}.panel select,.panel button{font:inherit}.panel select{width:100%;padding:11px;border-radius:9px;background:#0b1220;color:#fff;border:1px solid #475569}.panel button,button{border:0;border-radius:10px;padding:10px 14px;background:var(--p);color:#fff;font-weight:800;cursor:pointer;margin:5px 5px 5px 0}.secondary{background:#334155!important}.timeline-card{min-height:170px}.yearbig{font-size:2.3rem;font-weight:900;color:#67e8f9}.type-demo{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:18px 0}.type-demo div{padding:13px 8px;text-align:center;border-radius:12px;background:#1e293b;border:1px solid #475569}.active{background:#312e81!important;border-color:#818cf8!important}.quiz label{display:block;padding:10px;border:1px solid var(--line);border-radius:10px;margin:7px 0}.quiz button{margin-top:8px}.footer{text-align:center;color:var(--muted);padding:28px}
+@media(max-width:760px){.top{position:relative;flex-wrap:wrap}.branches{grid-template-columns:1fr}.type-demo{grid-template-columns:1fr}.timeline{padding-left:22px}}
+</style>
+</head>
 <body>
-<header class="site-header"><div class="container navbar">
-<a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a>
-<nav class="nav-links"><a href="index.html">Module 1</a><a href="../index.html">Course Home</a></nav>
-</div></header>
-<main class="lesson-shell">
-<div class="breadcrumbs">MODULE 1 / LESSON 02</div>
-<section class="lesson-header reveal"><span class="badge">Lesson 02 of 8</span><h1>AI History & Types</h1><p>Evolution • Weak/Strong AI • Reactive • Limited Memory • Theory of Mind • Self-Awareness</p>
-<div class="lesson-progress"><div id="lessonProgress"></div></div>
-<p class="small-note" id="progressText">Lesson not completed</p></section>
+<header class="top">
+<b>1BAIA103/203 · Introduction to AI & Applications</b>
+<nav><a href="lab-01-ai-fundamentals.html">← Lab 01</a> <a href="index.html">Module 1</a> <a href="lab-03-intelligence-comparison.html">Lab 03 →</a></nav>
+</header>
 
-<section class="lesson-section"><div class="visual-panel"><h2>SEE: AI as an evolving field</h2>
-<div class="timeline">
-<div class="timeline-item"><div class="timeline-year">1940s–1950s</div><p>Early mathematical and computational ideas laid foundations for artificial intelligence.</p></div>
-<div class="timeline-item"><div class="timeline-year">1956</div><p>The Dartmouth workshop is commonly associated with the formal naming of the field of artificial intelligence.</p></div>
-<div class="timeline-item"><div class="timeline-year">1960s–1970s</div><p>Symbolic AI, problem solving and early language/knowledge systems developed.</p></div>
-<div class="timeline-item"><div class="timeline-year">1980s</div><p>Expert systems became an important practical AI approach.</p></div>
-<div class="timeline-item"><div class="timeline-year">1990s–2000s</div><p>Data-driven machine learning and statistical methods became increasingly important.</p></div>
-<div class="timeline-item"><div class="timeline-year">2010s–today</div><p>Deep learning, large-scale data and generative AI have expanded AI capabilities and applications.</p></div>
-</div></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>UNDERSTAND: Weak AI vs Strong AI</h2>
-<table class="compare-table"><tr><th>Weak AI / Narrow AI</th><th>Strong AI</th></tr>
-<tr><td>Designed for a particular task or limited set of tasks.</td><td>Refers to a hypothetical system with broad, human-like general intelligence.</td></tr>
-<tr><td>Can be highly capable within its scope.</td><td>Would generalise across many domains.</td></tr>
-<tr><td>Examples are task-oriented AI systems.</td><td>Not established as a real-world general AI system in the supplied syllabus material.</td></tr></table>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: Five functionality-based types</h2>
-<div class="type-grid">
-<div class="type-card"><h4>Reactive Machines</h4><p>Respond to current input; no stored experience used to form a memory of past events.</p></div>
-<div class="type-card"><h4>Limited Memory</h4><p>Uses past information for a limited purpose, such as recent observations or learned patterns.</p></div>
-<div class="type-card"><h4>Theory of Mind</h4><p>A proposed capability involving understanding beliefs, intentions and emotions of others.</p></div>
-<div class="type-card"><h4>Self-Awareness</h4><p>A hypothetical level involving awareness of oneself.</p></div>
-<div class="type-card"><h4>Capability view</h4><p>Weak and strong AI classify systems by breadth of intelligence rather than memory mechanism.</p></div>
+<main class="wrap">
+<section class="hero">
+<span class="badge">MODULE 1 · LAB 02 · CO1</span>
+<h1>History & Types of Artificial Intelligence</h1>
+<p class="lead">Travel from the mathematical neuron and Turing's question to modern AI milestones, then learn how AI systems are classified by <b>capability</b> and by <b>functionality</b>.</p>
+<div class="grid">
+<div class="mini"><b>🕰️ History</b><br><span class="small">Understand the major milestones from 1943 onward.</span></div>
+<div class="mini"><b>🧩 Capability</b><br><span class="small">Weak AI vs Strong AI.</span></div>
+<div class="mini"><b>⚙️ Functionality</b><br><span class="small">Reactive, Limited Memory, Theory of Mind, Self-Awareness.</span></div>
+<div class="mini"><b>🧪 Experiment</b><br><span class="small">Explore the timeline and classify AI examples.</span></div>
 </div>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>TRY: Identify the classification</h2>
-<div class="check"><p>A system that performs a narrow task very well is best described as:</p>
-<button onclick="this.nextElementSibling.style.display='block'">A. Strong AI</button><button onclick="this.nextElementSibling.style.display='block'">B. Weak / Narrow AI</button><div class="answer">Correct: B. The course distinguishes task-focused Weak AI from hypothetical Strong AI.</div></div>
-</div></section>
+</section>
 
-<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>Answer in this order: <b>definition → working/steps → diagram or example → advantages/limitations → conclusion</b> when the question asks for an explanation. Use block diagrams wherever necessary.</p></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2>
-<div class="check"><p><strong>Can you explain the central idea of this lesson without looking at your notes?</strong></p>
-<button onclick="showAnswer()">Yes — reveal the self-check</button>
-<div class="answer" id="answer">Good. Now state the concept in your own words, give one example, and identify one limitation or trade-off.</div></div></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Key Takeaways</h2><ul><li>Start with the problem, not the buzzword.</li><li>Use the visual model to explain the concept before memorising terminology.</li><li>Test the idea with an example and compare alternatives.</li></ul>
-<button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
-<div class="lesson-nav"><a class="btn btn-secondary" href="lab-01-ai-fundamentals.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="lab-03-intelligence-comparison.html">Next →</a></div>
+<section class="card">
+<div class="kicker">1 · Learning Objectives</div>
+<h2>By the end of this lab, you should be able to…</h2>
+<ul>
+<li>Describe important milestones in the development of Artificial Intelligence from <b>1943 to 2020</b>.</li>
+<li>Explain why <b>1956</b> is treated as a landmark year for AI as a formal field in the course material.</li>
+<li>Differentiate <b>Weak AI (Narrow AI)</b> and <b>Strong AI</b>.</li>
+<li>Explain the four functionality categories: <b>Reactive Machines, Limited Memory, Theory of Mind and Self-Awareness</b>.</li>
+<li>Classify examples such as Siri/Alexa, Deep Blue and autonomous vehicles using the course's framework.</li>
+<li>Explain why some categories, particularly Theory of Mind and Self-Awareness, are presented as theoretical rather than established systems.</li>
+</ul>
+</section>
+
+<section class="card">
+<div class="kicker">2 · The Big Picture</div>
+<h2>AI history is a story of changing ideas about intelligence</h2>
+<p>The supplied resources describe AI as developing through several overlapping lines of work: mathematical models inspired by neurons, questions about whether machines can think, symbolic reasoning and problem solving, machine learning, natural language processing, robotics and increasingly data-driven/deep-learning systems.</p>
+<div class="tree">
+<div class="root">ARTIFICIAL<br>INTELLIGENCE</div>
+</div>
+<div class="branches">
+<div class="branch"><h3>🧠 Thinking & Reasoning</h3><p class="small">Neural models, logic, theorem proving, problem solving, knowledge and reasoning.</p></div>
+<div class="branch"><h3>📊 Learning from Data</h3><p class="small">Machine learning, reinforcement learning, deep learning and pattern recognition.</p></div>
+</div>
+<div class="callout"><b>Key lesson:</b> AI did not suddenly appear with modern generative systems. The course history begins with foundational work in the 1940s and 1950s and follows several decades of changing approaches.</div>
+</section>
+
+<section class="card">
+<div class="kicker">3 · History Timeline</div>
+<h2>Major milestones in the course resources</h2>
+<p class="small">The timeline below follows the supplied Module 1 handout and Reema Thareja's Chapter 1. Russell & Norvig is used as a complementary historical reference for the early foundations.</p>
+<div class="timeline">
+<div class="event"><div class="year">1943 — Artificial neuron model</div><p>Warren McCulloch and Walter Pitts proposed a mathematical model of artificial neurons. Russell & Norvig describes this as the first work now generally recognized as AI. The model connected ideas from neuron physiology, propositional logic and computation.</p></div>
+<div class="event"><div class="year">1949 — Hebbian learning</div><p>Donald Hebb described a rule for modifying connection strengths between neurons. This became known as Hebbian learning and influenced later thinking about learning in neural networks.</p></div>
+<div class="event"><div class="year">1950 — Turing Test & early neural computing</div><p>Alan Turing's work on <i>Computing Machinery and Intelligence</i> raised the question “Can machines think?” and introduced the Turing Test. The same year, Marvin Minsky and Dean Edmonds built SNARC, an early neural-network computer; Claude Shannon published work on computer chess.</p></div>
+<div class="event"><div class="year">1952 — Self-learning checkers</div><p>Arthur Samuel developed a self-learning program for checkers. This became an important early demonstration that a program could improve its play through experience.</p></div>
+<div class="event"><div class="year">1954 — Machine translation experiment</div><p>The course text records an IBM computer translating 60 carefully selected Russian sentences into English, illustrating early interest in language processing.</p></div>
+<div class="event"><div class="year">1956 — Dartmouth Conference</div><p>John McCarthy coined the term <b>Artificial Intelligence</b> in connection with the Dartmouth workshop. The course treats this as the birth of AI as a formal field. Allen Newell and Herbert Simon also demonstrated the Logic Theorist, an early reasoning program.</p></div>
+<div class="event"><div class="year">1958 — Lisp</div><p>John McCarthy developed <b>Lisp</b>, an AI programming language that became highly influential. He also worked on ideas for AI systems based on knowledge and reasoning.</p></div>
+<div class="event"><div class="year">1959 — GPS & “machine learning”</div><p>Allen Newell, Herbert Simon and J. C. Shaw developed the General Problem Solver (GPS), intended to imitate human problem solving. Arthur Samuel coined the term <b>machine learning</b>.</p></div>
+<div class="event"><div class="year">1963–1969 — AI labs, ELIZA & expert systems</div><p>John McCarthy started the Stanford AI Lab in 1963. Joseph Weizenbaum developed ELIZA, an early natural-language program. By 1969, an expert system for diagnosing blood infections had been developed at Stanford.</p></div>
+<div class="event"><div class="year">1972 — PROLOG</div><p>The logic programming language <b>PROLOG</b> was created, becoming important for symbolic AI and logic programming.</p></div>
+<div class="event"><div class="year">1974–1980 — First AI Winter</div><p>The course text identifies this period as the First AI Winter, when funding and expectations fell and AI research slowed.</p></div>
+<div class="event"><div class="year">1980 — Commercial expert systems</div><p>DEC developed R1, described by the course text as the first successful commercial expert system.</p></div>
+<div class="event"><div class="year">1982–1983 — Fifth Generation project</div><p>Japan launched the ambitious Fifth Generation Computer Systems project. The US later increased support for advanced computing and AI research.</p></div>
+<div class="event"><div class="year">1987–1993 — Second AI Winter</div><p>The course describes another period of reduced expectations and funding. Japan terminated the Fifth Generation project in 1992; the US ended related efforts in 1993.</p></div>
+<div class="event"><div class="year">1997 — Deep Blue defeats Kasparov</div><p>IBM's Deep Blue defeated world chess champion Garry Kasparov. In the course framework, Deep Blue is an example of a <b>reactive machine</b>.</p></div>
+<div class="event"><div class="year">2005 — STANLEY & autonomous systems</div><p>STANLEY, a self-driving car, won the DARPA Grand Challenge. The course also notes increasing military investment in autonomous robots.</p></div>
+<div class="event"><div class="year">2008 — Speech recognition</div><p>Google made a notable advance in speech recognition and introduced the feature in its iPhone application.</p></div>
+<div class="event"><div class="year">2011 — Siri</div><p>Apple released Siri, an AI-powered virtual assistant. In the course framework, Siri is a classic example of <b>Weak/Narrow AI</b>.</p></div>
+<div class="event"><div class="year">2012 — Deep learning breakthrough</div><p>Andrew Ng's Google Brain work used 10 million YouTube videos as training data for a neural network that learned to recognize cats without being explicitly told what a cat was.</p></div>
+<div class="event"><div class="year">2014 — Self-driving car & Alexa</div><p>The course text records Google's self-driving car passing a state driving test and Amazon releasing Alexa.</p></div>
+<div class="event"><div class="year">2016 — AlphaGo & Sophia</div><p>Google DeepMind's AlphaGo defeated Go world champion Lee Sedol, a major AI milestone. The same year, the course records the creation of Sophia, a humanoid robot capable of facial recognition, verbal communication and facial expression.</p></div>
+<div class="event"><div class="year">2018 — BERT & Waymo One</div><p>Google released BERT, an NLP engine that improved language understanding/translation-related tasks. Waymo One was launched as a self-driving vehicle service.</p></div>
+<div class="event"><div class="year">2020 — LinearFold</div><p>Baidu released LinearFold, which the course text describes as predicting viral RNA sequences rapidly during the early SARS-CoV-2 pandemic.</p></div>
+</div>
+</section>
+
+<section class="lab">
+<div class="kicker" style="color:#67e8f9">4 · Virtual Lab — Explore the Timeline</div>
+<h2>Click a year to inspect the milestone</h2>
+<div class="panel">
+<select id="yearSelect"></select>
+<div class="timeline-card" id="yearCard"></div>
+</div>
+</section>
+
+<section class="card">
+<div class="kicker">5 · Two Ways to Classify AI</div>
+<h2>Capability vs Functionality</h2>
+<div class="grid">
+<div class="mini"><h3>🎯 Based on capability</h3><p><b>Weak AI</b> → designed for a specific task.</p><p><b>Strong AI</b> → aims to resemble broad human intelligence and perform tasks beyond specific training.</p></div>
+<div class="mini"><h3>⚙️ Based on functionality</h3><p><b>Reactive</b> → reacts to current input.</p><p><b>Limited Memory</b> → uses relevant past/short-term information.</p><p><b>Theory of Mind</b> → would model thoughts/emotions.</p><p><b>Self-Awareness</b> → would possess consciousness of itself.</p></div>
+</div>
+<div class="callout warn"><b>Exam alert:</b> “Weak vs Strong” and “Reactive vs Limited Memory vs Theory of Mind vs Self-Awareness” are <b>different classification dimensions</b>. Do not mix them as if they are the same four categories.</div>
+</section>
+
+<section class="card">
+<div class="kicker">6 · Weak AI</div>
+<h2>Weak AI / Narrow AI</h2>
+<div class="types">
+<div class="type"><span class="tag">PURPOSE</span><h3>Specific task</h3><p>Weak AI is specifically designed to perform a particular type of task. It operates within a limited context.</p></div>
+<div class="type"><span class="tag">EXAMPLES</span><h3>Siri · Alexa · Search</h3><p>The textbook gives Siri and Alexa as examples and also lists Google Search, image recognition software, self-driving cars and IBM Watson as examples of narrow AI applications.</p></div>
+<div class="type"><span class="tag">WHY IMPORTANT?</span><h3>Most practical AI today</h3><p>The course describes Weak AI as the most successful realization of AI to date and notes its societal benefits.</p></div>
+</div>
+<div class="callout good"><b>Remember:</b> “Weak” does not mean “useless.” It means the intelligence is <b>narrowly scoped</b> to a task or set of related tasks.</div>
+</section>
+
+<section class="card">
+<div class="kicker">7 · Strong AI</div>
+<h2>Strong AI / AGI / Superintelligence in the course text</h2>
+<p>The supplied material describes Strong AI as an attempt to resemble human thinking. It would require capabilities such as visual perception, speech recognition, decision-making and language translation and would be able to perform tasks for which it was not specifically trained.</p>
+<div class="grid">
+<div class="mini"><b>🧠 General capability</b><p class="small">Unlike a narrowly scoped system, the goal is broad cognitive capability.</p></div>
+<div class="mini"><b>🔄 Transfer to new tasks</b><p class="small">The course associates Strong AI with performing tasks beyond those specifically trained for.</p></div>
+<div class="mini"><b>🎬 Current status in resource</b><p class="small">The material says general AI is seen mainly in science fiction and is not yet a reality.</p></div>
+</div>
+</section>
+
+<section class="card">
+<div class="kicker">8 · Weak AI vs Strong AI</div>
+<h2>Side-by-side comparison</h2>
+<table class="compare">
+<tr><th>Feature</th><th>Weak AI / Narrow AI</th><th>Strong AI</th></tr>
+<tr><td>Scope</td><td>Specific task or limited domain</td><td>Broad human-like intelligence</td></tr>
+<tr><td>Training/task boundary</td><td>Designed for defined tasks</td><td>Aims to handle tasks beyond specific training</td></tr>
+<tr><td>Examples in course</td><td>Siri, Alexa, Google Search, image recognition, self-driving cars, IBM Watson</td><td>Presented as a future/theoretical capability; science-fiction examples are discussed</td></tr>
+<tr><td>Availability</td><td>Widely used</td><td>Not yet established according to the supplied text</td></tr>
+<tr><td>Main idea</td><td>Excellent at a narrow job</td><td>Aims for generalized intelligence</td></tr>
+</table>
+</section>
+
+<section class="card">
+<div class="kicker">9 · Reactive Machines</div>
+<h2>Functionality Type 1 — React to the present</h2>
+<div class="type-demo">
+<div class="active">👁️<br>Current input</div><div>🧮<br>Analyse</div><div>🎯<br>Choose</div><div>⚡<br>Act</div><div>🚫<br>No memory</div>
+</div>
+<p>Reactive machines are the simplest functionality category in the course. They have <b>no memory to store past experiences</b> and respond to the current situation. The supplied textbook uses <b>IBM Deep Blue</b> as an example: it evaluates the present chess-board state and chooses a move without referring to previous games.</p>
+<div class="callout"><b>Key property:</b> Current percept → response. No stored past experience is used to improve future decisions.</div>
+</section>
+
+<section class="card">
+<div class="kicker">10 · Limited Memory</div>
+<h2>Functionality Type 2 — Use relevant past information</h2>
+<div class="type-demo">
+<div class="active">👁️<br>Current input</div><div class="active">🗂️<br>Recent data</div><div class="active">🧠<br>Model</div><div>🎯<br>Decision</div><div>🔁<br>Feedback</div>
+</div>
+<p>Limited Memory machines retain data for a limited period and use it for decisions. The course particularly connects them with autonomous vehicles, which may use recent information such as the speed of nearby cars, distances and speed limits.</p>
+<h3>Three ML models named in the resource</h3>
+<div class="grid">
+<div class="mini"><b>Reinforcement Learning</b><p class="small">Learns through repeated trial and error to make better predictions/decisions.</p></div>
+<div class="mini"><b>Long Short-Term Memory (LSTM)</b><p class="small">Uses past data to help predict the next item in a sequence, giving more priority to recent information while still considering past data.</p></div>
+<div class="mini"><b>Evolutionary GANs (E-GAN)</b><p class="small">The text describes a model that evolves over time using previous experience, simulations and statistics to explore better decisions.</p></div>
+</div>
+</section>
+
+<section class="card">
+<div class="kicker">11 · Theory of Mind</div>
+<h2>Functionality Type 3 — Understanding thoughts and emotions</h2>
+<div class="grid">
+<div class="mini"><div class="icon">💭</div><b>Thoughts</b><p class="small">Would represent aspects of another agent's internal mental state.</p></div>
+<div class="mini"><div class="icon">❤️</div><b>Emotions</b><p class="small">Would account for feelings that affect behaviour.</p></div>
+<div class="mini"><div class="icon">🧠</div><b>Memories</b><p class="small">The course describes representations beginning from thoughts, emotions and memories.</p></div>
+</div>
+<div class="callout warn"><b>Status:</b> The supplied textbook explicitly describes Theory of Mind systems as <b>theoretical</b> and says such systems do not currently exist as described.</div>
+</section>
+
+<section class="card">
+<div class="kicker">12 · Self-Awareness</div>
+<h2>Functionality Type 4 — Awareness of its own state</h2>
+<div class="grid">
+<div class="mini"><div class="icon">🪞</div><b>Self-state</b><p class="small">The system would understand its own state and existence in the world.</p></div>
+<div class="mini"><div class="icon">🤝</div><b>Others' feelings</b><p class="small">The resource describes using self-awareness to deduce or interpret others' feelings.</p></div>
+<div class="mini"><div class="icon">🧩</div><b>Conscious context</b><p class="small">Knowledge and conscious context would influence responses to events.</p></div>
+</div>
+<div class="callout warn"><b>Status:</b> The course material says self-aware AI systems <b>do not yet exist</b> but may become available in the future.</div>
+</section>
+
+<section class="card">
+<div class="kicker">13 · Four Functionality Categories</div>
+<h2>See the progression</h2>
+<table class="compare">
+<tr><th>Type</th><th>Memory</th><th>What it does</th><th>Course example/status</th></tr>
+<tr><td><b>Reactive</b></td><td>None</td><td>Responds to current input</td><td>Deep Blue</td></tr>
+<tr><td><b>Limited Memory</b></td><td>Limited/recent information</td><td>Uses relevant past information</td><td>Autonomous vehicles, AlphaGo; ML models</td></tr>
+<tr><td><b>Theory of Mind</b></td><td>Would represent mental states</td><td>Would understand thoughts/emotions</td><td>Theoretical</td></tr>
+<tr><td><b>Self-Awareness</b></td><td>Would include awareness of self</td><td>Would understand its own existence/state</td><td>Does not yet exist according to the resource</td></tr>
+</table>
+</section>
+
+<section class="lab">
+<div class="kicker" style="color:#67e8f9">14 · Virtual Lab — Classify an AI System</div>
+<h2>Can you identify the category?</h2>
+<p>Read the scenario, choose a functionality category and check your reasoning.</p>
+<div class="panel">
+<h3 id="scenarioTitle"></h3><p id="scenarioText"></p>
+<select id="answer">
+<option value="">Choose a category…</option>
+<option>Reactive Machine</option>
+<option>Limited Memory</option>
+<option>Theory of Mind</option>
+<option>Self-Awareness</option>
+</select>
+<button onclick="checkType()">Check</button>
+<button class="secondary" onclick="nextScenario()">Next Scenario</button>
+<div id="typeResult" style="margin-top:12px"></div>
+</div>
+</section>
+
+<section class="card">
+<div class="kicker">15 · Mini Concept Map</div>
+<h2>How to remember the six types</h2>
+<div class="grid">
+<div class="mini"><b>WEAK</b><p class="small">“I am built for this task.”</p></div>
+<div class="mini"><b>STRONG</b><p class="small">“I aim to handle many kinds of intellectual tasks.”</p></div>
+<div class="mini"><b>REACTIVE</b><p class="small">“I respond to what I see now.”</p></div>
+<div class="mini"><b>LIMITED MEMORY</b><p class="small">“I can use relevant recent/past information.”</p></div>
+<div class="mini"><b>THEORY OF MIND</b><p class="small">“I would understand mental states.”</p></div>
+<div class="mini"><b>SELF-AWARENESS</b><p class="small">“I would understand myself.”</p></div>
+</div>
+</section>
+
+<section class="card">
+<div class="kicker">16 · Common Misconceptions</div>
+<details><summary>“Weak AI means a bad AI.”</summary><p>No. In the course, “weak/narrow” describes scope. A narrow system can be extremely effective at its intended task.</p></details>
+<details><summary>“Strong AI and Limited Memory are the same classification.”</summary><p>No. Weak/Strong classify AI by capability; Reactive/Limited Memory/Theory of Mind/Self-Awareness classify it by functionality.</p></details>
+<details><summary>“Deep Blue remembers every previous chess game.”</summary><p>The supplied course framework uses Deep Blue as a reactive machine and emphasizes that reactive machines do not use stored past experiences.</p></details>
+<details><summary>“Theory of Mind AI already understands human emotions exactly like humans.”</summary><p>The supplied textbook presents Theory of Mind as theoretical and says such systems do not currently exist as described.</p></details>
+<details><summary>“Self-aware AI is the same as a chatbot that says ‘I am conscious.’”</summary><p>A statement generated by a system is not evidence of actual self-awareness. The course definition requires awareness of its own existence/state and consciousness.</p></details>
+</section>
+
+<section class="card quiz">
+<div class="kicker">17 · Quick Check</div>
+<h2>Test your understanding</h2>
+<form id="quiz">
+<p><b>1. Which year does the course identify with the Dartmouth Conference and the coining of “Artificial Intelligence”?</b></p>
+<label><input type="radio" name="q1" value="a"> 1943</label><label><input type="radio" name="q1" value="b"> 1950</label><label><input type="radio" name="q1" value="c"> 1956</label><label><input type="radio" name="q1" value="d"> 1997</label>
+<p><b>2. Siri and Alexa are examples of:</b></p>
+<label><input type="radio" name="q2" value="a"> Strong AI</label><label><input type="radio" name="q2" value="b"> Weak/Narrow AI</label><label><input type="radio" name="q2" value="c"> Self-Aware AI</label>
+<p><b>3. IBM Deep Blue is used in the resource as an example of:</b></p>
+<label><input type="radio" name="q3" value="a"> Reactive Machine</label><label><input type="radio" name="q3" value="b"> Theory of Mind</label><label><input type="radio" name="q3" value="c"> Self-Awareness</label>
+<p><b>4. Which functionality category uses relevant past/limited information?</b></p>
+<label><input type="radio" name="q4" value="a"> Reactive</label><label><input type="radio" name="q4" value="b"> Limited Memory</label><label><input type="radio" name="q4" value="c"> Self-Awareness</label>
+<p><b>5. According to the supplied text, Theory of Mind systems are:</b></p>
+<label><input type="radio" name="q5" value="a"> Already common</label><label><input type="radio" name="q5" value="b"> Theoretical</label><label><input type="radio" name="q5" value="c"> Reactive</label>
+<br><button type="button" onclick="quizCheck()">Check Score</button>
+<div id="quizResult" style="font-weight:800;margin-top:10px"></div>
+</form>
+</section>
+
+<section class="card">
+<div class="kicker">18 · Exam Corner</div>
+<h2>Questions to prepare</h2>
+<ol>
+<li>Explain the history of Artificial Intelligence with important milestones.</li>
+<li>Differentiate between <b>Weak AI and Strong AI</b>.</li>
+<li>Explain <b>Reactive Machines and Limited Memory AI</b> with examples.</li>
+<li>Explain <b>Theory of Mind and Self-Awareness</b>.</li>
+<li>How will you categorize AI systems based on their functionality?</li>
+<li>Explain why IBM Deep Blue is classified as a reactive machine in the course framework.</li>
+<li>Explain the significance of 1956 in AI history.</li>
+</ol>
+<div class="callout">The supplied model question paper tests Module 4/5 topics separately, while the textbook's Chapter 1 review questions directly ask students to differentiate Weak/Strong and Reactive/Limited Memory and categorize AI systems by functionality. fileciteturn15file10</div>
+</section>
+
+<section class="card">
+<div class="kicker">19 · Takeaways</div>
+<div class="callout good">
+<ul>
+<li><b>1943:</b> McCulloch and Pitts' artificial-neuron model is a foundational milestone.</li>
+<li><b>1950:</b> Turing's work introduced the Turing Test and strengthened the question of machine intelligence.</li>
+<li><b>1956:</b> Dartmouth is the landmark associated with the formal birth of AI as a field in the course material.</li>
+<li><b>Weak AI:</b> narrow/specific-task intelligence and widely used today.</li>
+<li><b>Strong AI:</b> aims at broad, human-like/general intelligence and is presented as future/theoretical in the supplied text.</li>
+<li><b>Reactive:</b> current input only; no past experience.</li>
+<li><b>Limited Memory:</b> uses limited/relevant past information.</li>
+<li><b>Theory of Mind:</b> would model thoughts/emotions; theoretical.</li>
+<li><b>Self-Awareness:</b> would possess awareness of its own state/existence; not yet established.</li>
+</ul>
+</div>
+</section>
+
+<section class="card">
+<div class="kicker">20 · Resource Alignment</div>
+<h2>Resources used</h2>
+<ul>
+<li><b>VTU 1BAIA103/203 syllabus</b> — Module 1 explicitly includes History of AI, Weak AI, Strong AI, Reactive Machines, Limited Memory, Theory of Mind and Self-Awareness. fileciteturn15file2</li>
+<li><b>Reema Thareja, Artificial Intelligence: Beyond Classical AI, Chapter 1</b> — sections 1.2 History of AI and 1.3 Types of AI, including Weak AI, Strong AI, Reactive Machines, Limited Memory, Theory of Mind and Self-Awareness. fileciteturn14file3</li>
+<li><b>Reema Thareja, Chapter 1 history section</b> — milestone sequence from 1943 through 2020 used for the detailed timeline. fileciteturn16file7</li>
+<li><b>VTU Module 1 handout</b> — classroom summary of the 1943, 1950, 1956, 1997 and 2011 milestones and the Weak/Strong/Reactive/Limited Memory descriptions. fileciteturn16file5 fileciteturn16file6</li>
+<li><b>Russell & Norvig, Artificial Intelligence: A Modern Approach</b> — complementary early-history material on McCulloch & Pitts, Hebb, Turing, Dartmouth, Logic Theorist and early machine learning. fileciteturn16file2 fileciteturn16file0</li>
+</ul>
+</section>
+
+<div class="footer"><a href="lab-01-ai-fundamentals.html">← Lab 01</a> · <a href="index.html">Module 1</a> · <a href="lab-03-intelligence-comparison.html">Lab 03 →</a></div>
 </main>
-<footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 1</div><div>Lesson 02: AI History & Types</div></div></footer>
-<script src="../assets/js/progress.js"></script>
+
 <script>
-const LESSON_ID="lab-02-ai-history-types";
-function showAnswer(){document.getElementById("answer").style.display="block";}
-function completeLesson(){
-  AIProgress.markLessonComplete(LESSON_ID);
-  document.getElementById("lessonProgress").style.width="100%";
-  document.getElementById("progressText").textContent="Completed locally ✓";
-  document.getElementById("completeBtn").textContent="✓ Lesson Completed";
-  document.getElementById("completeBtn").disabled=true;
+const milestones=[
+["1943","Artificial neuron model","Warren McCulloch and Walter Pitts proposed a mathematical model of artificial neurons, a foundational milestone in AI.","Foundations"],
+["1949","Hebbian learning","Donald Hebb described a rule for changing connection strengths between neurons.","Learning"],
+["1950","Turing Test & early neural computing","Alan Turing's work raised the question of machine intelligence and introduced the Turing Test; Minsky and Edmonds built SNARC.","Foundations"],
+["1952","Self-learning checkers","Arthur Samuel developed a self-learning checkers program.","Machine Learning"],
+["1954","Machine translation","IBM computer translated 60 carefully selected Russian sentences into English.","Language"],
+["1956","Dartmouth Conference","John McCarthy coined the term Artificial Intelligence in connection with the Dartmouth workshop; Logic Theorist was demonstrated.","Birth of AI"],
+["1958","Lisp","John McCarthy developed Lisp, a highly influential AI programming language.","Symbolic AI"],
+["1959","GPS & machine learning","General Problem Solver was developed; Arthur Samuel coined the term machine learning.","Problem Solving"],
+["1963–69","AI Lab, ELIZA & expert systems","Stanford AI Lab began; ELIZA emerged; an early expert system for blood-infection diagnosis was developed.","Symbolic AI"],
+["1972","PROLOG","Logic programming language PROLOG was created.","Logic Programming"],
+["1974–80","First AI Winter","Funding and expectations fell, slowing AI research.","AI Winter"],
+["1980","R1 expert system","DEC developed the first successful commercial expert system described in the text.","Expert Systems"],
+["1982–83","Fifth Generation project","Japan launched the Fifth Generation Computer Systems project and US support for advanced computing increased.","Research"],
+["1987–93","Second AI Winter","Another period of reduced expectations and funding; major projects were terminated.","AI Winter"],
+["1997","Deep Blue defeats Kasparov","IBM's Deep Blue defeated world chess champion Garry Kasparov.","Game AI"],
+["2005","STANLEY wins DARPA challenge","The self-driving car STANLEY won the DARPA Grand Challenge.","Autonomous Systems"],
+["2008","Speech recognition","Google made a notable advance in speech recognition and introduced it in its iPhone application.","Speech AI"],
+["2011","Siri","Apple released Siri, an AI-powered virtual assistant.","Weak AI"],
+["2012","Deep learning cat recognition","Google Brain work used 10 million YouTube videos to train a neural network to recognize cats.","Deep Learning"],
+["2014","Self-driving car & Alexa","Google's self-driving car passed a state driving test; Amazon released Alexa.","Weak AI"],
+["2016","AlphaGo & Sophia","AlphaGo defeated Lee Sedol; Sophia, a humanoid robot, was created according to the course text.","Game AI / Robotics"],
+["2018","BERT & Waymo One","Google released BERT; Waymo One self-driving service launched.","NLP / Autonomous"],
+["2020","LinearFold","Baidu released LinearFold, described in the course text as rapidly predicting viral RNA sequences.","AI for science"]
+];
+const ys=document.getElementById('yearSelect');
+milestones.forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent=m[0]+" — "+m[1];ys.appendChild(o)});
+function showYear(){
+ const m=milestones[+ys.value];
+ document.getElementById('yearCard').innerHTML='<div class="yearbig">'+m[0]+'</div><h3>'+m[1]+'</h3><p>'+m[2]+'</p><span style="color:#67e8f9;font-weight:800">'+m[3]+'</span>';
 }
-document.addEventListener("DOMContentLoaded",()=>{
- const done=AIProgress.get(LESSON_ID)>=100;
- document.getElementById("lessonProgress").style.width=done?"100%":"0%";
- document.getElementById("progressText").textContent=done?"Completed locally ✓":"Lesson not completed";
- if(done){document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
-});
+ys.addEventListener('change',showYear);showYear();
+
+const scenarios=[
+["Deep Blue","A chess system evaluates the current board and chooses a move without storing previous games for future use.","Reactive Machine"],
+["Autonomous vehicle","The system uses recent information such as nearby-car speed, distance and speed limits to make driving decisions.","Limited Memory"],
+["Emotion-aware future AI","A hypothetical machine represents another person's thoughts and emotions and uses them when deciding how to respond.","Theory of Mind"],
+["Conscious machine","A hypothetical system understands its own existence and internal state and uses that awareness in interaction.","Self-Awareness"],
+["Siri-style assistant","A virtual assistant is built for a defined task such as responding to requests and playing music.","Weak AI"]
+];
+let si=0;
+function renderScenario(){document.getElementById('scenarioTitle').textContent=scenarios[si][0];document.getElementById('scenarioText').textContent=scenarios[si][1];document.getElementById('answer').value='';document.getElementById('typeResult').textContent=''}
+function checkType(){
+ const a=document.getElementById('answer').value, correct=scenarios[si][2], r=document.getElementById('typeResult');
+ if(!a){r.textContent='Choose a category first.';return}
+ r.innerHTML=a===correct?'✅ Correct. <b>'+correct+'</b> — your classification matches the scenario.':'❌ Not quite. The expected answer is <b>'+correct+'</b>. Re-read the defining property.';
+}
+function nextScenario(){si=(si+1)%scenarios.length;renderScenario()}renderScenario();
+
+function quizCheck(){
+ const ans={q1:'c',q2:'b',q3:'a',q4:'b',q5:'b'};let s=0;
+ Object.keys(ans).forEach(k=>{const x=document.querySelector('input[name="'+k+'"]:checked');if(x&&x.value===ans[k])s++});
+ document.getElementById('quizResult').textContent='Score: '+s+'/5 '+(s===5?'🎉 Excellent!':s>=3?'👍 Good — review the missed concepts.':'📘 Revisit the timeline and AI-type sections, then try again.');
+}
 </script>
-</body></html>
+</body>
+</html>
