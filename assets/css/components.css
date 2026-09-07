@@ -1,0 +1,143 @@
+/* Reusable components for future lesson pages */
+
+.lesson-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 16px;
+}
+
+.lesson-header {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: var(--shadow);
+}
+
+.lesson-breadcrumb {
+  color: var(--muted);
+  font-size: .86rem;
+  font-weight: 700;
+}
+
+.lesson-header h1 { margin: 10px 0; font-size: clamp(2rem, 5vw, 3.8rem); line-height: 1.02; }
+
+.objectives {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.objective-card {
+  background: var(--surface-2);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.visual-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  margin-top: 20px;
+  box-shadow: var(--shadow);
+}
+
+.flow-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+
+.flow-box {
+  min-width: 130px;
+  padding: 18px;
+  text-align: center;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  font-weight: 850;
+}
+
+.interactive-panel {
+  margin-top: 20px;
+  padding: 22px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.tab-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tab-button {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 9px 13px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 750;
+}
+
+.tab-button.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.tab-panel { margin-top: 16px; }
+
+.callout {
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--surface-2);
+  margin-top: 14px;
+}
+
+.quiz-question {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  background: var(--surface);
+}
+
+.quiz-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.quiz-option:hover { border-color: var(--primary); }
+
+.result-box {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  display: none;
+}
+
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+@media (max-width: 700px) {
+  .objectives { grid-template-columns: 1fr; }
+  .lesson-nav { flex-direction: column; }
+}

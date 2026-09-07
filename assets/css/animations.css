@@ -1,0 +1,24 @@
+/* Lightweight animations — no external library required */
+
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseSoft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.025); }
+}
+
+.reveal {
+  animation: floatIn .55s ease both;
+}
+
+.pulse-soft {
+  animation: pulseSoft 2.4s ease-in-out infinite;
+}
+
+.flow-box:hover {
+  transform: translateY(-3px);
+  transition: transform .18s ease;
+}
