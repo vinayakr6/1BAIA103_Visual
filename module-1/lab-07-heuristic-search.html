@@ -1,74 +1,233 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Heuristic Search — Module 1 interactive lesson">
-<title>Lesson 07: Heuristic Search | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module1.css"></head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab 07 — Informed & Heuristic Search</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#647089;--a:#315bea;--a2:#6d28d9;--line:#dfe5ef;--good:#15803d;--warn:#b45309}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+header{background:linear-gradient(135deg,#172554,#4c1d95);color:#fff;padding:42px 6%}.hero{max-width:1120px;margin:auto}.tag{display:inline-block;border:1px solid #ffffff44;background:#ffffff1c;border-radius:999px;padding:6px 12px;font-size:.82rem}
+h1{font-size:clamp(2.1rem,5vw,3.7rem);line-height:1.05;margin:16px 0}.hero p{max-width:900px;color:#e9e9ff}
+nav{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);display:flex;gap:8px;padding:9px 6%;overflow:auto}nav a{white-space:nowrap;text-decoration:none;color:#334155;padding:7px 10px;border-radius:8px}nav a:hover{background:#eef2ff}
+main{max-width:1120px;margin:28px auto;padding:0 18px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:18px 0;box-shadow:0 5px 18px #1725540a}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px}
+h2{color:#172554;margin-top:0}h3{color:#26365e}.callout{background:#eef2ff;border-left:5px solid var(--a);padding:14px 17px;border-radius:10px}.good{background:#f0fdf4;border-left-color:#16a34a}.warn{background:#fff7ed;border-left-color:#f59e0b}
+.pill{display:inline-block;background:#eef2ff;color:#3730a3;border-radius:999px;padding:4px 9px;font-size:.8rem;margin:2px}
+.flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:20px 0}.box{padding:13px 18px;border:2px solid #94a3b8;background:#f8fafc;border-radius:12px;text-align:center;font-weight:700}.arrow{font-size:1.5rem;color:#64748b}
+.formula{font-size:1.5rem;text-align:center;background:#111827;color:#fff;border-radius:12px;padding:18px;margin:15px 0;font-weight:800}
+table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#f1f5f9}
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0}button,select,input{font:inherit}button{border:0;border-radius:9px;padding:10px 15px;background:var(--a);color:#fff;cursor:pointer}button.secondary{background:#475569}button.good{background:var(--good)}
+#map{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:720px;margin:20px auto}.city{padding:14px 8px;text-align:center;border:2px solid #cbd5e1;border-radius:12px;background:#fff;font-weight:700}.city.active{background:#dbeafe;border-color:#2563eb}.city.goal{background:#dcfce7;border-color:#16a34a}
+.metric{display:flex;gap:12px;align-items:center;margin:9px 0}.bar{height:16px;background:#e2e8f0;border-radius:99px;flex:1;overflow:hidden}.fill{height:100%;width:0;background:#6366f1;transition:.35s}
+.log{background:#0f172a;color:#dbeafe;padding:15px;border-radius:12px;min-height:100px;white-space:pre-wrap}
+.quiz .choice{display:block;padding:8px;border:1px solid var(--line);border-radius:8px;margin:6px 0}.quiz button{margin-top:5px}.ans{display:none;margin:8px 0;font-weight:700}
+small{color:var(--muted)}footer{max-width:1120px;margin:40px auto;padding:0 18px 50px;color:var(--muted)}
+</style>
+</head>
 <body>
-<header class="site-header"><div class="container navbar">
-<a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a>
-<nav class="nav-links"><a href="index.html">Module 1</a><a href="../index.html">Course Home</a></nav>
+<header><div class="hero">
+<span class="tag">MODULE 1 · LAB 07 · INFORMED SEARCH</span>
+<h1>Informed / Heuristic Search</h1>
+<p>Learn how an AI agent can use extra problem-specific information to explore promising states instead of searching blindly.</p>
 </div></header>
-<main class="lesson-shell">
-<div class="breadcrumbs">MODULE 1 / LESSON 07</div>
-<section class="lesson-header reveal"><span class="badge">Lesson 07 of 8</span><h1>Heuristic Search</h1><p>Informed search • Heuristic h(n) • Pure heuristic • Greedy best-first</p>
-<div class="lesson-progress"><div id="lessonProgress"></div></div>
-<p class="small-note" id="progressText">Lesson not completed</p></section>
+<nav><a href="#obj">Objectives</a><a href="#concept">Concept</a><a href="#heuristic">Heuristic</a><a href="#pure">Pure Heuristic</a><a href="#greedy">Greedy</a><a href="#compare">Compare</a><a href="#lab">Virtual Lab</a><a href="#quiz">Quick Check</a><a href="#exam">Exam Corner</a></nav>
+<main>
+<section id="obj" class="card">
+<h2>🎯 Learning Objectives</h2>
+<div class="grid">
+<div>Explain informed search and the role of <b>h(n)</b>.</div>
+<div>Understand <b>OPEN</b> and <b>CLOSED</b> lists.</div>
+<div>Trace <b>Pure Heuristic Search</b>.</div>
+<div>Trace <b>Greedy Best-First Search</b>.</div>
+<div>Explain why a heuristic can reduce unnecessary exploration.</div>
+<div>Recognise that Greedy Search is not guaranteed to return the optimal path.</div>
+</div>
+</section>
 
-<section class="lesson-section"><div class="visual-panel"><h2>SEE: Search with a hint</h2>
-<p>Informed search adds problem-specific information about the goal. A heuristic function h(n) estimates how close a state is to the goal.</p>
-<div class="visual-flow"><div class="vnode">State n</div><div class="varrow">→</div><div class="vnode">Heuristic h(n)</div><div class="varrow">→</div><div class="vnode">Estimate closeness</div><div class="varrow">→</div><div class="vnode">Choose promising node</div></div>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>UNDERSTAND: Pure Heuristic Search</h2>
-<p>The supplied module material describes pure heuristic search as expanding nodes according to h(n), maintaining OPEN and CLOSED lists, and selecting the node with the lowest heuristic value.</p>
-<div class="code-like">OPEN  = nodes waiting to be expanded
-CLOSED = nodes already expanded
+<section id="concept" class="card">
+<h2>🧭 From Blind Search to Informed Search</h2>
+<p>Uninformed algorithms such as BFS and DFS search without information about where the goal is. <b>Informed search</b> uses additional information about the search space—especially an estimate of how far a node is from the goal—to guide expansion. The VTU material describes it as a way to find a goal efficiently by using extra information about the search space. fileciteturn24file16</p>
+<div class="flow">
+<div class="box">Current state</div><div class="arrow">→</div><div class="box">Heuristic h(n)</div><div class="arrow">→</div><div class="box">Rank candidates</div><div class="arrow">→</div><div class="box">Expand promising node</div>
+</div>
+<div class="callout good"><b>Key idea:</b> Informed search is “guided” search. The guidance is supplied by a heuristic function rather than by blindly choosing the next node.</div>
+</section>
 
-repeat:
-    choose node with lowest h(n)
-    move it to CLOSED
-    expand its successors
-    insert promising successors into OPEN
-until goal is found</div>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: Greedy Best-First Search</h2>
-<div class="search-lab"><div><div class="search-board" id="heuristicBoard"></div><div class="controls"><button class="btn btn-primary" onclick="greedyStep()">Choose lowest h(n)</button><button class="btn btn-secondary" onclick="resetGreedy()">Reset</button></div><p id="greedyStatus" class="small-note"></p></div>
-<div><h3>Heuristic values</h3><table class="compare-table"><tr><th>Node</th><th>h(n)</th></tr><tr><td>A</td><td>7</td></tr><tr><td>B</td><td>3</td></tr><tr><td>C</td><td>5</td></tr><tr><td>D</td><td>1</td></tr><tr><td>G</td><td>0</td></tr></table><p class="small-note">Lower h(n) means the node appears closer to the goal.</p></div></div>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Important limitation</h2><p>Greedy best-first search chooses what appears best at the moment. The supplied reference notes that it is not an optimal algorithm and can behave poorly in some cases.</p></div></section>
-<script>
-const hs=[["S",8],["A",7],["B",3],["C",5],["D",1],["G",0]];let gi=0;
-function drawH(){const b=document.getElementById("heuristicBoard");b.innerHTML='<div class="tree-row">'+hs.map(x=>`<div class="node ${x[0]==="G"?"goal":""}" id="h-${x[0]}">${x[0]}<small style="display:block;font-size:10px">${x[1]}</small></div>`).join("")+'</div>'}
-function greedyStep(){if(gi>=hs.length){document.getElementById("greedyStatus").textContent="Goal reached.";return}let candidates=hs.slice(1).filter(x=>!document.getElementById("h-"+x[0]).classList.contains("visited"));if(!candidates.length)return;let best=candidates.reduce((a,b)=>a[1]<b[1]?a:b);document.getElementById("h-"+best[0]).classList.add("visited");gi++;document.getElementById("greedyStatus").textContent=`Selected ${best[0]} because it has the lowest remaining h(n) = ${best[1]}.`}
-function resetGreedy(){gi=0;drawH();document.getElementById("greedyStatus").textContent="Choose a step."}
-document.addEventListener("DOMContentLoaded",resetGreedy);
-</script>
+<section id="heuristic" class="card">
+<h2>📏 The Heuristic Function h(n)</h2>
+<p>Russell & Norvig define the heuristic function as the <b>estimated cost of the cheapest path from the state at node n to a goal state</b>. In route finding, straight-line distance to the destination is a common example. fileciteturn24file11</p>
+<div class="formula">h(n) = estimated cost from n → goal</div>
+<div class="grid">
+<div><h3>Low h(n)</h3><p>The node appears closer to the goal.</p><span class="pill">More promising</span></div>
+<div><h3>High h(n)</h3><p>The node appears farther from the goal.</p><span class="pill">Less promising</span></div>
+<div><h3>Domain knowledge</h3><p>A useful heuristic captures information about the problem domain.</p><span class="pill">Guidance</span></div>
+</div>
+<p>Reema Thareja describes the heuristic function as an estimate used to determine how close the agent is to the goal and notes that heuristic methods can reduce unnecessary exploration. fileciteturn24file0</p>
+</section>
 
-<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>Answer in this order: <b>definition → working/steps → diagram or example → advantages/limitations → conclusion</b> when the question asks for an explanation. Use block diagrams wherever necessary.</p></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2>
-<div class="check"><p><strong>Can you explain the central idea of this lesson without looking at your notes?</strong></p>
-<button onclick="showAnswer()">Yes — reveal the self-check</button>
-<div class="answer" id="answer">Good. Now state the concept in your own words, give one example, and identify one limitation or trade-off.</div></div></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Key Takeaways</h2><ul><li>Start with the problem, not the buzzword.</li><li>Use the visual model to explain the concept before memorising terminology.</li><li>Test the idea with an example and compare alternatives.</li></ul>
-<button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
-<div class="lesson-nav"><a class="btn btn-secondary" href="lab-06-depth-limited-iddfs.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="lab-08-a-star.html">Next →</a></div>
+<section class="card">
+<h2>🗺️ Visual Example: Straight-Line Distance</h2>
+<p>For a route-finding problem whose goal is <b>Bucharest</b>, Russell & Norvig use straight-line distance as a heuristic. For example, the supplied text gives <b>h(Arad)=366</b>. fileciteturn24file11</p>
+<div class="grid">
+<div class="box">Arad<br><b>h = 366</b></div>
+<div class="box">Sibiu<br><b>h = 253</b></div>
+<div class="box">Fagaras<br><b>h = 176</b></div>
+<div class="box">Bucharest<br><b>h = 0</b></div>
+</div>
+<p>Lower heuristic values make states look more attractive to a greedy search. This is an <b>estimate</b>, not necessarily the actual road cost.</p>
+</section>
+
+<section id="pure" class="card">
+<h2>🔎 1. Pure Heuristic Search</h2>
+<p>The supplied Reema Thareja text presents pure heuristic search as a simple heuristic-search approach that expands nodes based on their heuristic value <b>h(n)</b>. It maintains two lists: <b>OPEN</b> for nodes not yet expanded and <b>CLOSED</b> for nodes already expanded. At each step, the node with the lowest heuristic value is selected. fileciteturn24file0</p>
+<div class="flow">
+<div class="box">OPEN</div><div class="arrow">→</div><div class="box">Choose lowest h(n)</div><div class="arrow">→</div><div class="box">CLOSED</div><div class="arrow">→</div><div class="box">Generate children</div><div class="arrow">↺</div><div class="box">OPEN</div>
+</div>
+<h3>Algorithm idea</h3>
+<ol>
+<li>Put the start node in OPEN.</li>
+<li>Choose the OPEN node with the smallest heuristic value.</li>
+<li>Move it to CLOSED.</li>
+<li>Expand it and calculate heuristic values for successors.</li>
+<li>Continue until the goal is reached or OPEN becomes empty.</li>
+</ol>
+</section>
+
+<section id="greedy" class="card">
+<h2>🥇 2. Best-First Search (Greedy Search)</h2>
+<p>Reema Thareja describes Greedy Best-First Search as selecting the path that appears best at the moment, using the heuristic to choose the most promising node; it is implemented with a priority queue. fileciteturn24file14</p>
+<p>Russell & Norvig express the same greedy principle with the evaluation function:</p>
+<div class="formula">f(n) = h(n)</div>
+<p>Thus, the smallest <b>h(n)</b> gets priority. The algorithm is “greedy” because it tries to get as close to the goal as possible at each step. fileciteturn24file12</p>
+<div class="callout warn"><b>Important:</b> Greedy Best-First Search is not optimal. A node that looks closest according to h(n) can lead to a worse overall route. Reema Thareja also lists getting stuck in loops and non-optimality among its disadvantages. fileciteturn24file14</div>
+</section>
+
+<section class="card">
+<h2>🧩 Greedy Search Worked Example</h2>
+<p>The VTU example uses the path <b>S → B → F → G</b>, where G is the goal. The algorithm repeatedly chooses the node with the lowest heuristic value from OPEN. fileciteturn24file15</p>
+<table>
+<tr><th>Iteration</th><th>OPEN</th><th>CLOSED</th><th>Decision</th></tr>
+<tr><td>Start</td><td>A, B</td><td>S</td><td>B has lower h(n) → expand B</td></tr>
+<tr><td>1</td><td>E, F, A</td><td>S, B</td><td>F has lowest h(n) → expand F</td></tr>
+<tr><td>2</td><td>I, G, E, A</td><td>S, B, F</td><td>G is the goal → terminate</td></tr>
+</table>
+<div class="callout good"><b>Path found:</b> S → B → F → G.</div>
+</section>
+
+<section id="compare" class="card">
+<h2>⚖️ Pure Heuristic vs Greedy Best-First vs Uninformed Search</h2>
+<table>
+<tr><th>Feature</th><th>Uninformed</th><th>Pure Heuristic</th><th>Greedy Best-First</th></tr>
+<tr><td>Extra knowledge</td><td>No heuristic.</td><td>Uses h(n).</td><td>Uses h(n).</td></tr>
+<tr><td>Selection idea</td><td>Depends on strategy.</td><td>Lowest heuristic value.</td><td>Lowest h(n) among frontier candidates.</td></tr>
+<tr><td>Main strength</td><td>Does not require domain guidance.</td><td>Reduces unguided exploration.</td><td>Can reach a promising goal quickly.</td></tr>
+<tr><td>Main limitation</td><td>May explore many irrelevant nodes.</td><td>Quality depends on heuristic.</td><td>Not optimal; greedy choices can be misleading.</td></tr>
+</table>
+</section>
+
+<section id="lab" class="card">
+<h2>🧪 Virtual Lab: Heuristic-Guided Route Selection</h2>
+<p><b>How to use:</b> click <b>Next Step</b> to let the greedy strategy select the available city with the lowest heuristic value. Then compare the chosen route with the alternative route costs shown below.</p>
+<div id="map">
+<div class="city active" id="S">S<br><small>h=10</small></div>
+<div class="city" id="A">A<br><small>h=8</small></div>
+<div class="city" id="B">B<br><small>h=5</small></div>
+<div class="city" id="C">C<br><small>h=7</small></div>
+<div class="city goal" id="G">G 🎯<br><small>h=0</small></div>
+</div>
+<div class="controls">
+<button onclick="stepGreedy()">Next Step</button>
+<button class="secondary" onclick="resetGreedy()">Reset</button>
+<span id="state"><b>Current:</b> S</span>
+</div>
+<div class="metric"><b>Greedy h(n)</b><div class="bar"><div class="fill" id="hb"></div></div><span id="hv">10</span></div>
+<div class="log" id="glog">OPEN = [A(h=8), B(h=5), C(h=7)]
+Choose the lowest h(n).</div>
+<p><small>This small teaching graph demonstrates the selection principle; it is not intended to reproduce a particular textbook graph.</small></p>
+</section>
+
+<section class="card">
+<h2>🧠 Why Heuristics Matter</h2>
+<div class="flow">
+<div class="box">Huge search space</div><div class="arrow">→</div><div class="box">Estimate goal distance</div><div class="arrow">→</div><div class="box">Prioritize promising nodes</div><div class="arrow">→</div><div class="box">Less unnecessary exploration</div>
+</div>
+<p>Russell & Norvig explain that informed search uses domain-specific hints about the location of goals to find solutions more efficiently than uninformed search. fileciteturn24file11</p>
+</section>
+
+<section class="card">
+<h2>🚦 When should you use which?</h2>
+<div class="grid">
+<div><h3>Use uninformed search</h3><p>When no useful domain heuristic is available.</p></div>
+<div><h3>Use heuristic search</h3><p>When domain knowledge can estimate closeness to the goal.</p></div>
+<div><h3>Use Greedy Best-First</h3><p>When reaching a promising goal quickly is more important than guaranteeing the lowest-cost solution.</p></div>
+</div>
+</section>
+
+<section class="card">
+<h2>⚠️ Common Misconceptions</h2>
+<ul>
+<li><b>“Heuristic means exact distance.”</b> No. It is an estimate.</li>
+<li><b>“Lowest h(n) always gives the shortest path.”</b> No. Greedy search is not optimal. fileciteturn24file12</li>
+<li><b>“Informed means the AI knows the answer.”</b> No. It has useful guidance, not certainty.</li>
+<li><b>“A heuristic is useful only for maps.”</b> No. The idea is general; maps provide an intuitive example.</li>
+</ul>
+</section>
+
+<section id="quiz" class="card quiz">
+<h2>📝 Quick Check</h2>
+<div><b>1. What does h(n) estimate?</b>
+<label class="choice"><input type="radio" name="q1" value="a"> Cost from n to a goal</label>
+<label class="choice"><input type="radio" name="q1" value="b"> Number of CPUs</label>
+<label class="choice"><input type="radio" name="q1" value="c"> Memory size</label>
+<button onclick="check('q1','a','a1')">Check</button><div class="ans" id="a1"></div></div><hr>
+<div><b>2. Greedy Best-First Search primarily chooses the node with:</b>
+<label class="choice"><input type="radio" name="q2" value="a"> Lowest h(n)</label>
+<label class="choice"><input type="radio" name="q2" value="b"> Highest h(n)</label>
+<label class="choice"><input type="radio" name="q2" value="c"> Random h(n)</label>
+<button onclick="check('q2','a','a2')">Check</button><div class="ans" id="a2"></div></div><hr>
+<div><b>3. Is Greedy Best-First Search optimal?</b>
+<label class="choice"><input type="radio" name="q3" value="a"> Yes, always</label>
+<label class="choice"><input type="radio" name="q3" value="b"> No</label>
+<label class="choice"><input type="radio" name="q3" value="c"> Only when h(n) is high</label>
+<button onclick="check('q3','b','a3')">Check</button><div class="ans" id="a3"></div></div>
+</section>
+
+<section id="exam" class="card">
+<h2>🎓 Exam Corner</h2>
+<ul>
+<li><b>Define informed search.</b> Search that uses additional information about the search space to guide the search toward the goal. fileciteturn24file16</li>
+<li><b>Define heuristic function.</b> h(n) estimates the cost of the cheapest path from node n's state to a goal. fileciteturn24file11</li>
+<li><b>Explain Pure Heuristic Search.</b> Maintain OPEN/CLOSED and expand the node with the lowest h(n). fileciteturn24file0</li>
+<li><b>Explain Greedy Best-First Search.</b> It chooses the most promising node using h(n), typically via a priority queue. fileciteturn24file14</li>
+<li><b>State a limitation.</b> Greedy search is not optimal and a poor heuristic can mislead the search. fileciteturn24file15</li>
+</ul>
+<div class="callout"><b>Important for the next lab:</b> Greedy Search uses <b>f(n)=h(n)</b>. A* will combine path cost and heuristic: <b>f(n)=g(n)+h(n)</b>. fileciteturn24file12</div>
+</section>
+
+<section class="card">
+<h2>📚 Resource Alignment</h2>
+<p><b>VTU Module 1:</b> Informed Search Algorithms, Pure Heuristic Search and Best-First Search (Greedy Search). fileciteturn24file2turn24file5</p>
+<p><b>Reema Thareja, Artificial Intelligence: Beyond Classical AI:</b> informed search, heuristic function, Pure Heuristic Search and Best-First/Greedy Search. fileciteturn24file0turn24file14</p>
+<p><b>Russell & Norvig:</b> informed/heuristic search and Greedy Best-First Search. fileciteturn24file11turn24file12</p>
+</section>
+
+<div class="card callout good"><b>Next:</b> Lab 08 — A* Search + Knowledge Representation.</div>
 </main>
-<footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 1</div><div>Lesson 07: Heuristic Search</div></div></footer>
-<script src="../assets/js/progress.js"></script>
+<footer>1BAIA103/203 · Introduction to AI and Applications · Module 1 · Lab 07</footer>
 <script>
-const LESSON_ID="lab-07-heuristic-search";
-function showAnswer(){document.getElementById("answer").style.display="block";}
-function completeLesson(){
-  AIProgress.markLessonComplete(LESSON_ID);
-  document.getElementById("lessonProgress").style.width="100%";
-  document.getElementById("progressText").textContent="Completed locally ✓";
-  document.getElementById("completeBtn").textContent="✓ Lesson Completed";
-  document.getElementById("completeBtn").disabled=true;
+const path=['S','B','F','G'], hs={S:10,B:5,F:2,G:0};
+let i=0;
+function paint(n){document.querySelectorAll('.city').forEach(e=>e.classList.remove('active'));document.getElementById(n).classList.add('active')}
+function stepGreedy(){
+ if(i>=path.length-1){document.getElementById('glog').textContent='🎯 Goal reached. Reset to run again.';return}
+ i++; const n=path[i]; paint(n);
+ document.getElementById('state').innerHTML='<b>Current:</b> '+n;
+ document.getElementById('hv').textContent=hs[n];
+ document.getElementById('hb').style.width=(hs[n]*10)+'%';
+ document.getElementById('glog').textContent='Greedy selected '+n+' because it is the next most promising state in this teaching graph.\\nCurrent h(n) = '+hs[n]+(n==='G'?'\\n🎯 Goal reached!':'');
 }
-document.addEventListener("DOMContentLoaded",()=>{
- const done=AIProgress.get(LESSON_ID)>=100;
- document.getElementById("lessonProgress").style.width=done?"100%":"0%";
- document.getElementById("progressText").textContent=done?"Completed locally ✓":"Lesson not completed";
- if(done){document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
-});
+function resetGreedy(){i=0;paint('S');document.getElementById('state').innerHTML='<b>Current:</b> S';document.getElementById('hv').textContent='10';document.getElementById('hb').style.width='100%';document.getElementById('glog').textContent='OPEN = [A(h=8), B(h=5), C(h=7)]\\nChoose the lowest h(n).'}
+function check(q,c,id){const v=document.querySelector('input[name="'+q+'"]:checked'),e=document.getElementById(id);e.style.display='block';e.textContent=!v?'Choose an answer first.':v.value===c?'✅ Correct!':'❌ Try again — review the concept above.'}
 </script>
-</body></html>
+</body>
+</html>
