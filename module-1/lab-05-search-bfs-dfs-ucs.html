@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Uninformed Search — Module 1 interactive lesson">
+<title>Lesson 05: Uninformed Search | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module1.css"></head>
+<body>
+<header class="site-header"><div class="container navbar">
+<a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a>
+<nav class="nav-links"><a href="index.html">Module 1</a><a href="../index.html">Course Home</a></nav>
+</div></header>
+<main class="lesson-shell">
+<div class="breadcrumbs">MODULE 1 / LESSON 05</div>
+<section class="lesson-header reveal"><span class="badge">Lesson 05 of 8</span><h1>Uninformed Search</h1><p>Search space • DFS • BFS • UCS • Completeness • Cost • Memory</p>
+<div class="lesson-progress"><div id="lessonProgress"></div></div>
+<p class="small-note" id="progressText">Lesson not completed</p></section>
+
+<section class="lesson-section"><div class="visual-panel"><h2>SEE: Search as problem solving</h2>
+<p>Search explores a problem graph from a start state toward a goal state. The course material describes the problem graph, strategy, fringe, tree, solution plan and path/step cost.</p>
+<div class="visual-flow"><div class="vnode">Start S</div><div class="varrow">→</div><div class="vnode">Search strategy</div><div class="varrow">→</div><div class="vnode">Fringe</div><div class="varrow">→</div><div class="vnode">Goal G</div></div>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: DFS vs BFS vs UCS</h2>
+<div class="search-lab"><div><div class="search-board"><div class="tree">
+<div class="tree-row"><button class="node goal" data-n="S">S</button></div>
+<div class="tree-row"><button class="node" data-n="A">A</button><button class="node" data-n="B">B</button><button class="node" data-n="C">C</button></div>
+<div class="tree-row"><button class="node" data-n="D">D</button><button class="node" data-n="E">E</button><button class="node" data-n="F">F</button><button class="node" data-n="G">G</button><button class="node" data-n="H">H</button><button class="node" data-n="I">I</button></div>
+</div></div><div class="controls"><button class="btn btn-secondary" onclick="runSearch('bfs')">Run BFS</button><button class="btn btn-secondary" onclick="runSearch('dfs')">Run DFS</button><button class="btn btn-secondary" onclick="runSearch('ucs')">Run UCS</button><button class="btn btn-secondary" onclick="resetSearch()">Reset</button></div><p class="small-note" id="searchStatus">Choose an algorithm.</p></div>
+<div><h3>Core idea</h3><table class="compare-table"><tr><th>Algorithm</th><th>Selection idea</th><th>Typical strength</th></tr><tr><td>BFS</td><td>Shallowest node first</td><td>Complete; shortest path when step costs are equal</td></tr><tr><td>DFS</td><td>Deepest node first</td><td>Low memory compared with BFS</td></tr><tr><td>UCS</td><td>Lowest path cost first</td><td>Useful when step costs differ</td></tr></table></div></div>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>UNDERSTAND: Why “uninformed”?</h2><p>Uninformed (blind) search uses no extra information about how close a state is to the goal beyond the problem definition. The strategy determines which fringe node is explored next.</p></div></section>
+
+<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>Answer in this order: <b>definition → working/steps → diagram or example → advantages/limitations → conclusion</b> when the question asks for an explanation. Use block diagrams wherever necessary.</p></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2>
+<div class="check"><p><strong>Can you explain the central idea of this lesson without looking at your notes?</strong></p>
+<button onclick="showAnswer()">Yes — reveal the self-check</button>
+<div class="answer" id="answer">Good. Now state the concept in your own words, give one example, and identify one limitation or trade-off.</div></div></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Key Takeaways</h2><ul><li>Start with the problem, not the buzzword.</li><li>Use the visual model to explain the concept before memorising terminology.</li><li>Test the idea with an example and compare alternatives.</li></ul>
+<button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
+<div class="lesson-nav"><a class="btn btn-secondary" href="lab-04-agent-environment.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="lab-06-depth-limited-iddfs.html">Next →</a></div>
+</main>
+<footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 1</div><div>Lesson 05: Uninformed Search</div></div></footer>
+<script src="../assets/js/progress.js"></script>
+<script>
+const LESSON_ID="lab-05-search-bfs-dfs-ucs";
+function showAnswer(){document.getElementById("answer").style.display="block";}
+function completeLesson(){
+  AIProgress.markLessonComplete(LESSON_ID);
+  document.getElementById("lessonProgress").style.width="100%";
+  document.getElementById("progressText").textContent="Completed locally ✓";
+  document.getElementById("completeBtn").textContent="✓ Lesson Completed";
+  document.getElementById("completeBtn").disabled=true;
+}
+document.addEventListener("DOMContentLoaded",()=>{
+ const done=AIProgress.get(LESSON_ID)>=100;
+ document.getElementById("lessonProgress").style.width=done?"100%":"0%";
+ document.getElementById("progressText").textContent=done?"Completed locally ✓":"Lesson not completed";
+ if(done){document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
+});
+</script>
+</body></html>

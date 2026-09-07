@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Zero, One & Few-Shot Prompting — Module 2 interactive lesson"><title>Lesson 12: Zero, One & Few-Shot Prompting | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module2.css"></head><body>
+<header class="site-header"><div class="container navbar"><a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a><nav class="nav-links"><a href="index.html">Module 2</a><a href="../index.html">Course Home</a></nav></div></header>
+<main class="lesson-shell"><div class="breadcrumbs">MODULE 2 / LESSON 12</div>
+<section class="lesson-header reveal"><span class="badge">Lesson 12 of 8</span><h1>Zero, One & Few-Shot Prompting</h1><p>Context • Examples • Generalisation • Choosing the technique</p><div class="lesson-progress"><div id="lessonProgress"></div></div><p class="small-note" id="progressText">Lesson not completed</p></section>
+
+<section class="lesson-section"><div class="visual-panel"><h2>SEE: How many examples should you provide?</h2>
+<div class="shot-stage"><div class="shot-card"><span class="badge">ZERO</span><h3>No examples</h3><p>Give the task directly. The model uses its existing knowledge to respond.</p><div class="example">Write a poem about nature.</div></div>
+<div class="shot-card"><span class="badge">ONE</span><h3>One example</h3><p>Provide a single example to demonstrate the task pattern.</p><div class="example">Input: Happy → Output: Positive\nInput: Excited → ?</div></div>
+<div class="shot-card"><span class="badge">FEW</span><h3>A few examples</h3><p>Provide several representative examples to clarify the desired pattern.</p><div class="example">Happy → Positive\nAngry → Negative\nCalm → Positive\nExcited → ?</div></div></div>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: Add examples</h2>
+<label>Number of examples: <b id="shotN">0</b></label><input id="shotSlider" type="range" min="0" max="5" value="0" style="width:100%" oninput="showShot(this.value)">
+<div class="generated" id="shotOutput" style="margin-top:14px"></div>
+<script>
+function showShot(n){n=Number(n);document.getElementById("shotN").textContent=n;let label=n===0?"Zero-shot":n===1?"One-shot":"Few-shot";let ex=n===0?"Task: Classify the sentiment of the sentence.\nInput: The product is excellent.":n===1?"Example:\nInput: The product is excellent. → Positive\n\nNow classify:\nInput: The product arrived late.":`Examples:\n1. Excellent → Positive\n2. Broken → Negative\n3. Helpful → Positive\n4. Late → Negative\n\nNow classify:\nThe product is reliable.`;document.getElementById("shotOutput").textContent=label+"\n\n"+ex}
+showShot(0);
+</script>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>When is each useful?</h2>
+<table class="compare-table"><tr><th>Technique</th><th>Source-based idea</th><th>Limitation</th></tr><tr><td>Zero-shot</td><td>Open-ended tasks or when you want the model to use general knowledge.</td><td>May be less accurate or relevant without context.</td></tr><tr><td>One-shot</td><td>Useful when one example can clarify the task.</td><td>Effectiveness depends on the quality and relevance of the example.</td></tr><tr><td>Few-shot</td><td>Several examples give more context and guidance.</td><td>Examples must be representative; too many or poor examples may not help.</td></tr></table>
+</div></section>
+
+<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>For a long-answer prompt-engineering question, explain the <b>purpose → technique → prompt structure → example → expected effect → limitation</b>. Include the prompt itself where appropriate.</p></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2><div class="check"><p><strong>Can you explain this technique and create a new example without copying the lesson?</strong></p><button onclick="document.getElementById('answer').style.display='block'">Reveal self-check</button><div class="answer" id="answer">Try: state the task, identify what information/context the model needs, choose a technique, write the prompt, then evaluate the response.</div></div></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Complete the lesson</h2><button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
+<div class="lesson-nav"><a class="btn btn-secondary" href="lab-11-instruction-prompt-builder.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="lab-13-self-consistency.html">Next →</a></div>
+</main><footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 2</div><div>Lesson 12: Zero, One & Few-Shot Prompting</div></div></footer>
+<script src="../assets/js/progress.js"></script><script>
+const LESSON_ID="lab-12-shot-prompting";
+function completeLesson(){AIProgress.markLessonComplete(LESSON_ID);document.getElementById("lessonProgress").style.width="100%";document.getElementById("progressText").textContent="Completed locally ✓";document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
+document.addEventListener("DOMContentLoaded",()=>{if(AIProgress.get(LESSON_ID)>=100){document.getElementById("lessonProgress").style.width="100%";document.getElementById("progressText").textContent="Completed locally ✓";document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}});
+</script></body></html>

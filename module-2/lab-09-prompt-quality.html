@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Prompt Engineering: Quality & Foundations — Module 2 interactive lesson"><title>Lesson 09: Prompt Engineering: Quality & Foundations | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module2.css"></head><body>
+<header class="site-header"><div class="container navbar"><a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a><nav class="nav-links"><a href="index.html">Module 2</a><a href="../index.html">Course Home</a></nav></div></header>
+<main class="lesson-shell"><div class="breadcrumbs">MODULE 2 / LESSON 09</div>
+<section class="lesson-header reveal"><span class="badge">Lesson 09 of 8</span><h1>Prompt Engineering: Quality & Foundations</h1><p>Overview • Importance • Quality • Communication • Benefits • Future</p><div class="lesson-progress"><div id="lessonProgress"></div></div><p class="small-note" id="progressText">Lesson not completed</p></section>
+
+<section class="lesson-section"><div class="visual-panel"><h2>SEE: A prompt is the bridge between intent and output</h2>
+<div class="visual-flow"><div class="vnode">Human goal</div><div class="varrow">→</div><div class="vnode">Prompt</div><div class="varrow">→</div><div class="vnode">LLM</div><div class="varrow">→</div><div class="vnode">Response</div><div class="varrow">→</div><div class="vnode">Evaluate & refine</div></div>
+<p>The course material describes prompt engineering as crafting specific prompts or instructions to guide an AI model toward relevant, accurate and high-quality responses. It is an iterative process.</p>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: Vague → Specific</h2>
+<div class="prompt-layout"><div class="prompt-box"><h3>Vague prompt</h3><div class="example">Tell me about cats.</div><p class="small-note">The supplied module uses this as an example of a prompt that is vague, lacks focus and can lead to an unfocused answer.</p></div>
+<div class="prompt-box"><h3>More focused prompt</h3><div class="example">Write a fun short story about a cat who travels to the moon.</div><p class="small-note">The task and desired direction are clearer.</p></div></div>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>TRY: Prompt Quality Analyzer</h2>
+<div class="prompt-box"><textarea id="pq" oninput="scorePrompt()" placeholder="Type a prompt here...">Explain renewable energy.</textarea><div class="word-meter" id="wordMeter">0 words</div></div>
+<div class="prompt-layout" style="margin-top:12px"><div><div class="score-ring" id="ring"><strong id="score">0</strong></div></div><div><h3>What the analyzer looks for</h3><ul><li>Clear task/action</li><li>Specific topic or context</li><li>Audience/purpose</li><li>Constraints or output format</li></ul><p id="feedback" class="small-note"></p></div></div>
+<script>
+function scorePrompt(){const v=document.getElementById("pq").value.trim(),w=v?v.split(/\s+/).length:0;let s=0;if(/\b(explain|write|summarize|list|compare|create|translate|analyze|design|generate)\b/i.test(v))s+=25;if(w>=6)s+=25;if(/\b(for|audience|student|engineer|beginner|professional|grade|purpose)\b/i.test(v))s+=25;if(/\b(\d+|bullet|table|words?|steps?|format|brief|detailed)\b/i.test(v))s+=25;document.getElementById("score").textContent=s;document.getElementById("ring").style.setProperty("--score",s+"%");document.getElementById("wordMeter").textContent=w+" words";document.getElementById("feedback").textContent=s<50?"Add a clear action and more context.":s<100?"Good start. Add audience or output constraints.":"Strong structure: task + context + audience/constraints."}
+scorePrompt();
+</script>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Why prompt engineering matters</h2>
+<div class="feature-grid"><article class="feature-card"><h3>Relevance</h3><p>Well-crafted prompts help align responses with task objectives.</p></article><article class="feature-card"><h3>Accuracy</h3><p>Specific context and requirements can improve the usefulness of responses, while outputs still need checking.</p></article><article class="feature-card"><h3>Versatility</h3><p>Different prompt types can adapt outputs to many tasks.</p></article></div>
+</div></section>
+
+<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>For a long-answer prompt-engineering question, explain the <b>purpose → technique → prompt structure → example → expected effect → limitation</b>. Include the prompt itself where appropriate.</p></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2><div class="check"><p><strong>Can you explain this technique and create a new example without copying the lesson?</strong></p><button onclick="document.getElementById('answer').style.display='block'">Reveal self-check</button><div class="answer" id="answer">Try: state the task, identify what information/context the model needs, choose a technique, write the prompt, then evaluate the response.</div></div></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Complete the lesson</h2><button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
+<div class="lesson-nav"><a class="btn btn-secondary" href="index.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="lab-10-prompt-evolution-types.html">Next →</a></div>
+</main><footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 2</div><div>Lesson 09: Prompt Engineering: Quality & Foundations</div></div></footer>
+<script src="../assets/js/progress.js"></script><script>
+const LESSON_ID="lab-09-prompt-quality";
+function completeLesson(){AIProgress.markLessonComplete(LESSON_ID);document.getElementById("lessonProgress").style.width="100%";document.getElementById("progressText").textContent="Completed locally ✓";document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
+document.addEventListener("DOMContentLoaded",()=>{if(AIProgress.get(LESSON_ID)>=100){document.getElementById("lessonProgress").style.width="100%";document.getElementById("progressText").textContent="Completed locally ✓";document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}});
+</script></body></html>

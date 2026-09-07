@@ -1,0 +1,9 @@
+
+</script>
+<script>
+const ids=['lab-17-machine-learning-fundamentals','lab-18-linear-regression','lab-19-polynomial-regression','lab-20-logistic-regression','lab-21-bayes-naive-bayes','lab-22-decision-tree','lab-23-random-forest','lab-24-kmeans','lab-25-svm','lab-26-neural-network','lab-27-deep-learning-cnn-rnn-cv'];
+let data={};try{data=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const count=ids.filter(x=>Number(data[x]||0)>=100).length;
+document.getElementById("moduleProgressBar").style.width=(count/11*100)+"%";
+document.getElementById("moduleProgressText").textContent=`${count} of 11 lessons completed`;
+</script></body></html>

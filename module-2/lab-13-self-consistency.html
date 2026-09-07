@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Self-Consistency Prompt — Module 2 interactive lesson"><title>Lesson 13: Self-Consistency Prompt | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module2.css"></head><body>
+<header class="site-header"><div class="container navbar"><a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a><nav class="nav-links"><a href="index.html">Module 2</a><a href="../index.html">Course Home</a></nav></div></header>
+<main class="lesson-shell"><div class="breadcrumbs">MODULE 2 / LESSON 13</div>
+<section class="lesson-header reveal"><span class="badge">Lesson 13 of 8</span><h1>Self-Consistency Prompt</h1><p>Key facts • Constraints • Coherence • Consistency</p><div class="lesson-progress"><div id="lessonProgress"></div></div><p class="small-note" id="progressText">Lesson not completed</p></section>
+
+<section class="lesson-section"><div class="visual-panel"><h2>SEE: Anchor the response</h2>
+<div class="visual-flow"><div class="vnode">Key facts</div><div class="varrow">+</div><div class="vnode">Constraints</div><div class="varrow">+</div><div class="vnode">Task</div><div class="varrow">→</div><div class="vnode">Coherent response</div><div class="varrow">→</div><div class="vnode">Check consistency</div></div>
+<p>The supplied module defines self-consistency prompting as providing key information, facts, opinions or constraints that the generated text should remain consistent with throughout an interaction.</p></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: Build a consistency anchor</h2>
+<div class="prompt-layout"><div class="prompt-box"><label>Topic</label><input id="scTopic" value="Climate change"><label>Known context</label><textarea id="scFacts">Use the provided scientific consensus and established facts as the context.</textarea><label>Constraints</label><input id="scConstraint" value="Keep terminology consistent and do not contradict the stated context."><button class="btn btn-primary" onclick="makeSC()">Generate anchored prompt</button></div>
+<div class="prompt-box"><h3>Anchored prompt</h3><div class="generated" id="scOut"></div></div></div>
+<script>function makeSC(){document.getElementById("scOut").textContent=`Topic: ${document.getElementById("scTopic").value}\nContext: ${document.getElementById("scFacts").value}\nConstraint: ${document.getElementById("scConstraint").value}\nTask: Explain the topic clearly while remaining aligned with the provided context.`}makeSC();</script>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Balance guidance and flexibility</h2>
+<div class="ethical-grid"><div class="feature-card"><h3>Too little context</h3><p>The model has fewer explicit anchors, so the response may be less aligned with the intended context.</p></div><div class="feature-card"><h3>Too much restriction</h3><p>The source notes that overly restrictive prompts can limit flexibility and creativity, causing repetitive or unnatural responses.</p></div></div>
+<p class="small-note">For technical or educational content, the supplied material highlights self-consistency as useful when adherence to established facts or constraints is important.</p>
+</div></section>
+
+<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>For a long-answer prompt-engineering question, explain the <b>purpose → technique → prompt structure → example → expected effect → limitation</b>. Include the prompt itself where appropriate.</p></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2><div class="check"><p><strong>Can you explain this technique and create a new example without copying the lesson?</strong></p><button onclick="document.getElementById('answer').style.display='block'">Reveal self-check</button><div class="answer" id="answer">Try: state the task, identify what information/context the model needs, choose a technique, write the prompt, then evaluate the response.</div></div></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Complete the lesson</h2><button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
+<div class="lesson-nav"><a class="btn btn-secondary" href="lab-12-shot-prompting.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="lab-14-prompt-refinement-role.html">Next →</a></div>
+</main><footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 2</div><div>Lesson 13: Self-Consistency Prompt</div></div></footer>
+<script src="../assets/js/progress.js"></script><script>
+const LESSON_ID="lab-13-self-consistency";
+function completeLesson(){AIProgress.markLessonComplete(LESSON_ID);document.getElementById("lessonProgress").style.width="100%";document.getElementById("progressText").textContent="Completed locally ✓";document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
+document.addEventListener("DOMContentLoaded",()=>{if(AIProgress.get(LESSON_ID)>=100){document.getElementById("lessonProgress").style.width="100%";document.getElementById("progressText").textContent="Completed locally ✓";document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}});
+</script></body></html>

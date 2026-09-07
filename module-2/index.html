@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Module 2 interactive prompt engineering lessons">
+<title>Module 2 | Prompt Engineering</title>
+<link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module2.css">
+</head><body>
+<header class="site-header"><div class="container navbar">
+<a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a>
+<nav class="nav-links"><a href="../index.html">Course Home</a><a href="#lessons">Lessons</a></nav>
+</div></header>
+<main>
+<section class="prompt-hero"><div class="container">
+<div class="breadcrumbs">HOME / MODULE 2</div>
+<h1>Prompt Engineering</h1>
+<p>Learn how carefully crafted prompts guide language-model outputs, improve relevance and clarity, support communication, and enable structured experimentation.</p>
+<div class="hero-actions"><a class="btn btn-primary" href="lab-09-prompt-quality.html">Start Lesson 09 →</a><a class="btn btn-secondary" href="../index.html">← Course Home</a></div>
+<div class="lesson-progress"><div id="moduleProgressBar"></div></div>
+<p class="small-note" id="moduleProgressText">0 of 8 lessons completed</p>
+</div></section>
+
+<section class="section"><div class="container">
+<div class="section-heading"><div><h2>Module 2 at a glance</h2><p>CO2: apply prompt engineering techniques to solve problems and improve communication.</p></div></div>
+<div class="objective-list">
+<div class="objective"><strong>Design</strong><span>Craft clear instructions for a defined task.</span></div>
+<div class="objective"><strong>Control</strong><span>Use context, examples, roles and constraints to guide output.</span></div>
+<div class="objective"><strong>Refine</strong><span>Iterate when a response is vague, incomplete or unsuitable.</span></div>
+<div class="objective"><strong>Apply</strong><span>Use prompts for creativity, writing and communication.</span></div>
+</div>
+</div></section>
+
+<section class="section" id="lessons"><div class="container">
+<div class="section-heading"><div><h2>8 Interactive Lessons</h2><p>Each lesson includes a visual model, hands-on prompt activity and exam-oriented checkpoint.</p></div></div>
+<div class="lesson-grid">
+<div class="lesson-card"><div class="lesson-no">Lesson 09</div><h3>Prompt Quality & Foundations</h3><p>See why prompt clarity matters and how prompt engineering supports relevance, accuracy and versatility.</p><div class="lesson-tags"><span class="badge">Quality</span><span class="badge">Communication</span></div><a class="btn btn-secondary" href="lab-09-prompt-quality.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 10</div><h3>Evolution & Types</h3><p>Trace the move from informal experimentation to systematic prompting and explore prompt types.</p><div class="lesson-tags"><span class="badge">Evolution</span><span class="badge">Role</span><span class="badge">Conditional</span></div><a class="btn btn-secondary" href="lab-10-prompt-evolution-types.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 11</div><h3>Instruction Prompt Builder</h3><p>Construct a prompt from task, context, role, constraints and output requirements.</p><div class="lesson-tags"><span class="badge">Builder</span><span class="badge">Instructions</span></div><a class="btn btn-secondary" href="lab-11-instruction-prompt-builder.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 12</div><h3>Zero, One & Few Shot</h3><p>Compare the amount of contextual examples and see when each technique is useful.</p><div class="lesson-tags"><span class="badge">Zero</span><span class="badge">One</span><span class="badge">Few</span></div><a class="btn btn-secondary" href="lab-12-shot-prompting.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 13</div><h3>Self-Consistency</h3><p>Anchor a response to key information, established facts and constraints.</p><div class="lesson-tags"><span class="badge">Consistency</span><span class="badge">Context</span></div><a class="btn btn-secondary" href="lab-13-self-consistency.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 14</div><h3>Refinement & Role Prompting</h3><p>Turn an ambiguous prompt into a clearer one and compare role-driven outputs.</p><div class="lesson-tags"><span class="badge">Refinement</span><span class="badge">Roles</span></div><a class="btn btn-secondary" href="lab-14-prompt-refinement-role.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 15</div><h3>Creative Thinking</h3><p>Use prompts to unlock imagination, brainstorm alternatives and add practical constraints.</p><div class="lesson-tags"><span class="badge">Innovation</span><span class="badge">Engineering</span></div><a class="btn btn-secondary" href="lab-15-creative-engineering.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 16</div><h3>Effective Writing & Communication</h3><p>Use prompts to start writing, overcome writer’s block, develop narratives and adapt to audiences.</p><div class="lesson-tags"><span class="badge">Writing</span><span class="badge">Communication</span></div><a class="btn btn-secondary" href="lab-16-effective-writing-communication.html">Open Lesson →</a></div>
+</div></div></section>
+
+<section class="section"><div class="container"><div class="notice"><strong>Hands-on principle:</strong> students will not only read prompt examples. They will change wording, add examples or constraints, compare outputs, and document why one prompt is more effective than another.</div></div></section>
+</main>
+<footer class="site-footer"><div class="container footer-inner"><div><strong>Module 2</strong><br>Prompt Engineering</div><div><a href="../index.html">← Course Home</a></div></div></footer>
+<script>
+const KEY="ai-course-progress-v1";
+const completed=["lab-09-prompt-quality","lab-10-prompt-evolution-types","lab-11-instruction-prompt-builder","lab-12-shot-prompting","lab-13-self-consistency","lab-14-prompt-refinement-role","lab-15-creative-engineering","lab-16-effective-writing-communication"];
+let data={};try{data=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const count=completed.filter(x=>Number(data[x]||0)>=100).length;
+document.getElementById("moduleProgressBar").style.width=(count/8*100)+"%";
+document.getElementById("moduleProgressText").textContent=`${count} of 8 lessons completed`;
+</script></body></html>

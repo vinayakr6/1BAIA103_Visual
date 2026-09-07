@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Heuristic Search — Module 1 interactive lesson">
+<title>Lesson 07: Heuristic Search | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module1.css"></head>
+<body>
+<header class="site-header"><div class="container navbar">
+<a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a>
+<nav class="nav-links"><a href="index.html">Module 1</a><a href="../index.html">Course Home</a></nav>
+</div></header>
+<main class="lesson-shell">
+<div class="breadcrumbs">MODULE 1 / LESSON 07</div>
+<section class="lesson-header reveal"><span class="badge">Lesson 07 of 8</span><h1>Heuristic Search</h1><p>Informed search • Heuristic h(n) • Pure heuristic • Greedy best-first</p>
+<div class="lesson-progress"><div id="lessonProgress"></div></div>
+<p class="small-note" id="progressText">Lesson not completed</p></section>
+
+<section class="lesson-section"><div class="visual-panel"><h2>SEE: Search with a hint</h2>
+<p>Informed search adds problem-specific information about the goal. A heuristic function h(n) estimates how close a state is to the goal.</p>
+<div class="visual-flow"><div class="vnode">State n</div><div class="varrow">→</div><div class="vnode">Heuristic h(n)</div><div class="varrow">→</div><div class="vnode">Estimate closeness</div><div class="varrow">→</div><div class="vnode">Choose promising node</div></div>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>UNDERSTAND: Pure Heuristic Search</h2>
+<p>The supplied module material describes pure heuristic search as expanding nodes according to h(n), maintaining OPEN and CLOSED lists, and selecting the node with the lowest heuristic value.</p>
+<div class="code-like">OPEN  = nodes waiting to be expanded
+CLOSED = nodes already expanded
+
+repeat:
+    choose node with lowest h(n)
+    move it to CLOSED
+    expand its successors
+    insert promising successors into OPEN
+until goal is found</div>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: Greedy Best-First Search</h2>
+<div class="search-lab"><div><div class="search-board" id="heuristicBoard"></div><div class="controls"><button class="btn btn-primary" onclick="greedyStep()">Choose lowest h(n)</button><button class="btn btn-secondary" onclick="resetGreedy()">Reset</button></div><p id="greedyStatus" class="small-note"></p></div>
+<div><h3>Heuristic values</h3><table class="compare-table"><tr><th>Node</th><th>h(n)</th></tr><tr><td>A</td><td>7</td></tr><tr><td>B</td><td>3</td></tr><tr><td>C</td><td>5</td></tr><tr><td>D</td><td>1</td></tr><tr><td>G</td><td>0</td></tr></table><p class="small-note">Lower h(n) means the node appears closer to the goal.</p></div></div>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Important limitation</h2><p>Greedy best-first search chooses what appears best at the moment. The supplied reference notes that it is not an optimal algorithm and can behave poorly in some cases.</p></div></section>
+<script>
+const hs=[["S",8],["A",7],["B",3],["C",5],["D",1],["G",0]];let gi=0;
+function drawH(){const b=document.getElementById("heuristicBoard");b.innerHTML='<div class="tree-row">'+hs.map(x=>`<div class="node ${x[0]==="G"?"goal":""}" id="h-${x[0]}">${x[0]}<small style="display:block;font-size:10px">${x[1]}</small></div>`).join("")+'</div>'}
+function greedyStep(){if(gi>=hs.length){document.getElementById("greedyStatus").textContent="Goal reached.";return}let candidates=hs.slice(1).filter(x=>!document.getElementById("h-"+x[0]).classList.contains("visited"));if(!candidates.length)return;let best=candidates.reduce((a,b)=>a[1]<b[1]?a:b);document.getElementById("h-"+best[0]).classList.add("visited");gi++;document.getElementById("greedyStatus").textContent=`Selected ${best[0]} because it has the lowest remaining h(n) = ${best[1]}.`}
+function resetGreedy(){gi=0;drawH();document.getElementById("greedyStatus").textContent="Choose a step."}
+document.addEventListener("DOMContentLoaded",resetGreedy);
+</script>
+
+<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>Answer in this order: <b>definition → working/steps → diagram or example → advantages/limitations → conclusion</b> when the question asks for an explanation. Use block diagrams wherever necessary.</p></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2>
+<div class="check"><p><strong>Can you explain the central idea of this lesson without looking at your notes?</strong></p>
+<button onclick="showAnswer()">Yes — reveal the self-check</button>
+<div class="answer" id="answer">Good. Now state the concept in your own words, give one example, and identify one limitation or trade-off.</div></div></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Key Takeaways</h2><ul><li>Start with the problem, not the buzzword.</li><li>Use the visual model to explain the concept before memorising terminology.</li><li>Test the idea with an example and compare alternatives.</li></ul>
+<button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
+<div class="lesson-nav"><a class="btn btn-secondary" href="lab-06-depth-limited-iddfs.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="lab-08-a-star.html">Next →</a></div>
+</main>
+<footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 1</div><div>Lesson 07: Heuristic Search</div></div></footer>
+<script src="../assets/js/progress.js"></script>
+<script>
+const LESSON_ID="lab-07-heuristic-search";
+function showAnswer(){document.getElementById("answer").style.display="block";}
+function completeLesson(){
+  AIProgress.markLessonComplete(LESSON_ID);
+  document.getElementById("lessonProgress").style.width="100%";
+  document.getElementById("progressText").textContent="Completed locally ✓";
+  document.getElementById("completeBtn").textContent="✓ Lesson Completed";
+  document.getElementById("completeBtn").disabled=true;
+}
+document.addEventListener("DOMContentLoaded",()=>{
+ const done=AIProgress.get(LESSON_ID)>=100;
+ document.getElementById("lessonProgress").style.width=done?"100%":"0%";
+ document.getElementById("progressText").textContent=done?"Completed locally ✓":"Lesson not completed";
+ if(done){document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
+});
+</script>
+</body></html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="DLS & IDDFS — Module 1 interactive lesson">
+<title>Lesson 06: DLS & IDDFS | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module1.css"></head>
+<body>
+<header class="site-header"><div class="container navbar">
+<a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a>
+<nav class="nav-links"><a href="index.html">Module 1</a><a href="../index.html">Course Home</a></nav>
+</div></header>
+<main class="lesson-shell">
+<div class="breadcrumbs">MODULE 1 / LESSON 06</div>
+<section class="lesson-header reveal"><span class="badge">Lesson 06 of 8</span><h1>DLS & IDDFS</h1><p>Depth limit • Iterative deepening • Search behavior</p>
+<div class="lesson-progress"><div id="lessonProgress"></div></div>
+<p class="small-note" id="progressText">Lesson not completed</p></section>
+
+<section class="lesson-section"><div class="visual-panel"><h2>SEE: Depth-Limited Search</h2>
+<p>DLS is DFS with a maximum depth. It prevents the search from going beyond a specified level.</p>
+<div class="visual-flow"><div class="vnode">Start</div><div class="varrow">→</div><div class="vnode">DFS</div><div class="varrow">→</div><div class="vnode">Depth limit L</div><div class="varrow">→</div><div class="vnode">Cut off deeper nodes</div></div>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: Change the depth limit</h2>
+<label for="depth">Depth limit: <b id="depthValue">2</b></label>
+<input id="depth" type="range" min="0" max="4" value="2" style="width:100%" oninput="updateDepth(this.value)">
+<div class="search-board" style="margin-top:15px"><div class="tree" id="depthTree"></div></div>
+<p class="small-note" id="depthStatus"></p>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>UNDERSTAND: IDDFS</h2>
+<div class="visual-flow"><div class="vnode">Limit 0</div><div class="varrow">→</div><div class="vnode">Limit 1</div><div class="varrow">→</div><div class="vnode">Limit 2</div><div class="varrow">→</div><div class="vnode">Limit 3</div><div class="varrow">→</div><div class="vnode">Goal</div></div>
+<p>IDDFS repeatedly performs depth-limited DFS, increasing the depth limit until the goal is found. The supplied material highlights its memory efficiency and its combination of DFS-like memory use with BFS-like level progression.</p>
+</div></section>
+<script>
+const levels=[["S"],["A","B"],["C","D","E","F"],["G","H","I","J","K","L","M","N"],["O","P","Q","R","T"]];
+function updateDepth(v){document.getElementById("depthValue").textContent=v;const tree=document.getElementById("depthTree");tree.innerHTML="";levels.slice(0,Number(v)+1).forEach((row,i)=>{const d=document.createElement("div");d.className="tree-row";row.forEach(n=>{const b=document.createElement("div");b.className="node"+(n==="G"?" goal":"");b.textContent=n;d.appendChild(b)});tree.appendChild(d)});document.getElementById("depthStatus").textContent=`Nodes shown through depth ${v}. A goal deeper than this limit cannot be reached by this DLS run.`}
+document.addEventListener("DOMContentLoaded",()=>updateDepth(2));
+</script>
+
+<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>Answer in this order: <b>definition → working/steps → diagram or example → advantages/limitations → conclusion</b> when the question asks for an explanation. Use block diagrams wherever necessary.</p></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2>
+<div class="check"><p><strong>Can you explain the central idea of this lesson without looking at your notes?</strong></p>
+<button onclick="showAnswer()">Yes — reveal the self-check</button>
+<div class="answer" id="answer">Good. Now state the concept in your own words, give one example, and identify one limitation or trade-off.</div></div></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Key Takeaways</h2><ul><li>Start with the problem, not the buzzword.</li><li>Use the visual model to explain the concept before memorising terminology.</li><li>Test the idea with an example and compare alternatives.</li></ul>
+<button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
+<div class="lesson-nav"><a class="btn btn-secondary" href="lab-05-search-bfs-dfs-ucs.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="lab-07-heuristic-search.html">Next →</a></div>
+</main>
+<footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 1</div><div>Lesson 06: DLS & IDDFS</div></div></footer>
+<script src="../assets/js/progress.js"></script>
+<script>
+const LESSON_ID="lab-06-depth-limited-iddfs";
+function showAnswer(){document.getElementById("answer").style.display="block";}
+function completeLesson(){
+  AIProgress.markLessonComplete(LESSON_ID);
+  document.getElementById("lessonProgress").style.width="100%";
+  document.getElementById("progressText").textContent="Completed locally ✓";
+  document.getElementById("completeBtn").textContent="✓ Lesson Completed";
+  document.getElementById("completeBtn").disabled=true;
+}
+document.addEventListener("DOMContentLoaded",()=>{
+ const done=AIProgress.get(LESSON_ID)>=100;
+ document.getElementById("lessonProgress").style.width=done?"100%":"0%";
+ document.getElementById("progressText").textContent=done?"Completed locally ✓":"Lesson not completed";
+ if(done){document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
+});
+</script>
+</body></html>

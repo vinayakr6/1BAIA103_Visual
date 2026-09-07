@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Module 1 interactive lessons for Introduction to AI and Applications">
+<title>Module 1 | Introduction to AI</title>
+<link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css">
+<link rel="stylesheet" href="../assets/css/module1.css">
+</head>
+<body>
+<header class="site-header"><div class="container navbar">
+<a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a>
+<nav class="nav-links"><a href="../index.html">Course Home</a><a href="#lessons">Lessons</a><a href="#outcomes">Outcomes</a></nav>
+</div></header>
+<main>
+<section class="module-hero"><div class="container">
+<div class="breadcrumbs">HOME / MODULE 1</div>
+<h1>Introduction to Artificial Intelligence</h1>
+<p>Start with what AI is, how intelligent systems work, what intelligence means, how agents interact with environments, and how search algorithms explore problem spaces.</p>
+<div class="hero-actions"><a class="btn btn-primary" href="lab-01-ai-fundamentals.html">Start Lesson 01 →</a><a class="btn btn-secondary" href="../index.html">← Course Home</a></div>
+<div class="lesson-progress"><div id="moduleProgressBar"></div></div>
+<p class="small-note" id="moduleProgressText">0 of 8 lessons completed</p>
+</div></section>
+
+<section class="section" id="outcomes"><div class="container">
+<div class="section-heading"><div><h2>What you will learn</h2><p>Module 1 aligns with CO1: explain the concepts and types of artificial intelligence.</p></div></div>
+<div class="objective-list">
+<div class="objective"><strong>AI Foundations</strong><span>Define AI and explain a basic AI workflow.</span></div>
+<div class="objective"><strong>Machine Intelligence</strong><span>Break intelligence into reasoning, learning, problem solving, perception and linguistic intelligence.</span></div>
+<div class="objective"><strong>Agents</strong><span>Understand agent–environment interaction and rational action.</span></div>
+<div class="objective"><strong>Search</strong><span>Compare uninformed and informed search strategies.</span></div>
+</div>
+</div></section>
+
+<section class="section" id="lessons"><div class="container">
+<div class="section-heading"><div><h2>8 Interactive Lessons</h2><p>Each lesson follows SEE → UNDERSTAND → INTERACT → EXPERIMENT → APPLY → TEST.</p></div></div>
+<div class="lesson-grid">
+<div class="lesson-card"><div class="lesson-no">Lesson 01</div><h3>AI Fundamentals</h3><p>Build a mental model of AI, its working pipeline, benefits, limitations and applications.</p><div class="lesson-tags"><span class="badge">Definition</span><span class="badge">Working</span><span class="badge">Pros/Cons</span></div><a class="btn btn-secondary" href="lab-01-ai-fundamentals.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 02</div><h3>AI History & Types</h3><p>Explore major AI milestones and distinguish capability-based and functionality-based types.</p><div class="lesson-tags"><span class="badge">Timeline</span><span class="badge">Weak/Strong</span><span class="badge">5 Types</span></div><a class="btn btn-secondary" href="lab-02-ai-history-types.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 03</div><h3>Machine Intelligence</h3><p>Understand intelligence components and compare human and machine intelligence.</p><div class="lesson-tags"><span class="badge">Reasoning</span><span class="badge">Perception</span><span class="badge">Inductive/Deductive</span></div><a class="btn btn-secondary" href="lab-03-intelligence-comparison.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 04</div><h3>Agents & Environments</h3><p>See how sensors, agents, decision processes and actuators form an intelligent system.</p><div class="lesson-tags"><span class="badge">Sensors</span><span class="badge">Rationality</span><span class="badge">Agent Types</span></div><a class="btn btn-secondary" href="lab-04-agent-environment.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 05</div><h3>Uninformed Search</h3><p>Interactively compare DFS, BFS and UCS on the same problem tree.</p><div class="lesson-tags"><span class="badge">DFS</span><span class="badge">BFS</span><span class="badge">UCS</span></div><a class="btn btn-secondary" href="lab-05-search-bfs-dfs-ucs.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 06</div><h3>DLS & IDDFS</h3><p>Change the depth limit and watch iterative deepening expand the search space level by level.</p><div class="lesson-tags"><span class="badge">DLS</span><span class="badge">IDDFS</span></div><a class="btn btn-secondary" href="lab-06-depth-limited-iddfs.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 07</div><h3>Heuristic Search</h3><p>Use h(n) to guide search toward promising states using pure heuristic and greedy best-first ideas.</p><div class="lesson-tags"><span class="badge">h(n)</span><span class="badge">Greedy</span><span class="badge">OPEN/CLOSED</span></div><a class="btn btn-secondary" href="lab-07-heuristic-search.html">Open Lesson →</a></div>
+<div class="lesson-card"><div class="lesson-no">Lesson 08</div><h3>A* Search & Knowledge Bridge</h3><p>Understand f(n)=g(n)+h(n) and connect search to the broader AI problem-solving toolkit.</p><div class="lesson-tags"><span class="badge">A*</span><span class="badge">Path Cost</span><span class="badge">Extension</span></div><a class="btn btn-secondary" href="lab-08-a-star.html">Open Lesson →</a></div>
+</div>
+</div></section>
+</main>
+<footer class="site-footer"><div class="container footer-inner"><div><strong>Module 1</strong><br>Introduction to Artificial Intelligence</div><div><a href="../index.html">← Course Home</a></div></div></footer>
+<script>
+const KEY="ai-course-progress-v1";
+const completed=["lab-01-ai-fundamentals","lab-02-ai-history-types","lab-03-intelligence-comparison","lab-04-agent-environment","lab-05-search-bfs-dfs-ucs","lab-06-depth-limited-iddfs","lab-07-heuristic-search","lab-08-a-star"];
+let data={};try{data=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const count=completed.filter(x=>Number(data[x]||0)>=100).length;
+document.getElementById("moduleProgressBar").style.width=(count/8*100)+"%";
+document.getElementById("moduleProgressText").textContent=`${count} of 8 lessons completed`;
+</script>
+</body></html>

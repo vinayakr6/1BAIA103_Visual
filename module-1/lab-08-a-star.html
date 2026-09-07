@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A* Search & Knowledge Extension — Module 1 interactive lesson">
+<title>Lesson 08: A* Search & Knowledge Extension | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module1.css"></head>
+<body>
+<header class="site-header"><div class="container navbar">
+<a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a>
+<nav class="nav-links"><a href="index.html">Module 1</a><a href="../index.html">Course Home</a></nav>
+</div></header>
+<main class="lesson-shell">
+<div class="breadcrumbs">MODULE 1 / LESSON 08</div>
+<section class="lesson-header reveal"><span class="badge">Lesson 08 of 8</span><h1>A* Search & Knowledge Extension</h1><p>g(n) + h(n) • Optimal-path intuition • Bridge to knowledge representation</p>
+<div class="lesson-progress"><div id="lessonProgress"></div></div>
+<p class="small-note" id="progressText">Lesson not completed</p></section>
+
+<section class="lesson-section"><div class="visual-panel"><h2>SEE: A* combines cost and guidance</h2>
+<div class="visual-flow"><div class="vnode">g(n)<br>cost so far</div><div class="varrow">+</div><div class="vnode">h(n)<br>estimated cost</div><div class="varrow">=</div><div class="vnode">f(n)<br>evaluation</div></div>
+<p>The central A* idea is to consider both the path cost already travelled and an estimate of the remaining cost.</p>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: Change g(n) and h(n)</h2>
+<label>Path cost g(n): <b id="gval">4</b></label><input type="range" min="0" max="20" value="4" style="width:100%" oninput="calcA()">
+<label>Heuristic h(n): <b id="hval">6</b></label><input id="hr" type="range" min="0" max="20" value="6" style="width:100%" oninput="calcA()">
+<div class="callout"><strong>f(n) = <span id="fval">10</span></strong><br>Lower f(n) is preferred by the evaluation function.</div>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Compare the search ideas</h2>
+<table class="compare-table"><tr><th>Method</th><th>What guides selection?</th><th>Question it answers</th></tr><tr><td>DFS</td><td>Depth</td><td>“Can I go deeper?”</td></tr><tr><td>BFS</td><td>Depth / level</td><td>“What is the shallowest frontier?”</td></tr><tr><td>UCS</td><td>g(n)</td><td>“What path has the lowest cost so far?”</td></tr><tr><td>Greedy</td><td>h(n)</td><td>“What looks closest to the goal?”</td></tr><tr><td>A*</td><td>g(n)+h(n)</td><td>“What balances cost so far and estimated remaining cost?”</td></tr></table>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Knowledge representation bridge</h2>
+<p>The supplied 1BAIA103/203 course document also lists Knowledge Representation, including an introduction, knowledge representation, knowledge-based agents and types of knowledge. This lesson uses A* as a bridge: AI systems can combine <em>search</em> with <em>represented knowledge</em> to reason about problems.</p>
+<div class="visual-flow"><div class="vnode">Knowledge</div><div class="varrow">→</div><div class="vnode">Reasoning</div><div class="varrow">→</div><div class="vnode">Search / decision</div><div class="varrow">→</div><div class="vnode">Action</div></div>
+<p class="small-note">A dedicated knowledge-representation lesson can be added as an enrichment page if the course delivery requires it.</p>
+</div></section>
+<script>
+function calcA(){const g=document.querySelector('input[type="range"]').value;const h=document.getElementById("hr").value;document.getElementById("gval").textContent=g;document.getElementById("hval").textContent=h;document.getElementById("fval").textContent=Number(g)+Number(h)}
+document.addEventListener("DOMContentLoaded",calcA);
+</script>
+
+<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>Answer in this order: <b>definition → working/steps → diagram or example → advantages/limitations → conclusion</b> when the question asks for an explanation. Use block diagrams wherever necessary.</p></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2>
+<div class="check"><p><strong>Can you explain the central idea of this lesson without looking at your notes?</strong></p>
+<button onclick="showAnswer()">Yes — reveal the self-check</button>
+<div class="answer" id="answer">Good. Now state the concept in your own words, give one example, and identify one limitation or trade-off.</div></div></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Key Takeaways</h2><ul><li>Start with the problem, not the buzzword.</li><li>Use the visual model to explain the concept before memorising terminology.</li><li>Test the idea with an example and compare alternatives.</li></ul>
+<button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
+<div class="lesson-nav"><a class="btn btn-secondary" href="lab-07-heuristic-search.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="index.html">Next →</a></div>
+</main>
+<footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 1</div><div>Lesson 08: A* Search & Knowledge Extension</div></div></footer>
+<script src="../assets/js/progress.js"></script>
+<script>
+const LESSON_ID="lab-08-a-star";
+function showAnswer(){document.getElementById("answer").style.display="block";}
+function completeLesson(){
+  AIProgress.markLessonComplete(LESSON_ID);
+  document.getElementById("lessonProgress").style.width="100%";
+  document.getElementById("progressText").textContent="Completed locally ✓";
+  document.getElementById("completeBtn").textContent="✓ Lesson Completed";
+  document.getElementById("completeBtn").disabled=true;
+}
+document.addEventListener("DOMContentLoaded",()=>{
+ const done=AIProgress.get(LESSON_ID)>=100;
+ document.getElementById("lessonProgress").style.width=done?"100%":"0%";
+ document.getElementById("progressText").textContent=done?"Completed locally ✓":"Lesson not completed";
+ if(done){document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
+});
+</script>
+</body></html>

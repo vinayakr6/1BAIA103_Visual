@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Prompt Refinement & Role Prompting — Module 2 interactive lesson"><title>Lesson 14: Prompt Refinement & Role Prompting | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module2.css"></head><body>
+<header class="site-header"><div class="container navbar"><a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a><nav class="nav-links"><a href="index.html">Module 2</a><a href="../index.html">Course Home</a></nav></div></header>
+<main class="lesson-shell"><div class="breadcrumbs">MODULE 2 / LESSON 14</div>
+<section class="lesson-header reveal"><span class="badge">Lesson 14 of 8</span><h1>Prompt Refinement & Role Prompting</h1><p>Iterate • Clarify • Add constraints • Change audience/role</p><div class="lesson-progress"><div id="lessonProgress"></div></div><p class="small-note" id="progressText">Lesson not completed</p></section>
+
+<section class="lesson-section"><div class="visual-panel"><h2>SEE: Refinement is iterative</h2>
+<div class="refine-track"><div class="refine-card"><span class="badge">1 · AMBIGUOUS</span><h3>Tell me about the water cycle.</h3><p>Broad; output may be generic or unfocused.</p></div><div class="refine-card"><span class="badge">2 · CLEARER</span><h3>Explain the water cycle briefly with its main stages.</h3><p>Adds scope and desired content.</p></div><div class="refine-card"><span class="badge">3 · SPECIFIC</span><h3>Explain the water cycle in 4–5 short bullet points for 8th grade students, using simple words.</h3><p>Adds audience, format, length and language constraints.</p></div></div>
+</div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: Role Prompting</h2>
+<p>The supplied activity asks students to explain Newton’s Laws from three roles and compare tone, detail and style.</p>
+<div class="role-grid"><div class="role-card selected" onclick="selectRole(this,'engineer')"><h3>Expert Engineer</h3><p>Technical depth and engineering applications.</p></div><div class="role-card" onclick="selectRole(this,'teacher')"><h3>High School Teacher</h3><p>Simple, structured, everyday examples.</p></div><div class="role-card" onclick="selectRole(this,'beginner')"><h3>Beginner</h3><p>Very basic, casual explanation.</p></div></div>
+<div class="generated" id="roleOut" style="margin-top:12px"></div>
+<script>
+const roles={engineer:"You are an expert mechanical engineer. Explain Newton's Laws of Motion with technical depth and real-world engineering applications.",teacher:"You are a high school physics teacher. Explain Newton's Laws of Motion simply with everyday life examples for students.",beginner:"Imagine you are a beginner who just learned Newton's Laws of Motion. Explain them in your own simple words."};
+function selectRole(el,r){document.querySelectorAll(".role-card").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");document.getElementById("roleOut").textContent=roles[r]}
+document.getElementById("roleOut").textContent=roles.engineer;
+</script></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Refinement checklist</h2><ul><li>What exactly should the model do?</li><li>Who is the audience?</li><li>What context is missing?</li><li>What format, length or constraints are required?</li><li>What was confusing in the previous response?</li></ul></div></section>
+
+<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>For a long-answer prompt-engineering question, explain the <b>purpose → technique → prompt structure → example → expected effect → limitation</b>. Include the prompt itself where appropriate.</p></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2><div class="check"><p><strong>Can you explain this technique and create a new example without copying the lesson?</strong></p><button onclick="document.getElementById('answer').style.display='block'">Reveal self-check</button><div class="answer" id="answer">Try: state the task, identify what information/context the model needs, choose a technique, write the prompt, then evaluate the response.</div></div></div></section>
+<section class="lesson-section"><div class="visual-panel"><h2>Complete the lesson</h2><button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
+<div class="lesson-nav"><a class="btn btn-secondary" href="lab-13-self-consistency.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="lab-15-creative-engineering.html">Next →</a></div>
+</main><footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 2</div><div>Lesson 14: Prompt Refinement & Role Prompting</div></div></footer>
+<script src="../assets/js/progress.js"></script><script>
+const LESSON_ID="lab-14-prompt-refinement-role";
+function completeLesson(){AIProgress.markLessonComplete(LESSON_ID);document.getElementById("lessonProgress").style.width="100%";document.getElementById("progressText").textContent="Completed locally ✓";document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
+document.addEventListener("DOMContentLoaded",()=>{if(AIProgress.get(LESSON_ID)>=100){document.getElementById("lessonProgress").style.width="100%";document.getElementById("progressText").textContent="Completed locally ✓";document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}});
+</script></body></html>
