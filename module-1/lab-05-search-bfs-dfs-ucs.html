@@ -1,59 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Uninformed Search — Module 1 interactive lesson">
-<title>Lesson 05: Uninformed Search | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module1.css"></head>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab 05 — Uninformed Search: BFS, DFS & UCS</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#5d6878;--line:#dce3ee;--p:#4f46e5;--c:#0891b2;--g:#15803d;--o:#c2410c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;line-height:1.68}.top{position:sticky;top:0;z-index:5;background:#111827;color:#fff;padding:12px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;box-shadow:0 4px 20px #0002}.top a{color:#fff;text-decoration:none;border:1px solid #ffffff30;padding:6px 10px;border-radius:8px;font-size:.9rem}.wrap{max-width:1200px;margin:auto;padding:28px 18px 70px}.hero{padding:38px;border-radius:24px;background:linear-gradient(135deg,#eef2ff,#ecfeff);border:1px solid #dbe4ff}.badge{display:inline-block;background:#e0e7ff;color:#3730a3;border-radius:999px;padding:5px 12px;font-size:.8rem;font-weight:800}.hero h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.05;margin:15px 0}.lead{font-size:1.1rem;color:var(--muted);max-width:1000px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:23px;margin:18px 0;box-shadow:0 6px 24px #18223009}.kicker{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:var(--p)}h2{font-size:1.65rem;margin:4px 0 12px}.small{font-size:.94rem;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}.mini{padding:18px;border:1px solid var(--line);border-radius:15px;background:#fafbfe}.callout{padding:15px 18px;border-left:5px solid var(--p);background:#f5f3ff;border-radius:0 12px 12px 0}.good{border-left-color:#16a34a;background:#f0fdf4}.warn{border-left-color:#ea580c;background:#fff7ed}
+.searchvisual{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;margin:25px 0}.circle{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid #94a3b8;background:#f8fafc;font-weight:900}.circle.start{background:#eef2ff;border-color:var(--p)}.circle.goal{background:#f0fdf4;border-color:var(--g)}.arrow{font-size:1.4rem;font-weight:900;color:var(--p)}.algorithm{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.alg{padding:20px;border-radius:17px;border:2px solid var(--line)}.alg h3{margin-top:0}.structure{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.box{padding:17px;border:1px solid var(--line);border-radius:14px;text-align:center;background:#fafbfe}.compare{width:100%;border-collapse:collapse}.compare th,.compare td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.compare th{background:#f8fafc}
+.lab{background:#0f172a;color:#e5e7eb;border-radius:20px;padding:24px}.lab h2{color:#fff}.panel{background:#172033;border:1px solid #334155;border-radius:15px;padding:18px;margin-top:15px}.panel select,.panel input{font:inherit}.panel select{padding:10px;border-radius:9px;background:#0b1220;color:#fff;border:1px solid #475569}.panel button,button{border:0;border-radius:10px;padding:10px 14px;background:var(--p);color:#fff;font-weight:800;cursor:pointer;margin:5px 5px 5px 0}.secondary{background:#334155!important}.graph{position:relative;height:330px;border:1px solid #475569;border-radius:15px;background:#0b1220;margin-top:15px;overflow:hidden}.g-node{position:absolute;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;border:2px solid #64748b;background:#1e293b;transition:.25s}.g-node.start{border-color:#818cf8;background:#312e81}.g-node.goal{border-color:#4ade80;background:#14532d}.g-node.current{box-shadow:0 0 0 5px #67e8f955}.g-edge{position:absolute;height:3px;background:#64748b;transform-origin:left center}.log{background:#0b1220;border:1px solid #334155;border-radius:12px;padding:13px;margin-top:12px;max-height:180px;overflow:auto;font-family:ui-monospace,monospace;font-size:.88rem}.pill{display:inline-block;padding:4px 9px;border-radius:99px;background:#1e293b;border:1px solid #475569;margin:3px}.quiz label{display:block;border:1px solid var(--line);border-radius:10px;padding:9px;margin:7px 0;cursor:pointer}.footer{text-align:center;color:var(--muted);padding:28px}
+@media(max-width:800px){.top{position:relative;flex-wrap:wrap}.algorithm,.structure{grid-template-columns:1fr}.graph{height:360px}}
+</style>
+</head>
 <body>
-<header class="site-header"><div class="container navbar">
-<a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a>
-<nav class="nav-links"><a href="index.html">Module 1</a><a href="../index.html">Course Home</a></nav>
-</div></header>
-<main class="lesson-shell">
-<div class="breadcrumbs">MODULE 1 / LESSON 05</div>
-<section class="lesson-header reveal"><span class="badge">Lesson 05 of 8</span><h1>Uninformed Search</h1><p>Search space • DFS • BFS • UCS • Completeness • Cost • Memory</p>
-<div class="lesson-progress"><div id="lessonProgress"></div></div>
-<p class="small-note" id="progressText">Lesson not completed</p></section>
+<header class="top"><b>1BAIA103/203 · Introduction to AI & Applications</b><nav><a href="lab-04-agent-environment.html">← Lab 04</a> <a href="index.html">Module 1</a> <a href="lab-06-depth-limited-iddfs.html">Lab 06 →</a></nav></header>
+<main class="wrap">
+<section class="hero">
+<span class="badge">MODULE 1 · LAB 05 · CO1</span>
+<h1>Uninformed Search — BFS, DFS & UCS</h1>
+<p class="lead">When an intelligent agent knows the start state, possible actions and goal test but has <b>no additional information about how close each state is to the goal</b>, it can use uninformed (blind) search. This lab makes the three core strategies visual: <b>Depth-First Search, Breadth-First Search and Uniform-Cost Search</b>.</p>
+<div class="grid"><div class="mini"><b>🔎 Blind Search</b><br><span class="small">No heuristic estimate of goal closeness.</span></div><div class="mini"><b>📚 BFS</b><br><span class="small">Explore shallowest nodes first using FIFO.</span></div><div class="mini"><b>🧗 DFS</b><br><span class="small">Explore deepest available node first using LIFO.</span></div><div class="mini"><b>💰 UCS</b><br><span class="small">Expand the lowest cumulative path cost first.</span></div></div>
+</section>
 
-<section class="lesson-section"><div class="visual-panel"><h2>SEE: Search as problem solving</h2>
-<p>Search explores a problem graph from a start state toward a goal state. The course material describes the problem graph, strategy, fringe, tree, solution plan and path/step cost.</p>
-<div class="visual-flow"><div class="vnode">Start S</div><div class="varrow">→</div><div class="vnode">Search strategy</div><div class="varrow">→</div><div class="vnode">Fringe</div><div class="varrow">→</div><div class="vnode">Goal G</div></div>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: DFS vs BFS vs UCS</h2>
-<div class="search-lab"><div><div class="search-board"><div class="tree">
-<div class="tree-row"><button class="node goal" data-n="S">S</button></div>
-<div class="tree-row"><button class="node" data-n="A">A</button><button class="node" data-n="B">B</button><button class="node" data-n="C">C</button></div>
-<div class="tree-row"><button class="node" data-n="D">D</button><button class="node" data-n="E">E</button><button class="node" data-n="F">F</button><button class="node" data-n="G">G</button><button class="node" data-n="H">H</button><button class="node" data-n="I">I</button></div>
-</div></div><div class="controls"><button class="btn btn-secondary" onclick="runSearch('bfs')">Run BFS</button><button class="btn btn-secondary" onclick="runSearch('dfs')">Run DFS</button><button class="btn btn-secondary" onclick="runSearch('ucs')">Run UCS</button><button class="btn btn-secondary" onclick="resetSearch()">Reset</button></div><p class="small-note" id="searchStatus">Choose an algorithm.</p></div>
-<div><h3>Core idea</h3><table class="compare-table"><tr><th>Algorithm</th><th>Selection idea</th><th>Typical strength</th></tr><tr><td>BFS</td><td>Shallowest node first</td><td>Complete; shortest path when step costs are equal</td></tr><tr><td>DFS</td><td>Deepest node first</td><td>Low memory compared with BFS</td></tr><tr><td>UCS</td><td>Lowest path cost first</td><td>Useful when step costs differ</td></tr></table></div></div>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>UNDERSTAND: Why “uninformed”?</h2><p>Uninformed (blind) search uses no extra information about how close a state is to the goal beyond the problem definition. The strategy determines which fringe node is explored next.</p></div></section>
+<section class="card"><div class="kicker">1 · Learning Objectives</div><h2>By the end of this lab, you should be able to…</h2>
+<ul><li>Define <b>uninformed/blind search</b> and explain what information it does and does not use.</li><li>Explain problem graph, strategy, fringe/frontier, search tree, solution plan and path/step cost.</li><li>Trace <b>BFS</b> using a FIFO queue and explain why it finds a shallowest solution.</li><li>Trace <b>DFS</b> using a LIFO stack and explain backtracking, memory use and infinite-depth issues.</li><li>Explain <b>UCS</b> using cumulative path cost and a priority queue.</li><li>Compare BFS, DFS and UCS in terms of strategy, data structure, completeness, optimality and complexity.</li><li>Use the interactive graph to observe that changing edge costs can change the UCS solution without changing the graph structure.</li></ul></section>
 
-<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>Answer in this order: <b>definition → working/steps → diagram or example → advantages/limitations → conclusion</b> when the question asks for an explanation. Use block diagrams wherever necessary.</p></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2>
-<div class="check"><p><strong>Can you explain the central idea of this lesson without looking at your notes?</strong></p>
-<button onclick="showAnswer()">Yes — reveal the self-check</button>
-<div class="answer" id="answer">Good. Now state the concept in your own words, give one example, and identify one limitation or trade-off.</div></div></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Key Takeaways</h2><ul><li>Start with the problem, not the buzzword.</li><li>Use the visual model to explain the concept before memorising terminology.</li><li>Test the idea with an example and compare alternatives.</li></ul>
-<button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
-<div class="lesson-nav"><a class="btn btn-secondary" href="lab-04-agent-environment.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="lab-06-depth-limited-iddfs.html">Next →</a></div>
+<section class="card"><div class="kicker">2 · What is Uninformed Search?</div><h2>Search without a map to the goal</h2>
+<p>The VTU module defines uninformed (blind) search algorithms as methods with <b>no extra information about the goal state other than what is provided in the problem definition</b>. They explore the search space without considering how close a node is to the goal. fileciteturn22file5 Reema Thareja similarly describes blind search as having no additional information about the goal beyond the problem definition. fileciteturn22file9</p>
+<div class="searchvisual"><div class="circle start">S</div><div class="arrow">→</div><div class="circle">?</div><div class="arrow">→</div><div class="circle">?</div><div class="arrow">→</div><div class="circle goal">G</div></div>
+<div class="callout"><b>Blind does not mean random.</b> Each algorithm follows a well-defined strategy. What is missing is <b>domain-specific guidance such as a heuristic h(n)</b> telling the search which node appears closer to the goal.</div></section>
+
+<section class="card"><div class="kicker">3 · Search Problem Vocabulary</div><h2>The building blocks of a search problem</h2>
+<div class="structure">
+<div class="box"><b>Problem Graph</b><p class="small">Represents states and connections from start S toward goal G.</p></div>
+<div class="box"><b>Strategy</b><p class="small">The rule deciding which node/path is explored next.</p></div>
+<div class="box"><b>Fringe / Frontier</b><p class="small">Data structure containing states that can be reached and are waiting for exploration.</p></div>
+<div class="box"><b>Search Tree</b><p class="small">The path/tree representation generated while searching.</p></div>
+<div class="box"><b>Solution Plan</b><p class="small">Sequence of states/actions that transforms S into G.</p></div>
+<div class="box"><b>Path / Step Cost</b><p class="small">Integer/action costs used to measure the cost of moving between nodes.</p></div>
+</div>
+<p class="small">These six terms are explicitly listed in the VTU Module 1 uninformed-search material. fileciteturn22file5</p></section>
+
+<section class="card"><div class="kicker">4 · How We Evaluate Search</div><h2>Four important questions</h2>
+<div class="grid"><div class="mini"><b>1. Complete?</b><p class="small">Will the algorithm find a solution if one exists, subject to the stated conditions?</p></div><div class="mini"><b>2. Optimal?</b><p class="small">Will it return a solution with the lowest path cost?</p></div><div class="mini"><b>3. Time?</b><p class="small">How many nodes may need to be generated/expanded?</p></div><div class="mini"><b>4. Space?</b><p class="small">How much memory may be required for the frontier/reached information?</p></div></div>
+<p>Reema Thareja identifies optimality as obtaining the lowest path cost and defines time/space complexity in terms of execution effort and storage requirements. fileciteturn22file9</p></section>
+
+<section class="card"><div class="kicker">5 · Breadth-First Search</div><h2>BFS — Shallowest node first</h2>
+<p><b>Idea:</b> BFS explores the tree <b>level by level</b>. It starts at the root, expands all nodes at the current depth, then moves to the next depth. The VTU example finds S → D → G because G is the shallowest solution. fileciteturn22file7</p>
+<div class="loop"><div class="box">S<br><small>Depth 0</small></div><div class="arrow">→</div><div class="box">A · B · C<br><small>Depth 1</small></div><div class="arrow">→</div><div class="box">D · E · F · G<br><small>Depth 2</small></div></div>
+<div class="callout"><b>Data structure: FIFO Queue</b> — first node inserted is the first node removed. The queue allows BFS to finish one level before moving deeper. Reema Thareja describes BFS as a FIFO-queue algorithm. fileciteturn21file15</div>
+<h3>Typical BFS sequence</h3><ol><li>Insert the start node into the queue.</li><li>Remove the front node and test it.</li><li>Add its unvisited children to the rear of the queue.</li><li>Repeat until the goal is found or the queue becomes empty.</li></ol></section>
+
+<section class="card"><div class="kicker">6 · BFS Properties</div><h2>Why BFS is useful — and expensive</h2>
+<table class="compare"><tr><th>Property</th><th>BFS</th></tr><tr><td>Completeness</td><td>Complete under the standard finite-branching conditions described in the sources.</td></tr><tr><td>Optimality</td><td>Optimal when all step costs are equal; Reema Thareja states this as step cost = 1 / equal costs. fileciteturn21file15</td></tr><tr><td>Time</td><td>O(b<sup>d</sup>) in the standard tree-search formulation, where b is branching factor and d is shallowest solution depth. fileciteturn22file17</td></tr><tr><td>Space</td><td>O(b<sup>d</sup>) in the standard tree-search formulation because many frontier nodes remain in memory. fileciteturn22file17</td></tr><tr><td>Advantage</td><td>Finds the shallowest solution and does not get stuck following one infinitely deep branch.</td></tr><tr><td>Disadvantage</td><td>Can require very large memory because the frontier grows rapidly.</td></tr></table>
+<p class="small">Real-life applications named in Reema Thareja include web crawlers, GPS navigation for neighbouring locations, shortest paths in unweighted graphs, network broadcasting and peer-to-peer networking. fileciteturn21file3</p></section>
+
+<section class="card"><div class="kicker">7 · Depth-First Search</div><h2>DFS — Go deep, then backtrack</h2>
+<p>DFS starts at the root and follows a branch toward a leaf/deep node. If the goal is not found, it <b>backtracks</b> to the most recent point with an unexplored branch and continues. Reema Thareja's example traces A → B → D → H, then backtracks to explore other branches. fileciteturn22file9</p>
+<div class="searchvisual"><div class="circle start">A</div><div class="arrow">↓</div><div class="circle">B</div><div class="arrow">↓</div><div class="circle">D</div><div class="arrow">↓</div><div class="circle goal">H</div></div>
+<div class="callout"><b>Data structure: LIFO Stack</b> — the most recently added node is explored first. This is why DFS naturally moves down one branch before considering siblings.</div>
+<h3>DFS sequence</h3><ol><li>Push the start node.</li><li>Pop the deepest/latest available node.</li><li>If it is not the goal, add its successors.</li><li>Continue down a branch; when necessary, backtrack.</li></ol></section>
+
+<section class="card"><div class="kicker">8 · DFS Properties</div><h2>Memory efficient, but can go the wrong way for a long time</h2>
+<table class="compare"><tr><th>Property</th><th>DFS</th></tr><tr><td>Memory</td><td>Stores mainly the current path/fringe, so it can use less memory than BFS.</td></tr><tr><td>Time</td><td>O(b<sup>m</sup>) in the standard tree formulation, where m is maximum depth. fileciteturn22file9</td></tr><tr><td>Space</td><td>O(bm) in the formulation given by Reema Thareja. fileciteturn22file9</td></tr><tr><td>Completeness</td><td>Not guaranteed in general; an infinite path can prevent the algorithm from reaching a solution elsewhere.</td></tr><tr><td>Optimality</td><td>Not guaranteed to return the lowest-cost or shallowest solution.</td></tr><tr><td>Risks</td><td>Recurring states, infinite loops and duplicate nodes can create inefficiency. fileciteturn22file1</td></tr></table>
+<div class="callout warn"><b>Depth problem:</b> a cut-off can prevent an infinite descent, but a limit that is too small can miss the goal; a limit that is too large can increase execution time. fileciteturn22file1</div></section>
+
+<section class="card"><div class="kicker">9 · Uniform-Cost Search</div><h2>UCS — Cheapest path first</h2>
+<p>When actions have different costs, simply choosing the shallowest path is not enough. UCS expands the node with the <b>lowest cumulative path cost from the start</b>. The VTU example finds S → A → B → G with total cost 5. fileciteturn22file4</p>
+<div class="searchvisual"><div class="circle start">S</div><div class="arrow">cost +2</div><div class="circle">A</div><div class="arrow">cost +1</div><div class="circle">B</div><div class="arrow">cost +2</div><div class="circle goal">G</div></div>
+<div class="callout"><b>Priority queue:</b> UCS gives highest priority to the node with the <b>smallest cumulative path cost</b>. It is not depth-first and not breadth-first; it expands in increasing path-cost order. fileciteturn22file15</div>
+<h3>Cost calculation</h3><p><b>g(n) = cumulative cost from S to n</b><br>S = 0 → A = 2 → B = 3 → G = 5.</p></section>
+
+<section class="card"><div class="kicker">10 · UCS Properties</div><h2>Why cost changes the answer</h2>
+<table class="compare"><tr><th>Property</th><th>UCS</th></tr><tr><td>Selection rule</td><td>Lowest cumulative path cost g(n).</td></tr><tr><td>Data structure</td><td>Priority queue.</td></tr><tr><td>Completeness</td><td>Complete under conditions such as finite branching and action costs bounded below by ε &gt; 0; Reema Thareja also notes no zero-weight loop for its stated condition. fileciteturn22file15</td></tr><tr><td>Optimality</td><td>Optimal when action costs are non-negative/under the source's stated conditions; it selects paths in increasing cost order. fileciteturn22file15</td></tr><tr><td>Advantage</td><td>Finds an optimal solution based on actual path cost when its assumptions hold.</td></tr><tr><td>Disadvantage</td><td>May explore many nodes and require substantial memory; it has no information about where the goal is. fileciteturn22file15</td></tr></table></section>
+
+<section class="card"><div class="kicker">11 · BFS vs DFS vs UCS</div><h2>One comparison table to remember</h2>
+<table class="compare"><tr><th>Feature</th><th>BFS</th><th>DFS</th><th>UCS</th></tr><tr><td>Chooses</td><td>Shallowest depth</td><td>Deepest available node</td><td>Lowest cumulative cost</td></tr><tr><td>Data structure</td><td>FIFO queue</td><td>LIFO stack</td><td>Priority queue</td></tr><tr><td>Uses heuristic?</td><td>No</td><td>No</td><td>No</td></tr><tr><td>Best intuition</td><td>“Search level by level.”</td><td>“Go down one branch.”</td><td>“Follow the cheapest path so far.”</td></tr><tr><td>Complete?</td><td>Yes under standard conditions</td><td>No in general</td><td>Yes under positive-cost conditions</td></tr><tr><td>Optimal?</td><td>Yes if equal step costs</td><td>No</td><td>Yes under appropriate cost assumptions</td></tr><tr><td>Typical concern</td><td>Memory</td><td>Infinite/deep wrong branch</td><td>Cost-driven exploration and memory</td></tr></table>
+<p class="small">Russell & Norvig's comparison gives BFS and UCS as complete under their stated conditions, DFS as not generally complete, and distinguishes optimal-cost conditions. fileciteturn22file10</p></section>
+
+<section class="lab"><div class="kicker" style="color:#67e8f9">12 · Virtual Lab — Run the Search</div><h2>Watch BFS, DFS and UCS explore the same graph</h2>
+<p>The graph is designed to demonstrate the difference between <b>depth</b> and <b>cost</b>. BFS/DFS ignore edge costs; UCS uses them. Select an algorithm and run one step at a time.</p>
+<div class="panel">
+<label>Algorithm</label><br><select id="algo"><option value="bfs">Breadth-First Search (BFS)</option><option value="dfs">Depth-First Search (DFS)</option><option value="ucs">Uniform-Cost Search (UCS)</option></select>
+<div class="graph" id="graph"></div>
+<button onclick="runStep()">Run One Step</button><button onclick="runAll()">Run Until Goal</button><button class="secondary" onclick="resetSearch()">Reset</button>
+<div class="info" id="searchInfo">Ready. Start node is S and goal is G.</div><div class="log" id="log"></div>
+</div></section>
+
+<section class="card"><div class="kicker">13 · Worked Example</div><h2>Why BFS and UCS can return different paths</h2>
+<p>Imagine two routes from S to G:</p>
+<div class="grid"><div class="mini"><b>Route 1 — shallow</b><p>S → A → G</p><p class="small">2 edges, but expensive: 9 + 9 = 18.</p></div><div class="mini"><b>Route 2 — deeper</b><p>S → B → C → G</p><p class="small">3 edges, but cheap: 2 + 2 + 2 = 6.</p></div></div>
+<p><b>BFS</b> prefers the shallow solution because it ignores path cost. <b>UCS</b> prefers the cheaper route because it compares cumulative cost. This illustrates why BFS is optimal for equal step costs but not for arbitrary unequal costs.</p></section>
+
+<section class="card"><div class="kicker">14 · Algorithm Selection Guide</div><h2>Which one should you think of first?</h2>
+<div class="algorithm"><div class="alg"><h3>📚 Choose BFS when…</h3><p>The solution is likely shallow and actions have equal cost; you want the minimum number of steps.</p></div><div class="alg"><h3>🧗 Choose DFS when…</h3><p>Memory is constrained and deep solutions may be useful, but you can tolerate lack of completeness/optimality.</p></div><div class="alg"><h3>💰 Choose UCS when…</h3><p>Step costs differ and the objective is the lowest total path cost.</p></div></div>
+<div class="callout">If you have useful information about how close a node is to the goal, you are moving toward <b>informed/heuristic search</b>, which is the subject of the next search lessons.</div></section>
+
+<section class="card quiz"><div class="kicker">15 · Quick Check</div><h2>Test yourself</h2>
+<form>
+<p><b>1. Uninformed search has:</b></p><label><input type="radio" name="q1" value="a"> A heuristic estimate for every node</label><label><input type="radio" name="q1" value="b"> No extra goal information beyond the problem definition</label><label><input type="radio" name="q1" value="c"> Complete knowledge of the future</label>
+<p><b>2. BFS uses:</b></p><label><input type="radio" name="q2" value="a"> FIFO queue</label><label><input type="radio" name="q2" value="b"> LIFO stack</label><label><input type="radio" name="q2" value="c"> Priority queue by cost</label>
+<p><b>3. DFS primarily explores:</b></p><label><input type="radio" name="q3" value="a"> Lowest-cost node</label><label><input type="radio" name="q3" value="b"> Shallowest node</label><label><input type="radio" name="q3" value="c"> Deepest available node</label>
+<p><b>4. UCS selects the node with:</b></p><label><input type="radio" name="q4" value="a"> Lowest heuristic</label><label><input type="radio" name="q4" value="b"> Lowest cumulative path cost</label><label><input type="radio" name="q4" value="c"> Greatest depth</label>
+<p><b>5. BFS is optimal when:</b></p><label><input type="radio" name="q5" value="a"> All step costs are equal</label><label><input type="radio" name="q5" value="b"> Edge costs are negative</label><label><input type="radio" name="q5" value="c"> A heuristic is available</label>
+<button type="button" onclick="quiz()">Check Score</button><div id="qr" style="font-weight:800;margin-top:10px"></div>
+</form></section>
+
+<section class="card"><div class="kicker">16 · Common Misconceptions</div>
+<details><summary>“BFS always finds the cheapest path.”</summary><p>Only when the step costs satisfy the equal-cost condition used in the course treatment. With unequal costs, UCS is the appropriate uninformed cost-based strategy.</p></details>
+<details><summary>“DFS always finds the shortest path because it reaches a goal quickly.”</summary><p>No. DFS may find a deep, expensive or otherwise non-optimal solution before a better one.</p></details>
+<details><summary>“UCS is a heuristic search.”</summary><p>No. UCS uses actual cumulative path cost, not a heuristic estimate of remaining cost. It is treated as an uninformed strategy.</p></details>
+<details><summary>“Blind search means random search.”</summary><p>No. BFS, DFS and UCS are systematic strategies. “Blind” refers to the absence of extra information about goal location.</p></details>
+<details><summary>“The first node generated by UCS must be the optimal solution.”</summary><p>The algorithm's goal-testing/expansion conditions matter. The standard UCS formulation returns a goal when the least-cost node is selected for expansion; this supports cost optimality under the stated assumptions.</p></details>
+</section>
+
+<section class="card"><div class="kicker">17 · Exam Corner</div><h2>Questions to prepare</h2>
+<ol><li>Define <b>uninformed search</b>. Explain its characteristics.</li><li>Explain <b>Breadth-First Search</b> with algorithm, example, advantages and disadvantages.</li><li>Explain <b>Depth-First Search</b> with algorithm, example, advantages and disadvantages.</li><li>Explain <b>Uniform-Cost Search</b> with an example and cost calculation.</li><li>Differentiate BFS, DFS and UCS.</li><li>Explain the role of queue, stack and priority queue in BFS, DFS and UCS.</li><li>Explain completeness, optimality, time complexity and space complexity of uninformed search algorithms.</li><li>Given a graph with edge costs, trace UCS and calculate the total path cost.</li></ol>
+<div class="callout">The supplied Model Question Paper asks students to outline the <b>merits and demerits of BFS, UCS and DFS</b>. fileciteturn22file11</div></section>
+
+<section class="card"><div class="kicker">18 · Takeaways</div><div class="callout good"><ul><li><b>Uninformed search</b> has no extra information about how close a state is to the goal.</li><li><b>BFS = FIFO + shallowest first.</b></li><li><b>DFS = LIFO + deepest first + backtracking.</b></li><li><b>UCS = priority queue + lowest cumulative path cost.</b></li><li>BFS is optimal for equal step costs; UCS is designed for varying costs under its assumptions.</li><li>DFS uses less memory than BFS in the standard treatment but can get trapped in an infinite/deep branch.</li><li>Always state the <b>selection rule and data structure</b> when explaining a search algorithm.</li></ul></div></section>
+
+<section class="card"><div class="kicker">19 · Resource Alignment</div><h2>Sources used for this lesson</h2>
+<ul><li><b>VTU Module 1 — Introduction to AI and Applications</b>: definition of uninformed search, problem graph, strategy, fringe, tree, solution plan, path/step cost, and the listed uninformed algorithms. fileciteturn22file5</li><li><b>VTU Module 1 — BFS</b>: level-wise exploration, shallowest solution and traversal example. fileciteturn22file7</li><li><b>VTU Module 1 — DFS</b>: memory use, deep search, infinite-loop risk and disadvantages. fileciteturn22file1</li><li><b>VTU Module 1 — UCS</b>: cumulative cost, priority queue, optimal path example and total cost 5. fileciteturn22file4</li><li><b>Reema Thareja, Artificial Intelligence: Beyond Classical AI</b>: uninformed-search concepts, DFS, BFS and UCS. fileciteturn22file9turn21file15turn22file15</li><li><b>Russell & Norvig, Artificial Intelligence: A Modern Approach</b>: BFS/UCS pseudocode and formal comparison of completeness, optimality, time and space. fileciteturn22file17turn22file10</li></ul></section>
+
+<div class="footer"><a href="lab-04-agent-environment.html">← Lab 04</a> · <a href="index.html">Module 1</a> · <a href="lab-06-depth-limited-iddfs.html">Lab 06 →</a></div>
 </main>
-<footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 1</div><div>Lesson 05: Uninformed Search</div></div></footer>
-<script src="../assets/js/progress.js"></script>
 <script>
-const LESSON_ID="lab-05-search-bfs-dfs-ucs";
-function showAnswer(){document.getElementById("answer").style.display="block";}
-function completeLesson(){
-  AIProgress.markLessonComplete(LESSON_ID);
-  document.getElementById("lessonProgress").style.width="100%";
-  document.getElementById("progressText").textContent="Completed locally ✓";
-  document.getElementById("completeBtn").textContent="✓ Lesson Completed";
-  document.getElementById("completeBtn").disabled=true;
+const N={S:[18,42],A:[39,18],B:[39,65],C:[61,18],D:[61,65],G:[83,42]};
+const E=[['S','A',2],['S','B',5],['A','C',2],['A','D',9],['B','D',1],['C','G',10],['D','G',2]];
+const graph=document.getElementById('graph');
+function draw(){
+ graph.innerHTML='';
+ E.forEach(([a,b,c])=>{const [x1,y1]=N[a],[x2,y2]=N[b],dx=(x2-x1),dy=(y2-y1),len=Math.hypot(dx,dy),ang=Math.atan2(dy,dx)*180/Math.PI;
+ const e=document.createElement('div');e.className='g-edge';e.style.left=x1+'%';e.style.top=y1+'%';e.style.width=len+'%';e.style.transform='rotate('+ang+'deg)';e.title=a+' → '+b+' cost '+c;graph.appendChild(e);
+ const t=document.createElement('span');t.style.position='absolute';t.style.left=((x1+x2)/2)+'%';t.style.top=((y1+y2)/2-3)+'%';t.style.color='#94a3b8';t.style.fontSize='.75rem';t.textContent=c;graph.appendChild(t)});
+ Object.keys(N).forEach(k=>{const d=document.createElement('div');d.className='g-node '+(k==='S'?'start ':'')+(k==='G'?'goal ':'');d.id='n'+k;d.textContent=k;d.style.left='calc('+N[k][0]+'% - 26px)';d.style.top='calc('+N[k][1]+'% - 26px)';graph.appendChild(d)})
 }
-document.addEventListener("DOMContentLoaded",()=>{
- const done=AIProgress.get(LESSON_ID)>=100;
- document.getElementById("lessonProgress").style.width=done?"100%":"0%";
- document.getElementById("progressText").textContent=done?"Completed locally ✓":"Lesson not completed";
- if(done){document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
-});
+draw();
+let state;
+function resetSearch(){state={front:['S'],reached:new Set(['S']),parent:{},cost:{S:0},done:false,expanded:[],log:[]};renderState();document.getElementById('searchInfo').textContent='Reset: frontier contains S.';document.getElementById('log').innerHTML=''}
+function neighbors(x){return E.filter(e=>e[0]===x).map(e=>({to:e[1],c:e[2]}))}
+function renderState(){document.querySelectorAll('.g-node').forEach(x=>x.classList.remove('current'));if(state&&state.front[0])document.getElementById('n'+state.front[0])?.classList.add('current')}
+function one(){
+ if(state.done)return;
+ const alg=document.getElementById('algo').value;
+ let node;
+ if(alg==='bfs') node=state.front.shift();
+ else if(alg==='dfs') node=state.front.pop();
+ else {state.front.sort((a,b)=>(state.cost[a]||0)-(state.cost[b]||0));node=state.front.shift()}
+ state.expanded.push(node);
+ if(node==='G'){state.done=true;finish(node);return}
+ neighbors(node).forEach(({to,c})=>{
+   const nc=state.cost[node]+c;
+   if(alg==='ucs'){
+     if(!state.reached.has(to)||nc<state.cost[to]){state.reached.add(to);state.cost[to]=nc;state.parent[to]=node;state.front.push(to)}
+   }else if(!state.reached.has(to)){state.reached.add(to);state.parent[to]=node;state.front.push(to)}
+ });
+ state.log.push(alg.toUpperCase()+' expands '+node+' | frontier: ['+state.front.join(', ')+']');
+ document.getElementById('log').innerHTML=state.log.map(x=>'<div>'+x+'</div>').join('');
+ document.getElementById('searchInfo').innerHTML='<b>Expanded:</b> '+node+' · <b>Frontier:</b> '+state.front.join(', ')+' · <b>Cost so far:</b> '+(state.cost[node]??0);
+ renderState();
+ if(state.front.length===0){state.done=true;document.getElementById('searchInfo').textContent='Search failed: frontier is empty.'}
+}
+function finish(node){let p=[],x=node;while(x){p.unshift(x);x=state.parent[x]}document.getElementById('searchInfo').innerHTML='🎯 <b>Goal found!</b> Path: '+p.join(' → ')+' · Total cost: '+(state.cost[node]??0);state.log.push('GOAL FOUND: '+p.join(' → ')+' | cost '+(state.cost[node]??0));document.getElementById('log').innerHTML=state.log.map(x=>'<div>'+x+'</div>').join('');renderState()}
+function runStep(){if(!state)resetSearch();one()}
+function runAll(){if(!state)resetSearch();let guard=0;while(!state.done&&guard++<100)one()}
+document.getElementById('algo').addEventListener('change',resetSearch);resetSearch();
+function quiz(){const a={q1:'b',q2:'a',q3:'c',q4:'b',q5:'a'};let s=0;Object.keys(a).forEach(k=>{const x=document.querySelector('input[name="'+k+'"]:checked');if(x&&x.value===a[k])s++});document.getElementById('qr').textContent='Score: '+s+'/5 '+(s===5?'🎉 Excellent!':s>=3?'👍 Good — review the missed concepts.':'📘 Revisit the three search strategies and try again.')}
 </script>
-</body></html>
+</body>
+</html>
