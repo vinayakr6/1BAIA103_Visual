@@ -1,65 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Agents & Environments — Module 1 interactive lesson">
-<title>Lesson 04: Agents & Environments | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module1.css"></head>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab 04 — Agent & Environment</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#5d6878;--line:#dce3ee;--p:#4f46e5;--c:#0891b2;--g:#15803d;--o:#c2410c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;line-height:1.65}.top{position:sticky;top:0;z-index:5;background:#111827;color:#fff;padding:12px 5%;display:flex;justify-content:space-between;gap:15px;align-items:center;box-shadow:0 4px 20px #0002}.top a{color:#fff;text-decoration:none;border:1px solid #ffffff30;padding:6px 10px;border-radius:8px;font-size:.9rem}.wrap{max-width:1200px;margin:auto;padding:28px 18px 70px}.hero{padding:38px;border-radius:24px;background:linear-gradient(135deg,#eef2ff,#ecfeff);border:1px solid #dbe4ff}.badge{display:inline-block;background:#e0e7ff;color:#3730a3;border-radius:999px;padding:5px 12px;font-size:.8rem;font-weight:800}.hero h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.05;margin:15px 0}.lead{font-size:1.1rem;color:var(--muted);max-width:1000px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:23px;margin:18px 0;box-shadow:0 6px 24px #18223009}.kicker{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:var(--p)}h2{font-size:1.65rem;margin:4px 0 12px}.small{font-size:.94rem;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}.mini{padding:18px;border:1px solid var(--line);border-radius:15px;background:#fafbfe}.icon{font-size:2rem}.callout{padding:15px 18px;border-left:5px solid var(--p);background:#f5f3ff;border-radius:0 12px 12px 0}.good{border-left-color:#16a34a;background:#f0fdf4}.warn{border-left-color:#ea580c;background:#fff7ed}
+.agentflow{display:grid;grid-template-columns:1fr 180px 1fr;gap:15px;align-items:center;margin:25px 0}.env{border:3px solid var(--c);border-radius:20px;padding:25px;background:#ecfeff;text-align:center}.agent{border:3px solid var(--p);border-radius:20px;padding:25px;background:#eef2ff;text-align:center}.arr{text-align:center;font-size:1.8rem;font-weight:900;color:var(--p)}.loop{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;margin:22px}.node{padding:16px 14px;border:2px solid var(--line);border-radius:14px;background:#fafbfe;text-align:center;min-width:130px}.node b{display:block}.arrow{font-size:1.5rem;color:var(--p);font-weight:900}.peas{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.peas div{padding:18px;border-radius:16px;text-align:center;border:2px solid var(--line)}.peas b{display:block;font-size:1.4rem}.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px}.type{border:1px solid var(--line);border-radius:16px;padding:18px}.type h3{margin-top:0}.lab{background:#0f172a;color:#e5e7eb;border-radius:20px;padding:24px}.lab h2{color:#fff}.panel{background:#172033;border:1px solid #334155;border-radius:15px;padding:18px;margin-top:15px}.panel select,.panel input{width:100%;font:inherit}.panel select{padding:11px;border-radius:9px;background:#0b1220;color:#fff;border:1px solid #475569}.panel button,button{border:0;border-radius:10px;padding:10px 14px;background:var(--p);color:#fff;font-weight:800;cursor:pointer;margin:5px 5px 5px 0}.secondary{background:#334155!important}.world{position:relative;height:280px;background:#0b1220;border:1px solid #475569;border-radius:15px;overflow:hidden;margin-top:15px}.robot{position:absolute;font-size:2.2rem;transition:.3s}.obj{position:absolute;font-size:1.8rem}.info{background:#111827;border:1px solid #334155;border-radius:12px;padding:13px;margin-top:12px}.range{display:grid;grid-template-columns:1fr 70px;gap:12px;align-items:center}.quiz label{display:block;border:1px solid var(--line);border-radius:10px;padding:9px;margin:7px 0;cursor:pointer}.compare{width:100%;border-collapse:collapse}.compare th,.compare td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}.compare th{background:#f8fafc}.footer{text-align:center;color:var(--muted);padding:28px}@media(max-width:800px){.top{position:relative;flex-wrap:wrap}.agentflow{grid-template-columns:1fr}.peas{grid-template-columns:1fr 1fr}.loop{flex-direction:column}.arrow{transform:rotate(90deg)}}
+</style>
+</head>
 <body>
-<header class="site-header"><div class="container navbar">
-<a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a>
-<nav class="nav-links"><a href="index.html">Module 1</a><a href="../index.html">Course Home</a></nav>
-</div></header>
-<main class="lesson-shell">
-<div class="breadcrumbs">MODULE 1 / LESSON 04</div>
-<section class="lesson-header reveal"><span class="badge">Lesson 04 of 8</span><h1>Agents & Environments</h1><p>Agent • Environment • Sensors • Actuators • Rationality • Agent types</p>
-<div class="lesson-progress"><div id="lessonProgress"></div></div>
-<p class="small-note" id="progressText">Lesson not completed</p></section>
+<header class="top"><b>1BAIA103/203 · Introduction to AI & Applications</b><nav><a href="lab-03-intelligence-comparison.html">← Lab 03</a> <a href="index.html">Module 1</a> <a href="lab-05-search-bfs-dfs-ucs.html">Lab 05 →</a></nav></header>
+<main class="wrap">
+<section class="hero">
+<span class="badge">MODULE 1 · LAB 04 · CO1</span>
+<h1>Agent & Environment</h1>
+<p class="lead">Artificial Intelligence can be understood through the idea of an <b>agent</b>: something that perceives its environment through sensors and acts on that environment through actuators/effectors. Learn how percepts, actions, rationality and PEAS fit together, then experiment with a simple agent.</p>
+<div class="grid"><div class="mini"><b>👁️ Perceive</b><br><span class="small">Sensors receive percepts from the environment.</span></div><div class="mini"><b>🧠 Decide</b><br><span class="small">The agent uses its program/knowledge to choose an action.</span></div><div class="mini"><b>🦾 Act</b><br><span class="small">Actuators/effectors change or interact with the environment.</span></div><div class="mini"><b>🎯 Be rational</b><br><span class="small">Choose actions intended to maximize the performance measure.</span></div></div>
+</section>
 
-<section class="lesson-section"><div class="visual-panel"><h2>SEE: Agent ↔ Environment</h2>
-<div class="visual-flow"><div class="vnode">Environment</div><div class="varrow">→ percepts →</div><div class="vnode">Sensors<br>↓<br>Agent</div><div class="varrow">→ actions →</div><div class="vnode">Actuators</div><div class="varrow">→</div><div class="vnode">Environment</div></div>
-<p>An intelligent agent perceives its environment through sensors and acts on it through actuators. The agent function maps percept information to an action.</p>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>UNDERSTAND: Rationality</h2>
-<div class="visual-flow"><div class="vnode">Percept history</div><div class="varrow">→</div><div class="vnode">Agent function / program</div><div class="varrow">→</div><div class="vnode">Action</div><div class="varrow">→</div><div class="vnode">Performance measure</div></div>
-<div class="callout"><b>Rational agent:</b> chooses an action expected to maximise performance given the available percepts, knowledge and constraints.</div>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: Agent types</h2>
-<div class="type-grid">
-<div class="type-card"><h4>Simple Reflex</h4><p>Acts from current percept using condition–action rules.</p></div>
-<div class="type-card"><h4>Model-Based</h4><p>Maintains an internal state/model to handle partially observable situations.</p></div>
-<div class="type-card"><h4>Goal-Based</h4><p>Chooses actions that help achieve explicit goals.</p></div>
-<div class="type-card"><h4>Utility-Based</h4><p>Uses preferences or utility to compare desirable outcomes.</p></div>
-<div class="type-card"><h4>Learning Agent</h4><p>Improves performance through experience and feedback.</p></div>
-</div></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>APPLY: Environment properties</h2>
-<table class="compare-table"><tr><th>Property</th><th>Question to ask</th></tr><tr><td>Observable</td><td>Can the agent perceive the complete relevant state?</td></tr><tr><td>Deterministic</td><td>Does an action have a predictable outcome?</td></tr><tr><td>Episodic / Non-episodic</td><td>Does each decision stand alone, or do earlier actions affect later decisions?</td></tr><tr><td>Static / Dynamic</td><td>Can the environment change while the agent is deciding?</td></tr></table>
+<section class="card"><div class="kicker">1 · Learning Objectives</div><h2>By the end of this lab, you should be able to…</h2>
+<ul><li>Define <b>agent, environment, sensor, actuator, percept and percept sequence</b>.</li><li>Explain the agent–environment interaction loop.</li><li>Differentiate human, robotic and software agents using the supplied examples.</li><li>Explain <b>performance measure, agent behaviour and agent function</b>.</li><li>Explain rationality using performance measure, percept sequence, prior knowledge and available actions.</li><li>Construct a <b>PEAS</b> description for a simple AI task.</li><li>Explain the basic structure <b>Agent = Architecture + Agent Program</b>.</li><li>Recognize the main environment properties introduced in the course: observable, deterministic, episodic/sequential, static/dynamic, discrete/continuous, single/multi-agent and known/unknown.</li></ul></section>
+
+<section class="card"><div class="kicker">2 · The Core Model</div><h2>An AI system = Agent + Environment</h2>
+<p>Reema Thareja describes AI as the study of rational agents. An agent can be a person, firm, machine or software that makes decisions and performs actions. Agents operate in an environment and may interact with other agents. fileciteturn19file1</p>
+<div class="agentflow"><div class="env"><div class="icon">🌍</div><b>ENVIRONMENT</b><p class="small">The part of the world whose state affects the agent and can be affected by its actions.</p></div><div><div class="arr">👁️ → 🧠 → 🦾</div><p class="small">Percepts enter; actions leave.</p></div><div class="agent"><div class="icon">🤖</div><b>AGENT</b><p class="small">Perceives through sensors and acts through actuators.</p></div></div>
+<div class="callout"><b>Russell & Norvig:</b> an agent is anything that can be viewed as perceiving its environment through sensors and acting upon it through actuators. A human, robot or software agent can fit this abstraction. fileciteturn19file6</div></section>
+
+<section class="card"><div class="kicker">3 · Interaction Loop</div><h2>Percept → Decision → Action → New Percept</h2>
+<div class="loop"><div class="node">🌍<b>Environment</b>World state</div><div class="arrow">→</div><div class="node">👁️<b>Sensors</b>Receive input</div><div class="arrow">→</div><div class="node">📥<b>Percept</b>Current input</div><div class="arrow">→</div><div class="node">🧠<b>Agent program</b>Select action</div><div class="arrow">→</div><div class="node">🦾<b>Actuators</b>Perform action</div><div class="arrow">→</div><div class="node">🌍<b>Environment</b>Changes</div></div>
+<p><b>Percept:</b> the information an agent's sensors are perceiving at a particular instant. <b>Percept sequence:</b> the complete history of percepts received by the agent up to that point. The agent function maps a percept sequence to an action. fileciteturn19file6</p></section>
+
+<section class="card"><div class="kicker">4 · Three Types of Agents</div><h2>Human, Robotic and Software Agents</h2>
+<div class="types">
+<div class="type"><div class="icon">🧑</div><h3>Human Agent</h3><p><b>Sensors:</b> eyes, ears, nose, tongue and skin.</p><p><b>Effectors:</b> hands, legs and mouth for taking actions.</p><p class="small">The course uses the human body as the intuitive example of sensors and effectors. fileciteturn19file1</p></div>
+<div class="type"><div class="icon">🤖</div><h3>Robotic Agent</h3><p><b>Sensors:</b> cameras and infrared range finders.</p><p><b>Effectors:</b> motors and actuators.</p><p class="small">A robotic agent connects physical sensing to physical action. fileciteturn19file0</p></div>
+<div class="type"><div class="icon">💻</div><h3>Software Agent</h3><p><b>Sensors:</b> software inputs such as file contents, network packets or human input.</p><p><b>Effectors:</b> writing files, sending network packets, displaying information or generating sounds.</p><p class="small">The supplied Russell & Norvig text gives these software-agent examples. fileciteturn19file6</p></div>
 </div></section>
 
-<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>Answer in this order: <b>definition → working/steps → diagram or example → advantages/limitations → conclusion</b> when the question asks for an explanation. Use block diagrams wherever necessary.</p></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2>
-<div class="check"><p><strong>Can you explain the central idea of this lesson without looking at your notes?</strong></p>
-<button onclick="showAnswer()">Yes — reveal the self-check</button>
-<div class="answer" id="answer">Good. Now state the concept in your own words, give one example, and identify one limitation or trade-off.</div></div></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Key Takeaways</h2><ul><li>Start with the problem, not the buzzword.</li><li>Use the visual model to explain the concept before memorising terminology.</li><li>Test the idea with an example and compare alternatives.</li></ul>
-<button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
-<div class="lesson-nav"><a class="btn btn-secondary" href="lab-03-intelligence-comparison.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="lab-05-search-bfs-dfs-ucs.html">Next →</a></div>
+<section class="card"><div class="kicker">5 · Key Terminology</div><h2>Six terms you must know</h2>
+<table class="compare"><tr><th>Term</th><th>Meaning</th><th>Simple example</th></tr>
+<tr><td><b>Performance Measure</b></td><td>Criterion used to determine how successful an agent is.</td><td>Clean floor, safe journey, correct diagnosis.</td></tr>
+<tr><td><b>Behaviour</b></td><td>An action performed by an agent after receiving a percept.</td><td>Vacuum agent sucks when it perceives dirt.</td></tr>
+<tr><td><b>Percept</b></td><td>Perceptual input received at a specific instance.</td><td>“Current square is dirty.”</td></tr>
+<tr><td><b>Percept Sequence</b></td><td>List/history of all percepts received so far.</td><td>Dirty → clean → dirty → …</td></tr>
+<tr><td><b>Agent Function</b></td><td>A mapping from percept sequence to action.</td><td>Given percept history, choose Suck/Left/Right.</td></tr>
+<tr><td><b>Agent Program</b></td><td>Concrete implementation of the agent function.</td><td>Program running on a robot/controller.</td></tr></table>
+<p class="small">These definitions follow the terminology in the supplied Thareja material. fileciteturn19file1</p></section>
+
+<section class="card"><div class="kicker">6 · Rationality</div><h2>What makes an agent rational?</h2>
+<p>Rationality means selecting an action expected to maximize the agent's performance measure given the evidence in its percept sequence and its built-in/prior knowledge. Russell & Norvig identifies four factors: <b>performance measure, prior knowledge, possible actions and percept sequence to date</b>. fileciteturn19file2</p>
+<div class="peas"><div><b>🎯</b>Performance measure<br><span class="small">How success is judged</span></div><div><b>📚</b>Prior knowledge<br><span class="small">What the agent already knows</span></div><div><b>🦾</b>Possible actions<br><span class="small">What it can do</span></div><div><b>👁️</b>Percept sequence<br><span class="small">What it has observed</span></div></div>
+<div class="callout warn"><b>Rational ≠ omniscient.</b> A rational agent acts appropriately based on available evidence; it does not need to know the actual future outcome. The supplied Russell & Norvig text explicitly distinguishes rationality from omniscience. fileciteturn19file2</div></section>
+
+<section class="card"><div class="kicker">7 · The Vacuum-Cleaner Example</div><h2>A classic way to understand rational agents</h2>
+<div class="grid"><div class="mini"><b>Environment</b><p class="small">Two locations/squares, with dirt possibly present.</p></div><div class="mini"><b>Percept</b><p class="small">Current location and whether it contains dirt.</p></div><div class="mini"><b>Actions</b><p class="small">Left, Right, Suck.</p></div><div class="mini"><b>Performance</b><p class="small">Reward clean squares over time, with the exact measure depending on the task.</p></div></div>
+<p>The important lesson is that whether the vacuum agent is <b>rational depends on the performance measure and assumptions about the environment</b>. Russell & Norvig shows that an agent can be rational under one performance measure and irrational under another. fileciteturn19file7</p></section>
+
+<section class="card"><div class="kicker">8 · PEAS</div><h2>Specify the task environment before designing the agent</h2>
+<p><b>PEAS = Performance measure + Environment + Actuators + Sensors.</b> The supplied material uses PEAS to characterize a problem solved by an agent. fileciteturn19file9</p>
+<div class="peas"><div><b>P</b>Performance<br><span class="small">What counts as success?</span></div><div><b>E</b>Environment<br><span class="small">Where does the agent operate?</span></div><div><b>A</b>Actuators<br><span class="small">How can it act?</span></div><div><b>S</b>Sensors<br><span class="small">How can it perceive?</span></div></div>
+<h3>Example: Automated Taxi</h3>
+<table class="compare"><tr><th>P</th><td>Safe, fast, legal, comfortable trip; maximize profit; minimize impact on other road users.</td></tr><tr><th>E</th><td>Roads, traffic, police, pedestrians, customers, weather.</td></tr><tr><th>A</th><td>Steering, accelerator, brake, signal, horn, display, speech and communication outputs.</td></tr><tr><th>S</th><td>Cameras, radar/LiDAR/ultrasound, speedometer, GPS, engine sensors, accelerometer, microphones/touchscreen.</td></tr></table>
+<p class="small">This automated-taxi PEAS example is detailed in Russell & Norvig. fileciteturn19file5</p></section>
+
+<section class="card"><div class="kicker">9 · Structure of an Intelligent Agent</div><h2>Agent = Architecture + Agent Program</h2>
+<div class="agentflow"><div class="mini"><div class="icon">🖥️🤖</div><b>Architecture</b><p class="small">The machinery/platform on which the agent operates — for example, a computer, robot, vehicle and its sensors/actuators.</p></div><div class="arr">+</div><div class="mini"><div class="icon">💻</div><b>Agent Program</b><p class="small">The implementation that processes percepts and selects actions.</p></div></div>
+<p>Russell & Norvig states that the agent program implements the agent function, while the architecture is the computing device with physical sensors and actuators. fileciteturn19file3</p></section>
+
+<section class="card"><div class="kicker">10 · Environment Properties</div><h2>The environment changes the agent design</h2>
+<div class="types">
+<div class="type"><h3>👁️ Fully vs Partially Observable</h3><p><b>Fully observable:</b> sensors provide the complete relevant state.</p><p><b>Partially observable:</b> the agent cannot perceive everything relevant.</p><p class="small">Example in the course: chess is observable; Kriegspiel chess is partially observable. fileciteturn19file5</p></div>
+<div class="type"><h3>🎲 Deterministic vs Non-deterministic</h3><p><b>Deterministic:</b> next state can be determined from the current state/action.</p><p><b>Non-deterministic:</b> outcomes involve uncertainty.</p><p class="small">Course examples: chess vs ludo/dice roll. fileciteturn19file13</p></div>
+<div class="type"><h3>🕰️ Static vs Dynamic</h3><p><b>Static:</b> environment does not change while the agent is acting.</p><p><b>Dynamic:</b> environment changes during action.</p><p><b>Semi-dynamic:</b> environment does not change but performance can change.</p></div>
+<div class="type"><h3>🔢 Discrete vs Continuous</h3><p><b>Discrete:</b> limited/well-defined states.</p><p><b>Continuous:</b> no such limitation on percepts/actions.</p><p class="small">Course examples: chess vs self-driving car. fileciteturn19file12</p></div>
+<div class="type"><h3>👤 Single vs Multi-agent</h3><p><b>Single:</b> one agent.</p><p><b>Multiple:</b> two or more agents, potentially cooperative or competitive.</p><p class="small">Course examples: vacuum cleaner vs chess/taxi driving. fileciteturn19file13</p></div>
+<div class="type"><h3>📚 Known vs Unknown</h3><p><b>Known:</b> the agent knows the results of actions.</p><p><b>Unknown:</b> the agent must learn how to act.</p><p class="small">The handout gives reinforcement learning as an example of learning in an unknown environment. fileciteturn19file12</p></div>
+<div class="type"><h3>🔄 Episodic vs Non-episodic</h3><p><b>Episodic:</b> each episode is independent.</p><p><b>Non-episodic:</b> current actions affect future decisions.</p><p class="small">Course example: long-term decision making is non-episodic. fileciteturn19file13</p></div>
+<div class="type"><h3>🔓 Accessible vs Inaccessible</h3><p><b>Accessible:</b> agent has full access to environment information.</p><p><b>Inaccessible:</b> complete information is unavailable.</p><p class="small">This terminology appears in the supplied Module 1 handout. fileciteturn19file13</p></div>
+</div></section>
+
+<section class="lab"><div class="kicker" style="color:#67e8f9">11 · Virtual Lab — Agent Simulator</div>
+<h2>Watch a simple robot agent perceive and act</h2>
+<p>Use the controls to place dirt in a small world. The robot uses a simple reflex-style rule: <b>if its current square is dirty → Suck; otherwise → move</b>. This demonstrates the agent–environment loop and is intentionally simplified.</p>
+<div class="panel">
+<div class="world" id="world"><div class="robot" id="robot">🤖</div><div class="obj" id="d1">🟤</div><div class="obj" id="d2">🟤</div><div class="obj" id="goal">🏁</div></div>
+<button onclick="step()">Run One Percept–Action Cycle</button><button class="secondary" onclick="resetWorld()">Reset</button>
+<div class="info" id="simInfo">The robot is ready. Its sensor observes the current square.</div>
+</div></section>
+
+<section class="card"><div class="kicker">12 · Types of Agents</div><h2>Agent programs introduced in the course</h2>
+<div class="types">
+<div class="type"><h3>1. Simple Reflex Agent</h3><p>Chooses actions based only on the <b>current percept</b>. The course notes that its environment is completely observable in the basic treatment.</p></div>
+<div class="type"><h3>2. Model-Based Reflex Agent</h3><p>Maintains an <b>internal state</b> to represent aspects of the current situation that are not directly observable. It considers how the world evolves and how its actions affect the world. fileciteturn19file16</p></div>
+<div class="type"><h3>3. Goal-Based Agent</h3><p>Uses goals to select actions that lead toward desired states. It is useful when an agent must consider future consequences.</p></div>
+<div class="type"><h3>4. Utility-Based Agent</h3><p>Uses a utility measure to compare possible outcomes and select actions that maximize expected utility under uncertainty. fileciteturn19file4</p></div>
+<div class="type"><h3>5. Learning Agent</h3><p>Learns from past experiences and adapts. The handout identifies four components: <b>learning element, critic, performance element and problem generator</b>. fileciteturn19file15</p></div>
+</div></section>
+
+<section class="card"><div class="kicker">13 · Learning Agent Visual</div><h2>Experience → feedback → improvement</h2>
+<div class="loop"><div class="node">🌍<b>Environment</b>Percepts + outcomes</div><div class="arrow">→</div><div class="node">⚙️<b>Performance element</b>Chooses action</div><div class="arrow">→</div><div class="node">🦾<b>Action</b>Changes environment</div><div class="arrow">→</div><div class="node">🔍<b>Critic</b>Evaluates performance</div><div class="arrow">→</div><div class="node">📚<b>Learning element</b>Improves</div><div class="arrow">→</div><div class="node">💡<b>Problem generator</b>Suggests useful exploration</div></div>
+<p class="small">The four-component learning-agent structure follows the supplied Module 1 handout. fileciteturn19file15</p></section>
+
+<section class="lab"><div class="kicker" style="color:#67e8f9">14 · Virtual Lab — Build PEAS</div>
+<h2>Choose an AI application and inspect its PEAS</h2>
+<div class="panel"><select id="peasSelect"><option value="taxi">Automated Taxi</option><option value="vacuum">Vacuum Cleaner</option><option value="medical">Medical Diagnosis System</option><option value="satellite">Satellite Image Analysis</option></select><div id="peasOutput" style="margin-top:15px"></div></div></section>
+
+<section class="card quiz"><div class="kicker">15 · Quick Check</div><h2>Test yourself</h2>
+<form>
+<p><b>1. An agent perceives the environment using:</b></p><label><input type="radio" name="q1" value="a"> Actuators</label><label><input type="radio" name="q1" value="b"> Sensors</label><label><input type="radio" name="q1" value="c"> Performance measures</label>
+<p><b>2. PEAS stands for:</b></p><label><input type="radio" name="q2" value="a"> Performance, Environment, Actuators, Sensors</label><label><input type="radio" name="q2" value="b"> Perception, Evaluation, Algorithm, Search</label><label><input type="radio" name="q2" value="c"> Program, Environment, Agent, State</label>
+<p><b>3. A percept sequence is:</b></p><label><input type="radio" name="q3" value="a"> One current action</label><label><input type="radio" name="q3" value="b"> The complete history of percepts received so far</label><label><input type="radio" name="q3" value="c"> The agent's hardware</label>
+<p><b>4. Rationality depends on:</b></p><label><input type="radio" name="q4" value="a"> Only the agent's speed</label><label><input type="radio" name="q4" value="b"> Performance measure, prior knowledge, possible actions and percept sequence</label><label><input type="radio" name="q4" value="c"> Only the environment</label>
+<p><b>5. A model-based reflex agent maintains:</b></p><label><input type="radio" name="q5" value="a"> An internal state</label><label><input type="radio" name="q5" value="b"> No information about the world</label><label><input type="radio" name="q5" value="c"> Only a performance score</label>
+<button type="button" onclick="quiz()">Check Score</button><div id="qr" style="font-weight:800;margin-top:10px"></div>
+</form></section>
+
+<section class="card"><div class="kicker">16 · Common Misconceptions</div>
+<details><summary>“An agent is only a physical robot.”</summary><p>No. The supplied sources explicitly include humans and software agents.</p></details>
+<details><summary>“Sensors and actuators are the same.”</summary><p>No. Sensors provide perceptual input; actuators/effectors are used to perform actions.</p></details>
+<details><summary>“A rational agent always gets the best possible outcome.”</summary><p>Rationality is based on available evidence, prior knowledge, available actions and the performance measure. It is not omniscience. fileciteturn19file2</p></details>
+<details><summary>“PEAS is an AI algorithm.”</summary><p>PEAS is a framework for describing the task environment: Performance measure, Environment, Actuators and Sensors.</p></details>
+<details><summary>“Every environment is fully observable and deterministic.”</summary><p>No. The course explicitly introduces partially observable and non-deterministic environments and several other dimensions.</p></details>
+</section>
+
+<section class="card"><div class="kicker">17 · Exam Corner</div><h2>Questions to prepare</h2>
+<ol><li>Explain <b>Agent and Environment</b> with a suitable diagram.</li><li>Define percept, percept sequence, agent function, agent behaviour and performance measure.</li><li>Explain rationality of an agent and list the factors on which it depends.</li><li>Explain <b>PEAS</b> with a suitable example.</li><li>Explain the structure of an intelligent agent.</li><li>Differentiate simple reflex, model-based, goal-based, utility-based and learning agents.</li><li>Explain the different types/properties of AI environments.</li></ol>
+<div class="callout">The Module 1 resource explicitly covers Agent and Environment, key terminology, rationality, PEAS, agent structure, agent types and environment types. fileciteturn19file0turn19file9turn19file12</div></section>
+
+<section class="card"><div class="kicker">18 · Takeaways</div><div class="callout good"><ul><li>An <b>agent</b> perceives an environment and acts on it.</li><li><b>Sensors</b> provide percepts; <b>actuators/effectors</b> perform actions.</li><li>An <b>agent function</b> maps percept sequences to actions.</li><li>A <b>rational agent</b> chooses an action expected to maximize its performance measure given available evidence and knowledge.</li><li><b>PEAS</b> helps specify the task environment before designing the agent.</li><li><b>Agent = Architecture + Agent Program.</b></li><li>Environment properties strongly influence appropriate agent design.</li><li>Learning agents contain a learning element, critic, performance element and problem generator in the course's framework.</li></ul></div></section>
+
+<section class="card"><div class="kicker">19 · Resource Alignment</div><h2>Sources used</h2>
+<ul><li><b>VTU Module 1 course material</b> — Agent and Environment, human/robotic/software agents, rationality, PEAS, agent types and environment properties. fileciteturn19file0turn19file9turn19file12turn19file13</li>
+<li><b>Reema Thareja, Artificial Intelligence: Beyond Classical AI, Chapter 3</b> — Agent and Environment, terminology, rationality and agent structure/types. fileciteturn19file1</li>
+<li><b>Russell & Norvig, Artificial Intelligence: A Modern Approach, Chapter 2</b> — agents, sensors/actuators, percept sequences, rationality, PEAS, task environments and agent architecture. fileciteturn19file2turn19file3turn19file5turn19file6</li></ul></section>
+<div class="footer"><a href="lab-03-intelligence-comparison.html">← Lab 03</a> · <a href="index.html">Module 1</a> · <a href="lab-05-search-bfs-dfs-ucs.html">Lab 05 →</a></div>
 </main>
-<footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 1</div><div>Lesson 04: Agents & Environments</div></div></footer>
-<script src="../assets/js/progress.js"></script>
 <script>
-const LESSON_ID="lab-04-agent-environment";
-function showAnswer(){document.getElementById("answer").style.display="block";}
-function completeLesson(){
-  AIProgress.markLessonComplete(LESSON_ID);
-  document.getElementById("lessonProgress").style.width="100%";
-  document.getElementById("progressText").textContent="Completed locally ✓";
-  document.getElementById("completeBtn").textContent="✓ Lesson Completed";
-  document.getElementById("completeBtn").disabled=true;
-}
-document.addEventListener("DOMContentLoaded",()=>{
- const done=AIProgress.get(LESSON_ID)>=100;
- document.getElementById("lessonProgress").style.width=done?"100%":"0%";
- document.getElementById("progressText").textContent=done?"Completed locally ✓":"Lesson not completed";
- if(done){document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
-});
+const robot=document.getElementById('robot'),d1=document.getElementById('d1'),d2=document.getElementById('d2'),goal=document.getElementById('goal'),world=document.getElementById('world'),info=document.getElementById('simInfo');
+let pos=0,dir=1,clean=0;
+function place(){robot.style.left=(25+pos*23)+'%';robot.style.top='105px';d1.style.left='25%';d1.style.top='110px';d2.style.left='71%';d2.style.top='110px';goal.style.right='4%';goal.style.bottom='18px'}
+function step(){
+ const dirty=(pos===0&&d1.style.display!=='none')||(pos===2&&d2.style.display!=='none');
+ if(dirty){if(pos===0)d1.style.display='none';else d2.style.display='none';clean++;info.innerHTML='👁️ <b>Percept:</b> current square is dirty → 🧠 <b>Decision:</b> Suck → 🦾 <b>Action:</b> clean the square. <br>Cleaned squares: '+clean;}
+ else{pos+=dir;if(pos>=2){pos=2;dir=-1}if(pos<=0){pos=0;dir=1}info.innerHTML='👁️ <b>Percept:</b> current square is clean → 🧠 <b>Decision:</b> Move → 🦾 <b>Action:</b> change location.'}place()}
+function resetWorld(){pos=0;dir=1;clean=0;d1.style.display='block';d2.style.display='block';info.textContent='The robot is ready. Its sensor observes the current square.';place()}place();
+
+const pdata={
+taxi:['Safe, fast, legal and comfortable trip; maximize profit; minimize impact on road users.','Roads, traffic, police, pedestrians, customers, weather.','Steering, accelerator, brake, signal, horn, display, speech.','Cameras, radar/LiDAR/ultrasound, speedometer, GPS, engine sensors, accelerometer, microphones/touchscreen.'],
+vacuum:['Maximize cleanliness while considering the chosen performance measure.','Floor squares and dirt.','Left, Right, Suck.','Current location and dirt status.'],
+medical:['Healthy patient; reduced costs.','Patient, hospital, staff.','Questions/tests, diagnoses, treatments/display.','Symptoms and findings entered by touchscreen/voice.'],
+satellite:['Correct categorization of objects and terrain.','Orbiting satellite, downlink and Earth imagery.','Display/report of classification.','Satellite image data.']
+};
+function showP(){const x=pdata[document.getElementById('peasSelect').value];document.getElementById('peasOutput').innerHTML='<div class="peas"><div><b>P</b>'+x[0]+'</div><div><b>E</b>'+x[1]+'</div><div><b>A</b>'+x[2]+'</div><div><b>S</b>'+x[3]+'</div></div>'}
+document.getElementById('peasSelect').addEventListener('change',showP);showP();
+function quiz(){const a={q1:'b',q2:'a',q3:'b',q4:'b',q5:'a'};let s=0;Object.keys(a).forEach(k=>{const x=document.querySelector('input[name="'+k+'"]:checked');if(x&&x.value===a[k])s++});document.getElementById('qr').textContent='Score: '+s+'/5 '+(s===5?'🎉 Excellent!':s>=3?'👍 Good — review the missed concepts.':'📘 Revisit Agent, Rationality and PEAS sections.')}
 </script>
-</body></html>
+</body>
+</html>
