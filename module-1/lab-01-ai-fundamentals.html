@@ -1,64 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="AI Fundamentals — Module 1 interactive lesson">
-<title>Lesson 01: AI Fundamentals | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module1.css"></head>
-<body>
-<header class="site-header"><div class="container navbar">
-<a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a>
-<nav class="nav-links"><a href="index.html">Module 1</a><a href="../index.html">Course Home</a></nav>
-</div></header>
-<main class="lesson-shell">
-<div class="breadcrumbs">MODULE 1 / LESSON 01</div>
-<section class="lesson-header reveal"><span class="badge">Lesson 01 of 8</span><h1>AI Fundamentals</h1><p>Definition • Working • Advantages • Disadvantages • Applications</p>
-<div class="lesson-progress"><div id="lessonProgress"></div></div>
-<p class="small-note" id="progressText">Lesson not completed</p></section>
-
-<section class="lesson-section"><div class="visual-panel"><h2>SEE: What is AI?</h2>
-<p>In the supplied course material, AI is introduced through systems that exhibit intelligent behaviour such as learning, reasoning, perception, problem solving and language-related abilities.</p>
-<div class="visual-flow"><div class="vnode">Real-world data</div><div class="varrow">→</div><div class="vnode">AI system</div><div class="varrow">→</div><div class="vnode">Pattern / inference</div><div class="varrow">→</div><div class="vnode">Decision / action</div></div>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>UNDERSTAND: How does AI work?</h2>
-<div class="visual-flow"><div class="vnode">1. Collect<br>data</div><div class="varrow">→</div><div class="vnode">2. Represent<br>knowledge / features</div><div class="varrow">→</div><div class="vnode">3. Process / learn</div><div class="varrow">→</div><div class="vnode">4. Predict / decide</div><div class="varrow">→</div><div class="vnode">5. Act / assist</div></div>
-<div class="callout"><b>Think:</b> AI is not a single algorithm. The method depends on the task, available information and desired behaviour.</div>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: Advantages vs Disadvantages</h2>
-<table class="compare-table"><tr><th>Advantages</th><th>Disadvantages / concerns</th></tr>
-<tr><td>Can process large amounts of data quickly</td><td>Can require substantial data, computation or engineering</td></tr>
-<tr><td>Can automate repetitive tasks</td><td>Outputs can be wrong or biased</td></tr>
-<tr><td>Can support decision making</td><td>Raises issues of accountability, employment and responsible use</td></tr>
-<tr><td>Can operate consistently on defined tasks</td><td>Task-specific systems do not automatically possess general human intelligence</td></tr></table>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>APPLY: Where do you meet AI?</h2>
-<div class="feature-grid"><article class="feature-card"><h3>Vision</h3><p>Image understanding, inspection and recognition.</p></article><article class="feature-card"><h3>Language</h3><p>Text generation, translation and question answering.</p></article><article class="feature-card"><h3>Prediction</h3><p>Forecasting, recommendation and risk estimation.</p></article></div>
-</div></section>
-
-<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>Answer in this order: <b>definition → working/steps → diagram or example → advantages/limitations → conclusion</b> when the question asks for an explanation. Use block diagrams wherever necessary.</p></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2>
-<div class="check"><p><strong>Can you explain the central idea of this lesson without looking at your notes?</strong></p>
-<button onclick="showAnswer()">Yes — reveal the self-check</button>
-<div class="answer" id="answer">Good. Now state the concept in your own words, give one example, and identify one limitation or trade-off.</div></div></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Key Takeaways</h2><ul><li>Start with the problem, not the buzzword.</li><li>Use the visual model to explain the concept before memorising terminology.</li><li>Test the idea with an example and compare alternatives.</li></ul>
-<button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
-<div class="lesson-nav"><a class="btn btn-secondary" href="index.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="lab-02-ai-history-types.html">Next →</a></div>
-</main>
-<footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 1</div><div>Lesson 01: AI Fundamentals</div></div></footer>
-<script src="../assets/js/progress.js"></script>
-<script>
-const LESSON_ID="lab-01-ai-fundamentals";
-function showAnswer(){document.getElementById("answer").style.display="block";}
-function completeLesson(){
-  AIProgress.markLessonComplete(LESSON_ID);
-  document.getElementById("lessonProgress").style.width="100%";
-  document.getElementById("progressText").textContent="Completed locally ✓";
-  document.getElementById("completeBtn").textContent="✓ Lesson Completed";
-  document.getElementById("completeBtn").disabled=true;
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 01 — Artificial Intelligence Fundamentals</title>
+<style>
+:root{
+  --bg:#f6f8fc;--card:#fff;--ink:#172033;--muted:#5f6b7a;--line:#dce3ee;
+  --accent:#4f46e5;--accent2:#0891b2;--good:#15803d;--warn:#b45309;
 }
-document.addEventListener("DOMContentLoaded",()=>{
- const done=AIProgress.get(LESSON_ID)>=100;
- document.getElementById("lessonProgress").style.width=done?"100%":"0%";
- document.getElementById("progressText").textContent=done?"Completed locally ✓":"Lesson not completed";
- if(done){document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
-});
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.65}
+a{color:inherit}.top{position:sticky;top:0;z-index:10;background:#101828;color:white;padding:12px 5%;display:flex;justify-content:space-between;align-items:center;gap:20px;box-shadow:0 3px 18px #0002}
+.top b{letter-spacing:.3px}.nav{display:flex;gap:10px;flex-wrap:wrap}.nav a{padding:6px 10px;border:1px solid #ffffff2b;border-radius:8px;text-decoration:none;font-size:.9rem}
+.wrap{max-width:1180px;margin:auto;padding:30px 20px 70px}.hero{background:linear-gradient(135deg,#eef2ff,#ecfeff);border:1px solid #dbe3ff;border-radius:24px;padding:35px;margin-bottom:25px}
+.badge{display:inline-block;background:#e0e7ff;color:#3730a3;border-radius:999px;padding:5px 11px;font-weight:700;font-size:.82rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.1;margin:14px 0 10px}h2{font-size:1.65rem;margin-top:0}h3{margin-bottom:7px}
+.lead{font-size:1.1rem;color:var(--muted);max-width:900px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 5px 20px #1822300a;margin-bottom:18px}
+.kicker{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--accent)}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:stretch;margin:20px 0}
+.flow div{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:15px;text-align:center;position:relative}
+.flow div:not(:last-child)::after{content:"→";position:absolute;right:-13px;top:35%;color:var(--accent);font-size:1.3rem;font-weight:bold}
+.icon{font-size:2rem}.small{color:var(--muted);font-size:.94rem}
+.pipeline{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin:22px 0}
+.node{min-width:135px;padding:16px;border-radius:15px;text-align:center;border:2px solid #c7d2fe;background:#eef2ff}
+.arrow{font-size:1.5rem;font-weight:800;color:var(--accent)}
+.compare{width:100%;border-collapse:collapse;margin:10px 0}.compare th,.compare td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.compare th{background:#f8fafc}
+.callout{border-left:5px solid var(--accent);background:#f5f3ff;padding:15px 18px;border-radius:0 12px 12px 0}
+.warn{border-left-color:#d97706;background:#fff7ed}.good{border-left-color:#16a34a;background:#f0fdf4}
+details{border:1px solid var(--line);border-radius:12px;padding:12px 15px;background:#fff;margin:9px 0}summary{cursor:pointer;font-weight:700}
+button{border:0;border-radius:10px;background:var(--accent);color:#fff;padding:10px 14px;font-weight:700;cursor:pointer}button.secondary{background:#e2e8f0;color:#172033}
+.lab{background:#0f172a;color:#e5e7eb;border-radius:20px;padding:24px}.lab h2{color:#fff}.lab .panel{background:#172033;border:1px solid #334155;border-radius:14px;padding:18px;margin-top:15px}
+select,input[type=range]{width:100%}select{padding:10px;border-radius:9px;border:1px solid #475569;background:#0b1220;color:#fff}
+.range-row{display:grid;grid-template-columns:1fr 90px;gap:15px;align-items:center}.value{font-weight:800;color:#67e8f9;text-align:center}
+.bar{height:20px;background:#334155;border-radius:999px;overflow:hidden}.fill{height:100%;width:50%;background:linear-gradient(90deg,#4f46e5,#06b6d4);transition:.3s}
+.quiz label{display:block;padding:10px;border:1px solid var(--line);border-radius:10px;margin:7px 0;cursor:pointer}.quiz label:hover{background:#f8fafc}
+.result{margin-top:12px;font-weight:800}.footer{text-align:center;color:var(--muted);padding:30px 0}
+@media(max-width:760px){.flow{grid-template-columns:1fr}.flow div:not(:last-child)::after{content:"↓";right:48%;top:auto;bottom:-22px}.pipeline{flex-direction:column}.arrow{transform:rotate(90deg)}.top{position:relative}}
+</style>
+</head>
+<body>
+<header class="top">
+  <b>1BAIA103/203 · Introduction to AI & Applications</b>
+  <nav class="nav">
+    <a href="index.html">Course Home</a><a href="lab-02-ai-history-types.html">Next Lab →</a>
+  </nav>
+</header>
+
+<main class="wrap">
+<section class="hero">
+  <span class="badge">MODULE 1 · LAB 01 · CO1</span>
+  <h1>Artificial Intelligence Fundamentals</h1>
+  <p class="lead">What is AI? How does an AI system work? Why is it useful, and where are its limitations? This lesson builds the foundation before moving into AI history, types, agents and search.</p>
+  <div class="grid">
+    <div><b>🎯 Learn</b><br><span class="small">Define AI and explain its purpose.</span></div>
+    <div><b>👀 Visualize</b><br><span class="small">Trace data through an AI system.</span></div>
+    <div><b>🧪 Experiment</b><br><span class="small">Change inputs and observe an AI-style decision.</span></div>
+    <div><b>📝 Test</b><br><span class="small">Check your understanding with a quick quiz.</span></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="kicker">1 · Learning Objectives</div>
+  <h2>By the end of this lab, you should be able to…</h2>
+  <ol>
+    <li>Explain Artificial Intelligence in simple and technical terms.</li>
+    <li>Describe the kinds of cognitive tasks AI systems can perform: thinking, perceiving, learning, problem solving and decision-making.</li>
+    <li>Explain the basic AI workflow from data/input to pattern discovery, prediction/decision and feedback.</li>
+    <li>Explain the three cognitive skills highlighted in the course resource: <b>learning, reasoning and self-correction</b>.</li>
+    <li>Identify important advantages and disadvantages of AI.</li>
+    <li>Distinguish AI from ordinary rule-based computer processing at a high level.</li>
+  </ol>
+</section>
+
+<section class="card">
+  <div class="kicker">2 · What is Artificial Intelligence?</div>
+  <h2>AI = Making machines capable of intelligent behaviour</h2>
+  <p>The course text presents AI as the science and engineering of making intelligent machines, especially intelligent computer programs. It also describes AI from a practical viewpoint as machine intelligence that can mimic aspects of human intelligence, learn from experience, adjust to new inputs and perform tasks that normally require human intelligence.</p>
+  <div class="callout">
+    <b>Core idea:</b> AI is not simply “a computer doing a calculation.” The important idea is that a system can use information to <b>recognize patterns, learn, reason, perceive, make decisions or solve problems</b>.
+  </div>
+  <h3>Five useful ways to think about intelligence in AI</h3>
+  <div class="grid">
+    <div class="card"><div class="icon">👁️</div><b>Perceive</b><p class="small">Take information from the environment, such as an image, sound, text or sensor reading.</p></div>
+    <div class="card"><div class="icon">📚</div><b>Learn</b><p class="small">Use data or experience to identify patterns and improve performance.</p></div>
+    <div class="card"><div class="icon">🧠</div><b>Reason</b><p class="small">Select an appropriate method or rule to reach a desired outcome.</p></div>
+    <div class="card"><div class="icon">🎯</div><b>Decide</b><p class="small">Choose an action, prediction or response based on available information.</p></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="kicker">3 · Visual Definition</div>
+  <h2>From input to intelligent action</h2>
+  <p>Think of an AI application as a pipeline. The exact implementation varies by application, but the conceptual flow below captures the resource's description of data, patterns, algorithms, prediction and improvement.</p>
+  <div class="pipeline">
+    <div class="node">📥<br><b>Input / Data</b><br><small>Examples, sensors, text</small></div>
+    <div class="arrow">→</div>
+    <div class="node">🔎<br><b>Analyse</b><br><small>Find patterns</small></div>
+    <div class="arrow">→</div>
+    <div class="node">🧩<br><b>Algorithm / Model</b><br><small>Rules or learned pattern</small></div>
+    <div class="arrow">→</div>
+    <div class="node">🎯<br><b>Prediction / Decision</b><br><small>Useful output</small></div>
+    <div class="arrow">→</div>
+    <div class="node">🔁<br><b>Feedback</b><br><small>Improve accuracy</small></div>
+  </div>
+  <p class="small">Example from the textbook: a chatbot can be trained using examples of text chats; patterns learned from those examples can support conversation in real-world applications.</p>
+</section>
+
+<section class="card">
+  <div class="kicker">4 · How AI Works</div>
+  <h2>Three cognitive skills: Learning → Reasoning → Self-correction</h2>
+  <div class="flow">
+    <div><div class="icon">📚</div><b>1. Learning</b><p class="small">Acquire data and create rules or patterns for turning data into actionable information.</p></div>
+    <div><div class="icon">🧠</div><b>2. Reasoning</b><p class="small">Use an appropriate algorithm or learned representation to reach the desired outcome.</p></div>
+    <div><div class="icon">⚙️</div><b>3. Action</b><p class="small">Generate a prediction, classification, recommendation, answer or control action.</p></div>
+    <div><div class="icon">🔍</div><b>4. Evaluate</b><p class="small">Compare the output with the task objective or observed result.</p></div>
+    <div><div class="icon">🔁</div><b>5. Self-correct</b><p class="small">Improve the algorithm/model so later outputs can become more accurate.</p></div>
+  </div>
+  <div class="callout good"><b>Important:</b> “Learning” does not mean every AI system learns continuously while you use it. The course resource describes learning, reasoning and self-correction as key cognitive skills of AI programming; the actual learning process depends on the system design.</div>
+</section>
+
+<section class="card">
+  <div class="kicker">5 · Detailed Example</div>
+  <h2>How could an AI chatbot work?</h2>
+  <div class="grid">
+    <div><b>Step 1 — Examples</b><p class="small">The system receives large amounts of training information such as text examples.</p></div>
+    <div><b>Step 2 — Pattern discovery</b><p class="small">Algorithms analyse the data and identify useful statistical or structural patterns.</p></div>
+    <div><b>Step 3 — Model</b><p class="small">The learned patterns are represented in a computational model.</p></div>
+    <div><b>Step 4 — User input</b><p class="small">A user enters a question or instruction.</p></div>
+    <div><b>Step 5 — Output</b><p class="small">The system generates a response based on its learned representation and processing method.</p></div>
+    <div><b>Step 6 — Evaluation</b><p class="small">The quality of responses can be evaluated and the system can be improved through suitable training or engineering.</p></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="kicker">6 · AI is broader than one technique</div>
+  <h2>AI, ML and DL — a visual relationship</h2>
+  <div style="display:flex;justify-content:center;padding:20px">
+    <div style="width:min(620px,100%);aspect-ratio:1.5;border:3px solid #4f46e5;border-radius:45%;display:flex;align-items:center;justify-content:center;background:#eef2ff">
+      <div style="width:78%;height:78%;border:3px solid #0891b2;border-radius:45%;display:flex;align-items:center;justify-content:center;background:#ecfeff">
+        <div style="width:55%;height:55%;border:3px solid #16a34a;border-radius:45%;display:flex;align-items:center;justify-content:center;background:#f0fdf4;text-align:center;padding:10px"><b>Deep<br>Learning</b></div>
+        <span style="position:absolute"></span>
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <div><b>Artificial Intelligence</b><p class="small">The broad field concerned with making machines perform tasks associated with intelligence.</p></div>
+    <div><b>Machine Learning</b><p class="small">A branch of AI in which machines learn from data and improve without every rule being explicitly programmed.</p></div>
+    <div><b>Deep Learning</b><p class="small">A machine-learning approach based on multi-layer neural networks and representation learning.</p></div>
+  </div>
+  <p class="small">The course module explicitly introduces the relationship between AI, Machine Learning and Deep Learning. Later labs study ML methods in detail.</p>
+</section>
+
+<section class="card">
+  <div class="kicker">7 · Traditional Programming vs AI/ML</div>
+  <h2>What changes when the system learns from data?</h2>
+  <table class="compare">
+    <tr><th>Traditional programming</th><th>Machine-learning-oriented approach</th></tr>
+    <tr><td>Programmer explicitly writes rules/logic.</td><td>Algorithm learns patterns from data.</td></tr>
+    <tr><td>Input + fixed rules → output.</td><td>Data + learning method → model; model + new input → prediction.</td></tr>
+    <tr><td>Rules remain fixed until code is changed.</td><td>A trained model can be updated/retrained as data changes.</td></tr>
+    <tr><td>Useful when rules are clear and deterministic.</td><td>Useful when patterns are difficult to express as hand-written rules.</td></tr>
+  </table>
+  <div class="callout warn"><b>Do not oversimplify:</b> AI is not always machine learning. AI includes multiple approaches. ML is one important branch of AI, and deep learning is a further subset of ML.</div>
+</section>
+
+<section class="card">
+  <div class="kicker">8 · Why AI is Important</div>
+  <h2>What makes AI useful?</h2>
+  <div class="grid">
+    <div><b>⚡ Scale</b><p class="small">AI can process very large volumes of data quickly.</p></div>
+    <div><b>🎯 Consistency</b><p class="small">AI applications can produce consistent results when the same conditions and model are used.</p></div>
+    <div><b>🕐 Availability</b><p class="small">AI-based systems can be designed to operate continuously.</p></div>
+    <div><b>🤖 Automation</b><p class="small">AI can automate complex or repetitive processes.</p></div>
+    <div><b>🔮 Prediction</b><p class="small">AI/ML can identify patterns useful for prediction and decision support.</p></div>
+    <div><b>🛠️ Optimization</b><p class="small">AI can help utilize resources more effectively and support maintenance prediction.</p></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="kicker">9 · Advantages and Disadvantages</div>
+  <table class="compare">
+    <tr><th>Advantages from the course material</th><th>Disadvantages from the course material</th></tr>
+    <tr><td>Performs well on tasks using detailed data.</td><td>Can involve more cost.</td></tr>
+    <tr><td>Processes huge volumes of data in less time.</td><td>Technical expertise is required to develop and use AI applications.</td></tr>
+    <tr><td>Can generate consistent and accurate results.</td><td>There can be a lack of trained professionals.</td></tr>
+    <tr><td>Can be used 24 × 7.</td><td>Incomplete or inaccurate data can lead to disastrous results.</td></tr>
+    <tr><td>Optimizes tasks and resource utilization.</td><td>AI may lack the capability to generalize tasks.</td></tr>
+    <tr><td>Automates complex processes.</td><td>AI does not automatically possess broad human common sense or human capabilities simply because it processes data.</td></tr>
+    <tr><td>Can predict maintenance needs and minimize downtime.</td><td>Its performance depends strongly on the data, method and task for which it is designed.</td></tr>
+  </table>
+</section>
+
+<section class="lab">
+  <div class="kicker" style="color:#67e8f9">10 · Virtual Lab</div>
+  <h2>AI Decision Simulator — See the pipeline in action</h2>
+  <p>Choose the kind of input available to an AI system, then change the quality of the data. Observe how the simulated system moves through perception → pattern recognition → decision. This is a <b>conceptual simulation</b>, not a trained AI model.</p>
+  <div class="panel">
+    <label><b>Choose a task</b></label>
+    <select id="task">
+      <option value="vision">Image recognition</option>
+      <option value="spam">Email classification</option>
+      <option value="recommend">Recommendation</option>
+      <option value="maintenance">Predictive maintenance</option>
+    </select>
+    <p><b>Data quality</b></p>
+    <div class="range-row"><input id="quality" type="range" min="0" max="100" value="80"><div class="value" id="qv">80%</div></div>
+    <div class="bar"><div class="fill" id="fill"></div></div>
+    <p id="readout"></p>
+    <button onclick="runSim()">Run AI pipeline</button>
+    <button class="secondary" onclick="resetSim()">Reset</button>
+  </div>
+  <div class="panel" id="simResult">Choose a task, adjust data quality and click <b>Run AI pipeline</b>.</div>
+</section>
+
+<section class="card">
+  <div class="kicker">11 · Real-world Applications</div>
+  <h2>Where do we encounter AI?</h2>
+  <div class="grid">
+    <div><b>🏥 Healthcare</b><p class="small">Analysis of medical data and support for diagnosis/prediction tasks.</p></div>
+    <div><b>🚗 Transportation</b><p class="small">AI can support autonomous systems, routing and perception.</p></div>
+    <div><b>🛒 E-commerce</b><p class="small">Recommendation systems and inventory-related decision support.</p></div>
+    <div><b>💬 Language</b><p class="small">Chatbots and systems that process and respond to language.</p></div>
+    <div><b>🏭 Industry</b><p class="small">Automation and predictive maintenance.</p></div>
+    <div><b>🔐 Security</b><p class="small">Pattern analysis for threat or fraud detection.</p></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="kicker">12 · Misconceptions</div>
+  <h2>Stop-and-think</h2>
+  <details><summary>“AI is the same as any computer program.”</summary><p>Not every computer program is AI. The course frames AI around capabilities associated with intelligent behaviour such as learning, reasoning, perception, problem solving and decision-making.</p></details>
+  <details><summary>“AI always learns by itself after deployment.”</summary><p>Not necessarily. A system may be trained beforehand and then deployed for inference. Whether it learns after deployment depends on its design.</p></details>
+  <details><summary>“More data automatically means better AI.”</summary><p>Data quality matters. The course specifically notes that incomplete or inaccurate data can produce disastrous results.</p></details>
+  <details><summary>“AI can do everything humans can do.”</summary><p>The module distinguishes specialized AI capabilities from broad human intelligence. Many current AI systems are designed for particular tasks.</p></details>
+</section>
+
+<section class="card">
+  <div class="kicker">13 · Exam Corner</div>
+  <h2>Questions you should be ready to answer</h2>
+  <ol>
+    <li><b>Define Artificial Intelligence.</b></li>
+    <li><b>Explain how AI works.</b></li>
+    <li><b>Explain the learning, reasoning and self-correction processes in AI.</b></li>
+    <li><b>Explain any four advantages and disadvantages of AI.</b></li>
+    <li><b>Differentiate traditional programming and machine-learning programming.</b></li>
+    <li><b>Explain why AI is important with suitable examples.</b></li>
+  </ol>
+  <div class="callout"><b>CIE connection:</b> The supplied CIE pattern explicitly includes “Define AI. Explain its applications with working of AI” and “Explain advantages and disadvantages of AI.” fileciteturn12file4</div>
+</section>
+
+<section class="card quiz">
+  <div class="kicker">14 · Quick Check</div>
+  <h2>Test yourself</h2>
+  <form id="quiz">
+    <p><b>1. Which three cognitive skills are highlighted in the resource?</b></p>
+    <label><input type="radio" name="q1" value="a"> Sorting, printing, storing</label>
+    <label><input type="radio" name="q1" value="b"> Learning, reasoning, self-correction</label>
+    <label><input type="radio" name="q1" value="c"> Typing, browsing, compiling</label>
+    <p><b>2. What is a key role of training data in ML-oriented AI?</b></p>
+    <label><input type="radio" name="q2" value="a"> It helps the system discover patterns.</label>
+    <label><input type="radio" name="q2" value="b"> It removes the need for algorithms.</label>
+    <label><input type="radio" name="q2" value="c"> It guarantees perfect results.</label>
+    <p><b>3. Which statement is most accurate?</b></p>
+    <label><input type="radio" name="q3" value="a"> Every AI system is deep learning.</label>
+    <label><input type="radio" name="q3" value="b"> Deep learning is a subset of machine learning, which is a branch of AI.</label>
+    <label><input type="radio" name="q3" value="c"> AI and machine learning are unrelated.</label>
+    <button type="button" onclick="checkQuiz()">Check Answers</button>
+    <div class="result" id="quizResult"></div>
+  </form>
+</section>
+
+<section class="card">
+  <div class="kicker">15 · Reflection</div>
+  <h2>One-minute reflection</h2>
+  <p>Complete these sentences in your notebook:</p>
+  <ul>
+    <li>“AI is different from an ordinary program because…”</li>
+    <li>“The most important stage in the AI workflow is…”</li>
+    <li>“A real-world AI application I use is…, and it needs…”</li>
+    <li>“One limitation of AI that I should remember is…”</li>
+  </ul>
+</section>
+
+<section class="card">
+  <div class="kicker">16 · Takeaways</div>
+  <div class="callout good">
+    <ul>
+      <li>AI aims to enable machines to perform tasks associated with intelligence.</li>
+      <li>AI systems can involve perception, learning, reasoning, decision-making and problem solving.</li>
+      <li>A useful conceptual workflow is <b>data/input → analysis → model/algorithm → prediction/decision → evaluation/feedback</b>.</li>
+      <li>The course emphasizes <b>learning, reasoning and self-correction</b>.</li>
+      <li>AI has significant advantages, but cost, expertise, data quality and generalization are important limitations.</li>
+      <li>Machine Learning is a branch of AI; Deep Learning is a subset of Machine Learning.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="card">
+  <div class="kicker">17 · Resource Alignment</div>
+  <h2>Sources used for this lesson</h2>
+  <ul>
+    <li><b>VTU 1BAIA103/203 official syllabus/module material</b> — Module 1 specifies Artificial Intelligence, how AI works, advantages/disadvantages, history, types, AI vs augmented intelligence/cognitive computing, and ML/DL. fileciteturn13file17</li>
+    <li><b>Reema Thareja, Artificial Intelligence: Beyond Classical AI</b> — Chapter 1, especially §1.1 “What is Artificial Intelligence?”, §1.1.1 “How Does AI Work?” and §1.1.2 “Advantages and Disadvantages of Artificial Intelligence.” fileciteturn13file8</li>
+    <li><b>Module 1 course handout</b> — provides the classroom-oriented explanation of AI, its advantages/disadvantages, and the ML relationship. fileciteturn12file3 fileciteturn13file13</li>
+    <li><b>Russell & Norvig, Artificial Intelligence: A Modern Approach</b> — used in the course as a reference text; its agent perspective is developed in later Module 1 lessons. fileciteturn12file7</li>
+  </ul>
+</section>
+
+<div class="footer">
+  <a href="index.html">← Module 1</a> &nbsp; · &nbsp;
+  <a href="lab-02-ai-history-types.html">Lab 02 →</a>
+</div>
+</main>
+
+<script>
+const quality=document.getElementById('quality'), qv=document.getElementById('qv'), fill=document.getElementById('fill'), readout=document.getElementById('readout');
+function updateQ(){
+  const q=+quality.value;qv.textContent=q+'%';fill.style.width=q+'%';
+  readout.textContent=q>=80?'High-quality data: patterns are more likely to be useful.':
+    q>=50?'Moderate-quality data: the system may still work, but uncertainty is higher.':
+    'Low-quality data: missing or inaccurate information can seriously affect the output.';
+}
+quality.addEventListener('input',updateQ);updateQ();
+function runSim(){
+  const task=document.getElementById('task').value,q=+quality.value;
+  const names={vision:'Image recognition',spam:'Email classification',recommend:'Recommendation',maintenance:'Predictive maintenance'};
+  const outputs=q>=80?'High confidence':q>=55?'Moderate confidence':'Low confidence / needs review';
+  document.getElementById('simResult').innerHTML=
+    '<b>1. Input:</b> '+names[task]+' data<br>'+
+    '↓<br><b>2. Analyse:</b> identify useful patterns/features<br>↓<br>'+
+    '<b>3. Model/algorithm:</b> process the learned or programmed representation<br>↓<br>'+
+    '<b>4. Decision:</b> <strong>'+outputs+'</strong><br>↓<br>'+
+    '<b>5. Human/system feedback:</b> evaluate the result and improve the system when appropriate.<hr>'+
+    '<span style="color:#94a3b8">Simulation note: the confidence label is intentionally simplified to demonstrate the effect of data quality.</span>';
+}
+function resetSim(){quality.value=80;document.getElementById('task').value='vision';updateQ();document.getElementById('simResult').innerHTML='Choose a task, adjust data quality and click <b>Run AI pipeline</b>.'}
+function checkQuiz(){
+  const answers={q1:'b',q2:'a',q3:'b'};let score=0;
+  Object.keys(answers).forEach(k=>{const x=document.querySelector('input[name="'+k+'"]:checked');if(x&&x.value===answers[k])score++});
+  document.getElementById('quizResult').textContent='Score: '+score+'/3 '+(score===3?'🎉 Excellent!':score===2?'👍 Good — review one point.':'📘 Review the sections above and try again.');
+}
 </script>
-</body></html>
+</body>
+</html>
