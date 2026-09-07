@@ -1,65 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Machine Intelligence — Module 1 interactive lesson">
-<title>Lesson 03: Machine Intelligence | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module1.css"></head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab 03 — AI, Augmented Intelligence, Cognitive Computing, ML & DL</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#5d6878;--line:#dce3ee;--p:#4f46e5;--c:#0891b2;--g:#15803d;--o:#c2410c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.68}
+.top{position:sticky;top:0;z-index:10;background:#111827;color:#fff;padding:12px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;box-shadow:0 4px 20px #0002}.top a{color:#fff;text-decoration:none;border:1px solid #ffffff30;padding:6px 10px;border-radius:8px;font-size:.9rem}
+.wrap{max-width:1200px;margin:auto;padding:28px 18px 70px}.hero{padding:38px;border-radius:24px;background:linear-gradient(135deg,#eef2ff,#ecfeff);border:1px solid #dbe4ff;margin-bottom:22px}.badge{display:inline-block;background:#e0e7ff;color:#3730a3;border-radius:999px;padding:5px 12px;font-size:.8rem;font-weight:800}.hero h1{font-size:clamp(2rem,5vw,3.7rem);line-height:1.05;margin:15px 0 10px}.lead{font-size:1.1rem;color:var(--muted);max-width:980px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:23px;margin:18px 0;box-shadow:0 6px 24px #18223009}.kicker{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:var(--p)}h2{font-size:1.65rem;margin:4px 0 12px}h3{margin-bottom:7px}.small{font-size:.94rem;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:15px}.mini{padding:18px;border:1px solid var(--line);border-radius:15px;background:#fafbfe}.icon{font-size:2rem}
+.callout{padding:15px 18px;border-left:5px solid var(--p);background:#f5f3ff;border-radius:0 12px 12px 0}.good{border-left-color:#16a34a;background:#f0fdf4}.warn{border-left-color:#ea580c;background:#fff7ed}
+table{width:100%;border-collapse:collapse}th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#f8fafc}
+.layers{display:flex;justify-content:center;align-items:center;gap:0;margin:25px auto;max-width:850px}.layer{padding:25px 20px;text-align:center;font-weight:900;min-height:130px;display:flex;align-items:center;justify-content:center;flex-direction:column}.ai{width:100%;border:3px solid var(--p);border-radius:25px;background:#eef2ff}.ml{width:75%;border:3px solid var(--c);border-radius:22px;background:#ecfeff}.dl{width:55%;border:3px solid var(--g);border-radius:20px;background:#f0fdf4}.arrow{font-size:2rem;color:var(--p);font-weight:900;margin:8px}
+.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:stretch;margin:22px 0}.step{padding:16px;border:2px solid var(--line);border-radius:14px;background:#fafbfe;text-align:center}.step strong{display:block;margin-bottom:5px}.human{display:grid;grid-template-columns:1fr 90px 1fr;gap:15px;align-items:center}.versus{font-size:1.8rem;text-align:center;font-weight:900;color:var(--p)}
+.lab{background:#0f172a;color:#e5e7eb;border-radius:20px;padding:24px}.lab h2{color:#fff}.panel{background:#172033;border:1px solid #334155;border-radius:15px;padding:18px;margin-top:15px}.panel select,.panel input{width:100%}.panel select{padding:11px;border-radius:9px;background:#0b1220;color:#fff;border:1px solid #475569}.panel button,button{border:0;border-radius:10px;padding:10px 14px;background:var(--p);color:#fff;font-weight:800;cursor:pointer;margin:5px 5px 5px 0}.secondary{background:#334155!important}.simgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}.simcard{padding:15px;border:1px solid #475569;border-radius:12px;background:#111827}.active{border-color:#818cf8;background:#312e81}.meter{height:15px;background:#334155;border-radius:99px;overflow:hidden}.meter i{display:block;height:100%;width:50%;background:linear-gradient(90deg,#4f46e5,#06b6d4);transition:.4s}
+details{border:1px solid var(--line);border-radius:12px;padding:12px 15px;background:#fff;margin:9px 0}summary{font-weight:800;cursor:pointer}.quiz label{display:block;border:1px solid var(--line);border-radius:10px;padding:9px;margin:7px 0;cursor:pointer}.footer{text-align:center;color:var(--muted);padding:28px}
+@media(max-width:800px){.top{position:relative;flex-wrap:wrap}.pipeline,.simgrid{grid-template-columns:1fr}.human{grid-template-columns:1fr}.versus{transform:rotate(90deg)}.layers{display:block}.ai,.ml,.dl{width:100%;margin:10px 0}}
+</style>
+</head>
 <body>
-<header class="site-header"><div class="container navbar">
-<a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a>
-<nav class="nav-links"><a href="index.html">Module 1</a><a href="../index.html">Course Home</a></nav>
-</div></header>
-<main class="lesson-shell">
-<div class="breadcrumbs">MODULE 1 / LESSON 03</div>
-<section class="lesson-header reveal"><span class="badge">Lesson 03 of 8</span><h1>Machine Intelligence</h1><p>Defining intelligence • Components • Human vs Machine • Reasoning</p>
-<div class="lesson-progress"><div id="lessonProgress"></div></div>
-<p class="small-note" id="progressText">Lesson not completed</p></section>
+<header class="top"><b>1BAIA103/203 · Introduction to AI & Applications</b><nav><a href="lab-02-ai-history-types.html">← Lab 02</a> <a href="index.html">Module 1</a> <a href="lab-04-agent-environment.html">Lab 04 →</a></nav></header>
+<main class="wrap">
 
-<section class="lesson-section"><div class="visual-panel"><h2>SEE: What is intelligence?</h2>
-<p>The supplied textbook chapter presents intelligence as an intangible entity with several components. It identifies reasoning, learning, problem solving, perception and linguistic intelligence as key components.</p>
-<div class="visual-flow"><div class="vnode">Reasoning</div><div class="vnode">Learning</div><div class="vnode">Problem solving</div><div class="vnode">Perception</div><div class="vnode">Linguistic intelligence</div></div>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>UNDERSTAND: Components of intelligence</h2>
-<div class="feature-grid">
-<article class="feature-card"><h3>Reasoning</h3><p>Using processes to make decisions and predictions; the material distinguishes inductive and deductive reasoning.</p></article>
-<article class="feature-card"><h3>Learning</h3><p>Improving behaviour or performance from experience or data.</p></article>
-<article class="feature-card"><h3>Problem solving</h3><p>Finding a sequence of actions or method that reaches a desired solution.</p></article>
-<article class="feature-card"><h3>Perception</h3><p>Acquiring, interpreting and selecting useful information from the environment.</p></article>
-<article class="feature-card"><h3>Linguistic intelligence</h3><p>Ability to use, comprehend, speak and write verbal and written language.</p></article>
+<section class="hero">
+<span class="badge">MODULE 1 · LAB 03 · CO1</span>
+<h1>AI, Augmented Intelligence, Cognitive Computing, Machine Learning & Deep Learning</h1>
+<p class="lead">These terms are related, but they are <b>not interchangeable</b>. This lesson builds a visual mental model for understanding what each term means, how the course resources distinguish them, and where Machine Learning and Deep Learning fit within Artificial Intelligence.</p>
+<div class="grid">
+<div class="mini"><b>🤖 AI</b><br><span class="small">Broad field of intelligent machine behaviour.</span></div>
+<div class="mini"><b>🤝 Augmented Intelligence</b><br><span class="small">Weak AI that assists humans to improve tasks or decisions.</span></div>
+<div class="mini"><b>🧠 Cognitive Computing</b><br><span class="small">Systems/products intended to mimic or augment human thought processes.</span></div>
+<div class="mini"><b>📊 ML → 🧬 DL</b><br><span class="small">Learning from data, with DL using deep neural networks.</span></div>
 </div>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: Inductive vs Deductive reasoning</h2>
-<table class="compare-table"><tr><th>Inductive</th><th>Deductive</th></tr><tr><td>Moves from observations/examples toward a generalisation.</td><td>Moves from a general rule/premise toward a specific conclusion.</td></tr><tr><td>Conclusion is supported by observed patterns.</td><td>Conclusion follows from accepted premises when the reasoning is valid.</td></tr><tr><td>Example: several observed birds fly → infer a pattern.</td><td>Rule: all members of a defined class have property X; object is a member → infer X.</td></tr></table>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Human vs Machine Intelligence</h2>
-<table class="compare-table"><tr><th>Human intelligence</th><th>Machine intelligence</th></tr><tr><td>Flexible, embodied and influenced by rich experience and context.</td><td>Often highly effective within defined objectives and representations.</td></tr><tr><td>Can combine social, emotional and common-sense understanding.</td><td>Can process large datasets rapidly and consistently for programmed/learned tasks.</td></tr><tr><td>Learning can occur from relatively few examples.</td><td>Many AI methods depend strongly on data, representations and training.</td></tr></table>
-</div></section>
+</section>
 
-<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>Answer in this order: <b>definition → working/steps → diagram or example → advantages/limitations → conclusion</b> when the question asks for an explanation. Use block diagrams wherever necessary.</p></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2>
-<div class="check"><p><strong>Can you explain the central idea of this lesson without looking at your notes?</strong></p>
-<button onclick="showAnswer()">Yes — reveal the self-check</button>
-<div class="answer" id="answer">Good. Now state the concept in your own words, give one example, and identify one limitation or trade-off.</div></div></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Key Takeaways</h2><ul><li>Start with the problem, not the buzzword.</li><li>Use the visual model to explain the concept before memorising terminology.</li><li>Test the idea with an example and compare alternatives.</li></ul>
-<button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
-<div class="lesson-nav"><a class="btn btn-secondary" href="lab-02-ai-history-types.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="lab-04-agent-environment.html">Next →</a></div>
+<section class="card">
+<div class="kicker">1 · Learning Objectives</div><h2>By the end of this lab, you should be able to…</h2>
+<ul>
+<li>Explain how <b>Artificial Intelligence</b>, <b>Augmented Intelligence</b> and <b>Cognitive Computing</b> differ according to the supplied course resources.</li>
+<li>Explain the course's description of AI in machines as simulating how humans sense, learn, process and react to information.</li>
+<li>Define <b>Machine Learning</b> and explain how it uses data and patterns rather than manually written rules for every prediction.</li>
+<li>Explain <b>Deep Learning</b> as an ML technique using neural networks with multiple layers.</li>
+<li>Distinguish AI, ML and DL without treating them as synonyms.</li>
+<li>Compare traditional programming with ML-oriented programming.</li>
+<li>Choose the appropriate term when given a real-world scenario.</li>
+</ul>
+</section>
+
+<section class="card">
+<div class="kicker">2 · The Most Important Visual</div><h2>AI is the broadest term</h2>
+<p>The supplied textbook presents Machine Learning as an application/branch of AI and Deep Learning as an ML technique. It also places technologies such as NLP within AI. The course module explicitly asks students to understand the relationship among these ideas.</p>
+<div class="layers">
+<div class="layer ai"><span style="font-size:2rem">🤖</span>ARTIFICIAL INTELLIGENCE<div class="small">Broad field of intelligent systems</div>
+<div class="layer ml"><span style="font-size:1.7rem">📊</span>MACHINE LEARNING<div class="small">Learns patterns from data</div>
+<div class="layer dl"><span style="font-size:1.5rem">🧬</span>DEEP LEARNING<div class="small">Multi-layer neural networks</div></div>
+</div></div>
+<div class="callout"><b>Memory trick:</b> Think <b>AI = umbrella</b>, <b>ML = one major approach under the umbrella</b>, and <b>DL = a deeper neural-network-based approach within ML</b>.</div>
+</section>
+
+<section class="card">
+<div class="kicker">3 · Artificial Intelligence in Machines</div><h2>What does “AI” mean in this context?</h2>
+<p>The Module 1 resource says that when AI is used in reference to machines, it makes machines obtain human intelligence by simulating how humans <b>sense, learn, process and react</b> to information in the environment. This does not mean a machine literally has a human brain; it describes the intended intelligent behaviour.</p>
+<div class="pipeline">
+<div class="step">👁️<strong>Sense</strong>Receive information from the environment.</div>
+<div class="step">📥<strong>Learn</strong>Use data/experience where applicable.</div>
+<div class="step">🧠<strong>Process</strong>Apply rules, algorithms or learned representations.</div>
+<div class="step">🎯<strong>Decide</strong>Generate a prediction/decision.</div>
+<div class="step">⚡<strong>React</strong>Produce an output/action.</div>
+</div>
+</section>
+
+<section class="card">
+<div class="kicker">4 · Augmented Intelligence</div><h2>AI that assists the human</h2>
+<p>The supplied Module 1 handout describes <b>augmented intelligence as a type of weak AI that assists humans to improve tasks or decisions</b>. The textbook similarly describes augmented intelligence as weak AI that improves products and services, giving the example of automatically highlighting important information in a report.</p>
+<div class="grid">
+<div class="mini"><div class="icon">👩‍💼</div><h3>Human</h3><p class="small">Defines the goal, interprets the situation and remains the decision-maker in the example.</p></div>
+<div class="mini"><div class="icon">🤖</div><h3>AI assistance</h3><p class="small">Finds/highlights useful information and reduces the effort needed to inspect a large report.</p></div>
+<div class="mini"><div class="icon">🤝</div><h3>Combined outcome</h3><p class="small">The machine supports the human rather than being presented as a replacement for the human.</p></div>
+</div>
+<div class="callout good"><b>Course definition:</b> Augmented intelligence is presented as <b>weak AI that assists humans</b> to improve tasks or decisions. fileciteturn18file1</div>
+</section>
+
+<section class="card">
+<div class="kicker">5 · Cognitive Computing</div><h2>Mimicking and augmenting human thought processes</h2>
+<p>The Module 1 handout describes cognitive computing as systems or products that <b>mimic human thought processes to enhance decision-making</b>. Reema Thareja describes the term as being coined for products and services that mimic or augment human thought processes. In the later AI-technologies material, cognitive computing is described as a subfield of AI intended to support natural, human-like interaction by analysing text, speech, images or objects.</p>
+<div class="pipeline">
+<div class="step">📄<strong>Text</strong>Read/analyse textual information.</div><div class="step">🎙️<strong>Speech</strong>Process spoken information.</div><div class="step">🖼️<strong>Images</strong>Analyse visual information.</div><div class="step">🧠<strong>Interpret</strong>Combine information.</div><div class="step">💡<strong>Decision support</strong>Produce a useful response.</div>
+</div>
+<div class="callout"><b>Important distinction:</b> Cognitive computing focuses on a <b>human-like interaction/thought-process orientation</b>; it should not be treated as a synonym for all AI.</div>
+</section>
+
+<section class="card">
+<div class="kicker">6 · Compare the Three</div><h2>AI vs Augmented Intelligence vs Cognitive Computing</h2>
+<table>
+<tr><th>Dimension</th><th>Artificial Intelligence</th><th>Augmented Intelligence</th><th>Cognitive Computing</th></tr>
+<tr><td>Broad idea</td><td>Make machines perform tasks associated with intelligence.</td><td>Use weak AI to assist humans and improve tasks/decisions.</td><td>Use systems/products that mimic or augment human thought processes.</td></tr>
+<tr><td>Human role</td><td>Depends on the application.</td><td>Human assistance is central to the course definition.</td><td>Designed to support human-like interaction/decision-making.</td></tr>
+<tr><td>Typical emphasis</td><td>Intelligent behaviour.</td><td>Human + machine collaboration.</td><td>Human-like cognitive interaction and decision support.</td></tr>
+<tr><td>Course example</td><td>Machines sensing, learning, processing and reacting.</td><td>Automatically highlighting important information in a report.</td><td>Analysing text, speech, images or objects for human-like interaction.</td></tr>
+</table>
+<div class="callout warn"><b>Do not memorize this as “three separate technologies.”</b> The concepts overlap. The purpose of the comparison is to recognize the <b>emphasis</b> of each term as it is used in the course resources.</div>
+</section>
+
+<section class="card">
+<div class="kicker">7 · Machine Learning</div><h2>Teaching machines from data and experience</h2>
+<p>Reema Thareja describes Machine Learning as a branch of computer science that analyses data and identifies patterns to teach a machine to deduce results and make decisions. ML algorithms learn from <b>experience rather than instructions</b>; they analyse datasets, compare outputs and can repeat the learning process when errors occur so that accuracy improves.</p>
+<div class="pipeline">
+<div class="step">🗃️<strong>Data</strong>Historical examples or observations.</div>
+<div class="step">🔎<strong>Patterns</strong>Algorithm identifies useful relationships.</div>
+<div class="step">🧠<strong>Model</strong>Learned representation of those relationships.</div>
+<div class="step">🎯<strong>Prediction</strong>Apply model to new input.</div>
+<div class="step">🔁<strong>Improve</strong>Use errors/evaluation to improve the model.</div>
+</div>
+</section>
+
+<section class="card">
+<div class="kicker">8 · A Human Learning Analogy</div><h2>The “10, 20, 30, 40, ?” example</h2>
+<p>The textbook asks you to find the missing number in <b>10, 20, 30, 40, ?</b>. A person notices the pattern and answers 50. The text uses this to introduce the central idea of ML: making machines learn patterns from data.</p>
+<div class="grid">
+<div class="mini"><b>Input</b><p class="small">10, 20, 30, 40</p></div>
+<div class="mini"><b>Observed pattern</b><p class="small">Each value increases by 10.</p></div>
+<div class="mini"><b>Learned rule</b><p class="small">Next value = previous value + 10.</p></div>
+<div class="mini"><b>Prediction</b><p class="small">50</p></div>
+</div>
+<p class="small">This is an intuition-building analogy, not a claim that a real ML model always learns a simple explicit rule.</p>
+</section>
+
+<section class="card">
+<div class="kicker">9 · Traditional Programming vs ML</div><h2>Where does the “program” come from?</h2>
+<div class="human">
+<div class="mini"><h3>👨‍💻 Traditional programming</h3><p><b>Data + manually written rules → output</b></p><p class="small">The programmer formulates/codes the rules and the program applies them to input data.</p></div>
+<div class="versus">VS</div>
+<div class="mini"><h3>📊 Machine learning</h3><p><b>Data + observed output → learned model → prediction</b></p><p class="small">The algorithm uses examples to formulate patterns/rules represented in a predictive model.</p></div>
+</div>
+<div class="callout">The textbook's customer-churn example uses customer demographics and transactions as historical inputs and historical churn outcomes as outputs; the ML algorithm uses these to formulate a predictive model for future churn. fileciteturn18file0</div>
+</section>
+
+<section class="card">
+<div class="kicker">10 · Case Study</div><h2>Finding one person's photos</h2>
+<p>The textbook gives a case study: filtering one person's photos from 100 images is difficult to solve reliably using traditional programming rules or pixel-by-pixel comparison. With ML, multiple photos can be supplied as examples so that a model can learn visual characteristics of that person.</p>
+<div class="pipeline">
+<div class="step">🖼️<strong>Example photos</strong>Many images of the person.</div><div class="step">🔎<strong>Learn patterns</strong>Model learns useful visual features.</div><div class="step">🧠<strong>Model</strong>Represents learned patterns.</div><div class="step">📷<strong>New image</strong>Unknown photo arrives.</div><div class="step">✅<strong>Classify</strong>Predict whether it matches.</div>
+</div>
+</section>
+
+<section class="card">
+<div class="kicker">11 · Deep Learning</div><h2>Machine Learning with deep neural networks</h2>
+<p>The course material describes Deep Learning as a powerful technique within ML that uses neural networks with many layers to process and learn from data, especially complex patterns in large datasets. Reema Thareja describes deep learning as an ML technique using neural networks with several processing layers to classify, infer and predict outcomes.</p>
+<div class="grid">
+<div class="mini"><div class="icon">1️⃣</div><b>Input layer</b><p class="small">Receives raw data.</p></div>
+<div class="mini"><div class="icon">2️⃣</div><b>Hidden layers</b><p class="small">Successive layers process and learn representations.</p></div>
+<div class="mini"><div class="icon">3️⃣</div><b>Output layer</b><p class="small">Produces the final prediction/classification.</p></div>
+<div class="mini"><div class="icon">🔁</div><b>Training</b><p class="small">Forward propagation produces output; backward propagation updates weights based on error.</p></div>
+</div>
+</section>
+
+<section class="card">
+<div class="kicker">12 · Visual Example — Image Recognition</div><h2>How a deep network can build representations</h2>
+<div class="pipeline">
+<div class="step">🖼️<strong>Raw image</strong>Pixels enter the network.</div><div class="step">📐<strong>Early features</strong>Edges/simple patterns.</div><div class="step">🔷<strong>Intermediate features</strong>Shapes and parts.</div><div class="step">👁️<strong>Higher features</strong>Eyes, nose, mouth or object parts.</div><div class="step">🎯<strong>Output</strong>Class/prediction.</div>
+</div>
+<p>The course material uses this style of example: in image recognition, early layers can detect edges, later layers can recognize shapes and further layers can identify objects. The advantage emphasized is automatic feature extraction from raw data.</p>
+<div class="callout good"><b>ML vs DL intuition:</b> conventional ML may require relevant features to be manually extracted; deep learning can automatically learn representations/features from raw data through multiple layers. fileciteturn18file7</div>
+</section>
+
+<section class="card">
+<div class="kicker">13 · Deep Learning Training</div><h2>Forward propagation → error → backward propagation</h2>
+<div class="pipeline">
+<div class="step">📥<strong>Input</strong>Raw data enters.</div><div class="step">➡️<strong>Forward</strong>Information passes through layers.</div><div class="step">🎯<strong>Output</strong>Prediction is generated.</div><div class="step">📏<strong>Error</strong>Prediction is compared with target.</div><div class="step">⬅️<strong>Backward</strong>Weights are updated to reduce error.</div>
+</div>
+<p>The supplied Module 3 material explains forward propagation as movement of computations toward the output layer and backward propagation as sending error information backward to adjust weights. This training cycle is repeated to improve accuracy. fileciteturn18file14</p>
+</section>
+
+<section class="lab">
+<div class="kicker" style="color:#67e8f9">14 · Virtual Lab — Which Concept?</div>
+<h2>Scenario Classifier</h2>
+<p>Read each scenario and choose the concept that best matches the <b>emphasis</b> of the course definition. Some real systems can involve more than one concept; here we are practising the dominant idea.</p>
+<div class="panel">
+<h3 id="st"></h3><p id="sx"></p>
+<select id="sa"><option value="">Choose…</option><option>Artificial Intelligence</option><option>Augmented Intelligence</option><option>Cognitive Computing</option><option>Machine Learning</option><option>Deep Learning</option></select>
+<button onclick="checkS()">Check</button><button class="secondary" onclick="nextS()">Next</button>
+<div id="sr" style="margin-top:10px"></div>
+</div>
+<div class="simgrid">
+<div class="simcard" id="scoreBox"><b>Score</b><br><span id="score">0</span></div>
+<div class="simcard"><b>Scenario</b><br><span id="sn">1</span> / 8</div>
+<div class="simcard"><b>Tip</b><br><span id="tip">Look for the main emphasis.</span></div>
+</div>
+</section>
+
+<section class="card">
+<div class="kicker">15 · Quick Comparison</div><h2>Five terms in one view</h2>
+<table>
+<tr><th>Term</th><th>Ask this question</th><th>Simple memory cue</th></tr>
+<tr><td><b>AI</b></td><td>Is the machine performing an intelligent task?</td><td>“Machine intelligence”</td></tr>
+<tr><td><b>Augmented Intelligence</b></td><td>Is AI assisting a human to improve a task/decision?</td><td>“Human + AI assistance”</td></tr>
+<tr><td><b>Cognitive Computing</b></td><td>Is the system designed to mimic/augment human thought processes?</td><td>“Human-like cognitive interaction”</td></tr>
+<tr><td><b>Machine Learning</b></td><td>Is the machine learning patterns from data/experience?</td><td>“Learn from data”</td></tr>
+<tr><td><b>Deep Learning</b></td><td>Is ML using deep, multi-layer neural networks?</td><td>“Many neural layers”</td></tr>
+</table>
+</section>
+
+<section class="card">
+<div class="kicker">16 · Common Misconceptions</div>
+<details><summary>“AI, ML and DL are three names for exactly the same thing.”</summary><p>No. The course presents ML as a branch/application of AI and DL as an ML technique using deep neural networks.</p></details>
+<details><summary>“Augmented intelligence means stronger-than-human AI.”</summary><p>No. In the supplied course material, augmented intelligence is described as weak AI that assists humans to improve tasks or decisions.</p></details>
+<details><summary>“Cognitive computing is a replacement for AI.”</summary><p>No. The resource describes cognitive computing in relation to AI and human-like thought processes/interaction.</p></details>
+<details><summary>“Machine learning means no human involvement at all.”</summary><p>The textbook says ML algorithms learn from experience rather than explicit instructions for each output, but people still define the problem, collect/select data, choose methods and evaluate systems.</p></details>
+<details><summary>“Deep learning automatically means the model is correct.”</summary><p>No. Deep learning requires training and evaluation; the course explicitly describes error calculation and weight updates during training.</p></details>
+</section>
+
+<section class="card quiz">
+<div class="kicker">17 · Quick Check</div><h2>Test yourself</h2>
+<form>
+<p><b>1. According to the Module 1 handout, augmented intelligence is:</b></p>
+<label><input type="radio" name="q1" value="a"> A type of weak AI that assists humans</label>
+<label><input type="radio" name="q1" value="b"> A type of self-aware AI</label>
+<label><input type="radio" name="q1" value="c"> A synonym for deep learning</label>
+<p><b>2. Machine Learning primarily learns from:</b></p>
+<label><input type="radio" name="q2" value="a"> Only manually written rules</label><label><input type="radio" name="q2" value="b"> Data and experience/patterns</label><label><input type="radio" name="q2" value="c"> No input at all</label>
+<p><b>3. Deep Learning is best described as:</b></p>
+<label><input type="radio" name="q3" value="a"> An unrelated field to ML</label><label><input type="radio" name="q3" value="b"> An ML technique using deep neural networks/multiple layers</label><label><input type="radio" name="q3" value="c"> A traditional programming language</label>
+<p><b>4. Cognitive computing in the course material emphasizes:</b></p>
+<label><input type="radio" name="q4" value="a"> Mimicking/augmenting human thought processes</label><label><input type="radio" name="q4" value="b"> Removing all human interaction</label><label><input type="radio" name="q4" value="c"> Only arithmetic calculation</label>
+<p><b>5. Which relationship is correct?</b></p>
+<label><input type="radio" name="q5" value="a"> DL ⊃ ML ⊃ AI</label><label><input type="radio" name="q5" value="b"> AI ⊃ ML ⊃ DL</label><label><input type="radio" name="q5" value="c"> AI and ML have no relationship</label>
+<button type="button" onclick="quiz()">Check Score</button><div id="qr" style="font-weight:800;margin-top:10px"></div>
+</form>
+</section>
+
+<section class="card">
+<div class="kicker">18 · Exam Corner</div><h2>Questions to prepare</h2>
+<ol>
+<li>Is Artificial Intelligence the same as Augmented Intelligence and Cognitive Computing? Explain.</li>
+<li>Differentiate between Artificial Intelligence, Augmented Intelligence and Cognitive Computing.</li>
+<li>Define Machine Learning and explain how it is related to Artificial Intelligence.</li>
+<li>Explain Machine Learning with a suitable real-world example.</li>
+<li>Differentiate traditional programming and Machine Learning programming.</li>
+<li>What is Deep Learning? Explain how Deep Learning works.</li>
+<li>Differentiate Machine Learning and Deep Learning.</li>
+</ol>
+<div class="callout">The official syllabus explicitly places “Is Artificial Intelligence Same as Augmented Intelligence and Cognitive Computing” and “Machine Learning and Deep Learning” in Module 1 and maps Module 1 to Reema Thareja Chapter 1 sections 1.1–1.5. fileciteturn18file5</div>
+</section>
+
+<section class="card">
+<div class="kicker">19 · Takeaways</div>
+<div class="callout good"><ul>
+<li><b>AI</b> is the broad concept of making machines perform tasks associated with intelligence.</li>
+<li><b>Augmented Intelligence</b>, in this course, is weak AI that assists humans to improve tasks or decisions.</li>
+<li><b>Cognitive Computing</b> focuses on mimicking/augmenting human thought processes and human-like interaction.</li>
+<li><b>Machine Learning</b> learns patterns from data/experience rather than requiring every rule to be explicitly written.</li>
+<li><b>Deep Learning</b> is an ML technique based on neural networks with multiple layers.</li>
+<li>Traditional programming and ML are complementary; ML does not simply replace conventional programming.</li>
+<li>Always distinguish the <b>conceptual relationship</b> among these terms from the particular technology used in a real application.</li>
+</ul></div>
+</section>
+
+<section class="card">
+<div class="kicker">20 · Resource Alignment</div><h2>Resources used for this lesson</h2>
+<ul>
+<li><b>VTU 1BAIA103/203 syllabus</b> — Module 1 explicitly includes AI vs Augmented Intelligence/Cognitive Computing and Machine Learning/Deep Learning; CO1 covers concepts and types of AI. fileciteturn18file5</li>
+<li><b>VTU Module 1 handout</b> — defines augmented intelligence as weak AI that assists humans and describes cognitive computing as systems/products that mimic human thought processes to enhance decision-making. fileciteturn18file1</li>
+<li><b>Reema Thareja, Artificial Intelligence: Beyond Classical AI, Chapter 1</b> — Section 1.4 discusses Augmented Intelligence and Cognitive Computing; Section 1.5 covers Machine Learning and Deep Learning. fileciteturn18file3turn18file2</li>
+<li><b>Reema Thareja — Traditional Programming vs Machine Learning</b> — used for the data/rules/model comparison and customer-churn example. fileciteturn18file0</li>
+<li><b>Course Module 3 material</b> — used only to reinforce the neural-network/deep-learning mechanics that connect back to the Module 1 introduction. fileciteturn18file14</li>
+</ul>
+</section>
+
+<div class="footer"><a href="lab-02-ai-history-types.html">← Lab 02</a> · <a href="index.html">Module 1</a> · <a href="lab-04-agent-environment.html">Lab 04 →</a></div>
 </main>
-<footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 1</div><div>Lesson 03: Machine Intelligence</div></div></footer>
-<script src="../assets/js/progress.js"></script>
+
 <script>
-const LESSON_ID="lab-03-intelligence-comparison";
-function showAnswer(){document.getElementById("answer").style.display="block";}
-function completeLesson(){
-  AIProgress.markLessonComplete(LESSON_ID);
-  document.getElementById("lessonProgress").style.width="100%";
-  document.getElementById("progressText").textContent="Completed locally ✓";
-  document.getElementById("completeBtn").textContent="✓ Lesson Completed";
-  document.getElementById("completeBtn").disabled=true;
-}
-document.addEventListener("DOMContentLoaded",()=>{
- const done=AIProgress.get(LESSON_ID)>=100;
- document.getElementById("lessonProgress").style.width=done?"100%":"0%";
- document.getElementById("progressText").textContent=done?"Completed locally ✓":"Lesson not completed";
- if(done){document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
-});
+const scenarios=[
+["A system automatically highlights important information in a report so a manager can make a better decision.","AI assists a human to improve a task/decision.","Augmented Intelligence"],
+["A machine processes environmental information, learns patterns and reacts to an input.","The broad concept is intelligent machine behaviour.","Artificial Intelligence"],
+["A system analyses text, speech and images and is designed to provide natural, human-like interaction and decision support.","The emphasis is mimicking/augmenting human thought processes.","Cognitive Computing"],
+["A bank provides historical customer data and churn outcomes so an algorithm can learn a predictive model.","The model learns patterns from data to predict future outcomes.","Machine Learning"],
+["A model processes raw images through many neural-network layers and automatically learns increasingly complex visual features.","Multiple neural-network layers indicate deep learning.","Deep Learning"],
+["A programmer manually writes if-then rules for a tax calculator.","Rules are explicitly coded rather than learned from examples.","Artificial Intelligence"],
+["A classifier is trained on labelled examples and improves after its errors are evaluated.","The central idea is learning from data/experience.","Machine Learning"],
+["An image model learns edges in early layers, shapes in later layers and object-level features in deeper layers.","The layered feature hierarchy is a deep-learning example.","Deep Learning"]
+];
+let i=0,score=0,locked=false;
+function render(){document.getElementById('st').textContent=scenarios[i][0];document.getElementById('sx').textContent=scenarios[i][1];document.getElementById('sa').value='';document.getElementById('sr').textContent='';document.getElementById('sn').textContent=i+1;locked=false}
+function checkS(){if(locked)return;const a=document.getElementById('sa').value;if(!a){document.getElementById('sr').textContent='Choose an answer first.';return}locked=true;if(a===scenarios[i][2]){score++;document.getElementById('sr').innerHTML='✅ Correct — <b>'+scenarios[i][2]+'</b>.'}else document.getElementById('sr').innerHTML='❌ Review the clue. Expected: <b>'+scenarios[i][2]+'</b>.';document.getElementById('score').textContent=score}
+function nextS(){i=(i+1)%scenarios.length;render()}
+render();
+function quiz(){const a={q1:'a',q2:'b',q3:'b',q4:'a',q5:'b'};let s=0;Object.keys(a).forEach(k=>{const x=document.querySelector('input[name="'+k+'"]:checked');if(x&&x.value===a[k])s++});document.getElementById('qr').textContent='Score: '+s+'/5 '+(s===5?'🎉 Excellent!':s>=3?'👍 Good — review the missed concepts.':'📘 Revisit the visual relationship and comparisons.')}
 </script>
-</body></html>
+</body>
+</html>
