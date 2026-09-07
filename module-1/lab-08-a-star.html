@@ -1,67 +1,314 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="A* Search & Knowledge Extension — Module 1 interactive lesson">
-<title>Lesson 08: A* Search & Knowledge Extension | 1BAIA103/203</title><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/components.css"><link rel="stylesheet" href="../assets/css/animations.css"><link rel="stylesheet" href="../assets/css/responsive.css"><link rel="stylesheet" href="../assets/css/module1.css"></head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab 08 — A* Search & Knowledge Representation</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#647089;--a:#315bea;--a2:#6d28d9;--good:#15803d;--warn:#b45309;--line:#dfe5ef}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.62}
+header{background:linear-gradient(135deg,#172554,#4c1d95);color:white;padding:44px 6%}.hero{max-width:1150px;margin:auto}.tag{display:inline-block;padding:6px 12px;border:1px solid #ffffff44;background:#ffffff1c;border-radius:999px;font-size:.82rem}
+h1{font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.04;margin:16px 0}.hero p{max-width:920px;color:#ededff}
+nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);display:flex;gap:8px;padding:9px 6%;overflow:auto}nav a{white-space:nowrap;text-decoration:none;color:#334155;padding:7px 10px;border-radius:8px}nav a:hover{background:#eef2ff}
+main{max-width:1150px;margin:28px auto;padding:0 18px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:23px;margin:18px 0;box-shadow:0 5px 18px #1725540a}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:15px}
+h2{color:#172554;margin-top:0}h3{color:#26365e}.callout{background:#eef2ff;border-left:5px solid var(--a);padding:14px 17px;border-radius:10px}.good{background:#f0fdf4;border-left-color:#16a34a}.warn{background:#fff7ed;border-left-color:#f59e0b}
+.pill{display:inline-block;background:#eef2ff;color:#3730a3;border-radius:999px;padding:4px 9px;font-size:.8rem;margin:2px}.formula{text-align:center;background:#111827;color:white;border-radius:12px;padding:18px;font-size:1.45rem;font-weight:800;margin:16px 0}
+.flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:20px 0}.box{padding:13px 17px;border:2px solid #94a3b8;background:#f8fafc;border-radius:12px;text-align:center;font-weight:700}.arrow{font-size:1.5rem;color:#64748b}
+table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#f1f5f9}
+pre{background:#0f172a;color:#dbeafe;border-radius:12px;padding:16px;overflow:auto}
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0}button,select,input{font:inherit}button{border:0;border-radius:9px;padding:10px 15px;background:var(--a);color:#fff;cursor:pointer}button.secondary{background:#475569}button.good{background:var(--good)}
+#astar{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;max-width:700px;margin:18px auto}.cell{min-height:65px;border:2px solid #cbd5e1;border-radius:11px;background:#fff;display:grid;place-items:center;text-align:center;font-weight:700}.cell.open{background:#dbeafe;border-color:#2563eb}.cell.current{background:#ede9fe;border-color:#7c3aed}.cell.goal{background:#dcfce7;border-color:#16a34a}.cell.wall{background:#e2e8f0}.cell small{font-weight:500;color:#64748b}
+.metric{display:flex;gap:12px;align-items:center;margin:9px 0}.bar{height:16px;background:#e2e8f0;border-radius:99px;flex:1;overflow:hidden}.fill{height:100%;width:0;background:#6366f1;transition:.35s}.log{background:#0f172a;color:#dbeafe;padding:15px;border-radius:12px;min-height:110px;white-space:pre-wrap}
+.krdiagram{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:14px;align-items:center;margin:20px 0}.krbox{border:2px solid #94a3b8;border-radius:14px;padding:18px;text-align:center;background:#f8fafc}.krbox.big{background:#eef2ff;border-color:#6366f1}.down{text-align:center;font-size:1.6rem;color:#64748b}
+.kb{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.fact{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fafcff}.fact b{color:#3730a3}
+.network{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:20px}.nnode{border:2px solid #6366f1;background:#eef2ff;border-radius:50%;min-width:85px;min-height:65px;display:grid;place-items:center;text-align:center;font-weight:800}.rel{font-weight:800;color:#64748b}
+.quiz .choice{display:block;padding:8px;border:1px solid var(--line);border-radius:8px;margin:6px 0}.quiz button{margin-top:5px}.ans{display:none;margin:8px 0;font-weight:700}
+footer{max-width:1150px;margin:40px auto;padding:0 18px 50px;color:var(--muted)}small{color:var(--muted)}
+</style>
+</head>
 <body>
-<header class="site-header"><div class="container navbar">
-<a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>1BAIA103 / 203</span></a>
-<nav class="nav-links"><a href="index.html">Module 1</a><a href="../index.html">Course Home</a></nav>
+<header><div class="hero">
+<span class="tag">MODULE 1 · LAB 08 · A* + KNOWLEDGE REPRESENTATION</span>
+<h1>A* Search & Knowledge Representation</h1>
+<p>The final Module 1 lab connects two important AI ideas: <b>finding a good path with A*</b> and <b>representing knowledge so an intelligent agent can reason about the world</b>.</p>
 </div></header>
-<main class="lesson-shell">
-<div class="breadcrumbs">MODULE 1 / LESSON 08</div>
-<section class="lesson-header reveal"><span class="badge">Lesson 08 of 8</span><h1>A* Search & Knowledge Extension</h1><p>g(n) + h(n) • Optimal-path intuition • Bridge to knowledge representation</p>
-<div class="lesson-progress"><div id="lessonProgress"></div></div>
-<p class="small-note" id="progressText">Lesson not completed</p></section>
+<nav>
+<a href="#obj">Objectives</a><a href="#astarTheory">A* Search</a><a href="#astarLab">A* Lab</a><a href="#kr">Knowledge Representation</a><a href="#kba">Knowledge-Based Agent</a><a href="#types">Types</a><a href="#tech">Techniques</a><a href="#krLab">KR Lab</a><a href="#quiz">Quick Check</a><a href="#exam">Exam Corner</a>
+</nav>
+<main>
+<section id="obj" class="card">
+<h2>🎯 Learning Objectives</h2>
+<div class="grid">
+<div>Explain the A* evaluation function <b>f(n)=g(n)+h(n)</b>.</div>
+<div>Distinguish path cost <b>g(n)</b> from heuristic cost <b>h(n)</b>.</div>
+<div>Trace A* using OPEN/CLOSED concepts.</div>
+<div>Explain Knowledge Representation (KR) and why AI needs it.</div>
+<div>Describe a Knowledge-Based Agent, KB, inference engine, TELL and ASK.</div>
+<div>Recognise major knowledge types and representation techniques in the syllabus/resources.</div>
+</div>
+</section>
 
-<section class="lesson-section"><div class="visual-panel"><h2>SEE: A* combines cost and guidance</h2>
-<div class="visual-flow"><div class="vnode">g(n)<br>cost so far</div><div class="varrow">+</div><div class="vnode">h(n)<br>estimated cost</div><div class="varrow">=</div><div class="vnode">f(n)<br>evaluation</div></div>
-<p>The central A* idea is to consider both the path cost already travelled and an estimate of the remaining cost.</p>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>INTERACT: Change g(n) and h(n)</h2>
-<label>Path cost g(n): <b id="gval">4</b></label><input type="range" min="0" max="20" value="4" style="width:100%" oninput="calcA()">
-<label>Heuristic h(n): <b id="hval">6</b></label><input id="hr" type="range" min="0" max="20" value="6" style="width:100%" oninput="calcA()">
-<div class="callout"><strong>f(n) = <span id="fval">10</span></strong><br>Lower f(n) is preferred by the evaluation function.</div>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Compare the search ideas</h2>
-<table class="compare-table"><tr><th>Method</th><th>What guides selection?</th><th>Question it answers</th></tr><tr><td>DFS</td><td>Depth</td><td>“Can I go deeper?”</td></tr><tr><td>BFS</td><td>Depth / level</td><td>“What is the shallowest frontier?”</td></tr><tr><td>UCS</td><td>g(n)</td><td>“What path has the lowest cost so far?”</td></tr><tr><td>Greedy</td><td>h(n)</td><td>“What looks closest to the goal?”</td></tr><tr><td>A*</td><td>g(n)+h(n)</td><td>“What balances cost so far and estimated remaining cost?”</td></tr></table>
-</div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Knowledge representation bridge</h2>
-<p>The supplied 1BAIA103/203 course document also lists Knowledge Representation, including an introduction, knowledge representation, knowledge-based agents and types of knowledge. This lesson uses A* as a bridge: AI systems can combine <em>search</em> with <em>represented knowledge</em> to reason about problems.</p>
-<div class="visual-flow"><div class="vnode">Knowledge</div><div class="varrow">→</div><div class="vnode">Reasoning</div><div class="varrow">→</div><div class="vnode">Search / decision</div><div class="varrow">→</div><div class="vnode">Action</div></div>
-<p class="small-note">A dedicated knowledge-representation lesson can be added as an enrichment page if the course delivery requires it.</p>
-</div></section>
-<script>
-function calcA(){const g=document.querySelector('input[type="range"]').value;const h=document.getElementById("hr").value;document.getElementById("gval").textContent=g;document.getElementById("hval").textContent=h;document.getElementById("fval").textContent=Number(g)+Number(h)}
-document.addEventListener("DOMContentLoaded",calcA);
-</script>
+<section id="astarTheory" class="card">
+<h2>⭐ Part A — A* Search</h2>
+<p>A* is an informed search algorithm. The supplied Reema Thareja material presents it as an informed search algorithm that combines the actual cost already travelled with an estimated cost to the goal. The evaluation function is:</p>
+<div class="formula">f(n) = g(n) + h(n)</div>
+<div class="grid">
+<div><h3>g(n)</h3><p>Cost of the path from the start node to node <b>n</b>.</p><span class="pill">“What have I spent?”</span></div>
+<div><h3>h(n)</h3><p>Heuristic estimate of the cost from <b>n</b> to a goal.</p><span class="pill">“How far might remain?”</span></div>
+<div><h3>f(n)</h3><p>Combined evaluation used to decide which node is most promising.</p><span class="pill">“Estimated total”</span></div>
+</div>
+<p>The supplied Reema Thareja text lists A* under informed search and describes its evaluation function using g(n) and h(n). fileciteturn25file17</p>
+</section>
 
-<section class="lesson-section"><div class="exam-box"><strong>Exam Corner</strong><p>Answer in this order: <b>definition → working/steps → diagram or example → advantages/limitations → conclusion</b> when the question asks for an explanation. Use block diagrams wherever necessary.</p></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Quick Check</h2>
-<div class="check"><p><strong>Can you explain the central idea of this lesson without looking at your notes?</strong></p>
-<button onclick="showAnswer()">Yes — reveal the self-check</button>
-<div class="answer" id="answer">Good. Now state the concept in your own words, give one example, and identify one limitation or trade-off.</div></div></div></section>
-<section class="lesson-section"><div class="visual-panel"><h2>Key Takeaways</h2><ul><li>Start with the problem, not the buzzword.</li><li>Use the visual model to explain the concept before memorising terminology.</li><li>Test the idea with an example and compare alternatives.</li></ul>
-<button class="btn btn-primary" id="completeBtn" onclick="completeLesson()">✓ Mark Lesson Complete</button></div></section>
-<div class="lesson-nav"><a class="btn btn-secondary" href="lab-07-heuristic-search.html">← Previous</a><a class="btn btn-secondary" href="index.html">Module Index</a><a class="btn btn-primary" href="index.html">Next →</a></div>
+<section class="card">
+<h2>🧠 A* Visual Intuition</h2>
+<div class="flow">
+<div class="box">Start</div><div class="arrow">→</div><div class="box">g(n)<br><small>cost already paid</small></div><div class="arrow">+</div><div class="box">h(n)<br><small>estimated remaining cost</small></div><div class="arrow">=</div><div class="box">f(n)<br><small>priority</small></div>
+</div>
+<div class="callout good"><b>Think of A* as balanced guidance:</b> Greedy Best-First focuses on h(n), while A* considers both the cost already incurred and the estimated remaining cost.</div>
+</section>
+
+<section class="card">
+<h2>🔢 Worked Numerical Example</h2>
+<p>Suppose three frontier nodes are available:</p>
+<table>
+<tr><th>Node</th><th>g(n)</th><th>h(n)</th><th>f(n)=g+h</th><th>Interpretation</th></tr>
+<tr><td>A</td><td>4</td><td>6</td><td><b>10</b></td><td>Moderate path cost + estimate</td></tr>
+<tr><td>B</td><td>7</td><td>2</td><td><b>9</b></td><td>Best combined estimate</td></tr>
+<tr><td>C</td><td>2</td><td>9</td><td><b>11</b></td><td>Cheap so far, but farther from goal</td></tr>
+</table>
+<div class="callout"><b>Decision:</b> A* would prioritize B because it has the lowest f(n)=9 in this example.</div>
+</section>
+
+<section class="card">
+<h2>🪜 A* Step-by-Step</h2>
+<ol>
+<li>Place the start node in the frontier/OPEN structure.</li>
+<li>Compute or obtain <b>g(n)</b>, <b>h(n)</b>, and therefore <b>f(n)</b>.</li>
+<li>Select the most promising node according to the A* evaluation.</li>
+<li>Expand it and generate successors.</li>
+<li>Update path costs and priorities when a better route is discovered.</li>
+<li>Continue until the goal is selected/reached under the algorithm's termination conditions.</li>
+</ol>
+<pre>A* idea
+OPEN  = nodes waiting to be explored
+CLOSED = nodes already explored
+
+repeat:
+    choose promising node using f(n) = g(n) + h(n)
+    if goal → return solution
+    expand node
+    update successors and their path costs
+</pre>
+</section>
+
+<section id="astarLab" class="card">
+<h2>🧪 Virtual Lab A — A* Grid Explorer</h2>
+<p><b>How to use:</b> press <b>Next A* Step</b>. The demo uses a small teaching grid and shows the current node's g, h and f values. The goal is G. This is a simplified visualization of the A* decision principle.</p>
+<div id="astar">
+<div class="cell" id="p0">S<br><small>g0 h6</small></div><div class="cell" id="p1">A<br><small>g1 h5</small></div><div class="cell wall">■</div><div class="cell" id="p3">B<br><small>g3 h4</small></div>
+<div class="cell" id="p4">C<br><small>g1 h5</small></div><div class="cell" id="p5">D<br><small>g2 h4</small></div><div class="cell" id="p6">E<br><small>g3 h2</small></div><div class="cell" id="p7">F<br><small>g4 h1</small></div>
+<div class="cell wall">■</div><div class="cell" id="p9">X<br><small>g4 h3</small></div><div class="cell" id="p10">Y<br><small>g4 h2</small></div><div class="cell goal" id="p11">G 🎯<br><small>h0</small></div>
+</div>
+<div class="controls"><button onclick="nextA()">Next A* Step</button><button class="secondary" onclick="resetA()">Reset</button><span id="astat"><b>Current:</b> S</span></div>
+<div class="metric"><b>f(n)</b><div class="bar"><div class="fill" id="fbar"></div></div><span id="fval">6</span></div>
+<div class="log" id="alog">A* starts at S. Press Next A* Step.</div>
+</section>
+
+<section id="kr" class="card">
+<h2>🧠 Part B — Knowledge Representation (KR)</h2>
+<p>Knowledge Representation and Reasoning (KR/KRR) is concerned with representing knowledge so that an AI agent can use it for reasoning and intelligent behaviour. Reema Thareja emphasises that KR is more than simply storing data: it represents information such as beliefs, intentions, judgments and facts in a form an intelligent system can use. fileciteturn25file14</p>
+<div class="flow">
+<div class="box">Real World</div><div class="arrow">→</div><div class="box">Represent Knowledge</div><div class="arrow">→</div><div class="box">Reason / Infer</div><div class="arrow">→</div><div class="box">Intelligent Action</div>
+</div>
+<div class="callout"><b>Simple distinction:</b> A database may store data. A knowledge representation system is designed so an AI system can represent and reason with knowledge.</div>
+</section>
+
+<section class="card">
+<h2>📦 What knowledge needs to be represented?</h2>
+<p>Reema Thareja identifies several things that AI systems may need to represent:</p>
+<div class="grid">
+<div class="card"><h3>Objects</h3><p>Relevant entities and their facts, such as vehicles and roads for a self-driving car.</p></div>
+<div class="card"><h3>Events</h3><p>Actions occurring in the real world, such as applying brakes when an obstacle appears.</p></div>
+<div class="card"><h3>Performance</h3><p>Information about how actions are performed.</p></div>
+<div class="card"><h3>Meta-knowledge</h3><p>Knowledge about knowledge — what the system knows.</p></div>
+<div class="card"><h3>Facts</h3><p>Truths about the world that need to be available to an intelligent agent.</p></div>
+<div class="card"><h3>Knowledge Base</h3><p>A collection of represented sentences/facts used by the knowledge-based agent.</p></div>
+</div>
+<p>These categories are explicitly described in the supplied Reema Thareja chapter. fileciteturn25file0</p>
+</section>
+
+<section id="kba" class="card">
+<h2>🤖 Knowledge-Based Agent (KBA)</h2>
+<p>A knowledge-based agent maintains knowledge about its environment and uses reasoning over that knowledge to decide what action to take. Reema Thareja identifies the <b>knowledge base</b> and <b>inference engine</b> as central components. fileciteturn25file4</p>
+<div class="krdiagram">
+<div class="krbox">🌍 Environment<br>Percepts</div>
+<div class="krbox big"><b>Knowledge-Based Agent</b><br><br>Knowledge Base (KB)<br>+<br>Inference Engine (IE)</div>
+<div class="krbox">⚙️ Action<br>Actuators</div>
+</div>
+<div class="flow"><div class="box">Perceive</div><div class="arrow">→</div><div class="box">TELL(KB, percept)</div><div class="arrow">→</div><div class="box">ASK(KB, action?)</div><div class="arrow">→</div><div class="box">Perform</div></div>
+<p>Russell & Norvig likewise describe a knowledge-based agent as taking a percept, adding it to the KB using TELL, asking the KB what action to take using ASK, then telling the KB which action was performed. fileciteturn25file3</p>
+</section>
+
+<section class="card">
+<h2>🔄 TELL → INFER → ASK → PERFORM</h2>
+<div class="grid">
+<div><h3>1. TELL</h3><p>Add information to the knowledge base.</p></div>
+<div><h3>2. INFER</h3><p>Derive new knowledge from existing knowledge using rules.</p></div>
+<div><h3>3. ASK</h3><p>Query the knowledge base for what action or conclusion follows.</p></div>
+<div><h3>4. PERFORM</h3><p>Execute the selected action.</p></div>
+</div>
+<p>Reema Thareja explicitly describes TELL, ASK and PERFORM operations and explains that the inference engine derives new sentences from old ones. fileciteturn25file1</p>
+</section>
+
+<section id="types" class="card">
+<h2>🧩 Types of Knowledge</h2>
+<p>The supplied Reema Thareja material describes five types:</p>
+<table>
+<tr><th>Type</th><th>Meaning</th><th>Easy example</th></tr>
+<tr><td><b>Meta-knowledge</b></td><td>Knowledge about knowledge.</td><td>Knowing which rule/source is relevant.</td></tr>
+<tr><td><b>Heuristic</b></td><td>Rule-of-thumb knowledge based on experience; useful but not guaranteed.</td><td>An expert's practical diagnostic shortcut.</td></tr>
+<tr><td><b>Procedural</b></td><td>How to achieve/do something; rules, strategies and procedures.</td><td>Steps for diagnosing a fault.</td></tr>
+<tr><td><b>Declarative</b></td><td>Information about an object, concept, fact and attributes.</td><td>“A car has four wheels.”</td></tr>
+<tr><td><b>Structural</b></td><td>Knowledge about relationships among entities/concepts.</td><td>Car IS-A vehicle.</td></tr>
+</table>
+<p>The source specifically explains heuristic, procedural, declarative and meta-knowledge and presents the types of knowledge in its Chapter 4 discussion. fileciteturn25file0</p>
+</section>
+
+<section id="tech" class="card">
+<h2>🛠️ Techniques of Knowledge Representation</h2>
+<div class="grid">
+<div class="card"><h3>1. Logical Representation</h3><p>Uses formal rules. Includes <b>propositional logic</b> and <b>first-order logic</b>.</p><div class="pill">True / False</div><div class="pill">Predicates</div></div>
+<div class="card"><h3>2. Semantic Networks</h3><p>Represents knowledge as a graph: nodes represent objects/concepts and links represent relationships.</p><div class="pill">IS-A</div><div class="pill">Relations</div></div>
+<div class="card"><h3>3. Frames</h3><p>Record-like structures representing real-world objects with attributes/slots and values.</p><div class="pill">Slots</div><div class="pill">Values</div></div>
+<div class="card"><h3>4. Production Rules</h3><p>Knowledge can be expressed as condition → action/conclusion rules.</p><div class="pill">IF</div><div class="pill">THEN</div></div>
+</div>
+<p>Reema Thareja lists logical, semantic network, frame and production-rule representations, with propositional and first-order logic under logical representation. fileciteturn25file8turn25file11</p>
+</section>
+
+<section class="card">
+<h2>🕸️ Semantic Network — Visual Example</h2>
+<div class="network">
+<div class="nnode">Animal</div><div class="rel">← IS-A ←</div><div class="nnode">Bird</div><div class="rel">← IS-A ←</div><div class="nnode">Sparrow</div>
+</div>
+<div class="network">
+<div class="nnode">Bird</div><div class="rel">→ has →</div><div class="nnode">Wings</div><div class="rel">→ can →</div><div class="nnode">Fly*</div>
+</div>
+<small>*Teaching example only: real-world exceptions exist, so a knowledge representation must be designed carefully.</small>
+<p>Reema Thareja describes semantic networks as graphical networks where nodes represent objects and arcs represent relationships, including IS-A and instance relations. fileciteturn25file8</p>
+</section>
+
+<section class="card">
+<h2>⚙️ Logical Representation: From English to Logic</h2>
+<div class="flow"><div class="box">Diya is a student.</div><div class="arrow">→</div><div class="box">Student(Diya)</div></div>
+<div class="flow"><div class="box">All students are bright.</div><div class="arrow">→</div><div class="box">∀x Student(x) → Bright(x)</div></div>
+<div class="callout good"><b>Inference:</b> If Student(Diya) and all students are bright, the system can derive Bright(Diya). The supplied Reema Thareja text gives this style of example for inferential knowledge. fileciteturn25file2</div>
+</section>
+
+<section id="krLab" class="card">
+<h2>🧪 Virtual Lab B — Build a Tiny Knowledge Base</h2>
+<p><b>How to use:</b> click the facts you want to add, then press <b>Infer</b>. The demo applies one simple rule: <b>IF someone is a student THEN they are bright.</b></p>
+<div class="kb">
+<div class="fact"><b>Fact 1</b><br><label><input type="checkbox" id="diya"> Student(Diya)</label></div>
+<div class="fact"><b>Fact 2</b><br><label><input type="checkbox" id="raj"> Student(Raj)</label></div>
+<div class="fact"><b>Rule</b><br>Student(x) → Bright(x)</div>
+</div>
+<div class="controls"><button onclick="inferKB()">Infer</button><button class="secondary" onclick="resetKB()">Reset</button></div>
+<div class="log" id="klog">Knowledge Base is empty. Select a fact and click Infer.</div>
+</section>
+
+<section class="card">
+<h2>🏗️ Requirements of a Good KR System</h2>
+<div class="grid">
+<div><h3>Representational Accuracy</h3><p>Represent the kinds of knowledge required by the system.</p></div>
+<div><h3>Inferential Adequacy</h3><p>Manipulate representations to produce new knowledge.</p></div>
+<div><h3>Inferential Efficiency</h3><p>Guide reasoning toward useful results efficiently.</p></div>
+<div><h3>Acquisitional Efficiency</h3><p>Make it easier to acquire new knowledge.</p></div>
+</div>
+<p>These four requirements are explicitly given in Reema Thareja's knowledge representation chapter. fileciteturn25file4</p>
+</section>
+
+<section class="card">
+<h2>🔗 A* + Knowledge Representation: Why both matter</h2>
+<div class="flow">
+<div class="box">Knowledge<br><small>What do I know?</small></div><div class="arrow">→</div><div class="box">Reasoning<br><small>What follows?</small></div><div class="arrow">→</div><div class="box">Search<br><small>What should I explore?</small></div><div class="arrow">→</div><div class="box">Action<br><small>What should I do?</small></div>
+</div>
+<p>These are complementary AI ideas. Knowledge representation gives an agent a structured way to represent and reason about information; search algorithms provide systematic ways to explore possible states or paths.</p>
+</section>
+
+<section id="quiz" class="card quiz">
+<h2>📝 Quick Check</h2>
+<div><b>1. What is the A* evaluation function?</b>
+<label class="choice"><input type="radio" name="q1" value="a"> f(n)=g(n)+h(n)</label>
+<label class="choice"><input type="radio" name="q1" value="b"> f(n)=g(n)-h(n)</label>
+<label class="choice"><input type="radio" name="q1" value="c"> f(n)=h(n) only</label>
+<button onclick="check('q1','a','a1')">Check</button><div class="ans" id="a1"></div></div><hr>
+<div><b>2. What does a knowledge base store?</b>
+<label class="choice"><input type="radio" name="q2" value="a"> Represented knowledge/sentences about the world</label>
+<label class="choice"><input type="radio" name="q2" value="b"> Only images</label>
+<label class="choice"><input type="radio" name="q2" value="c"> Only program source code</label>
+<button onclick="check('q2','a','a2')">Check</button><div class="ans" id="a2"></div></div><hr>
+<div><b>3. Which operation adds knowledge to the KB?</b>
+<label class="choice"><input type="radio" name="q3" value="a"> ASK</label>
+<label class="choice"><input type="radio" name="q3" value="b"> TELL</label>
+<label class="choice"><input type="radio" name="q3" value="c"> PLAY</label>
+<button onclick="check('q3','b','a3')">Check</button><div class="ans" id="a3"></div></div><hr>
+<div><b>4. Which representation uses nodes and relationships?</b>
+<label class="choice"><input type="radio" name="q4" value="a"> Semantic network</label>
+<label class="choice"><input type="radio" name="q4" value="b"> Only numeric regression</label>
+<label class="choice"><input type="radio" name="q4" value="c"> Random search</label>
+<button onclick="check('q4','a','a4')">Check</button><div class="ans" id="a4"></div></div>
+</section>
+
+<section id="exam" class="card">
+<h2>🎓 Exam Corner</h2>
+<ul>
+<li><b>Define A*.</b> An informed search approach using the combined evaluation f(n)=g(n)+h(n). fileciteturn25file17</li>
+<li><b>What is Knowledge Representation?</b> A way of representing knowledge so an AI system/agent can use it for reasoning and intelligent behaviour. fileciteturn25file14</li>
+<li><b>What is a KBA?</b> An agent that maintains knowledge, reasons over it, updates it from observations and acts accordingly. fileciteturn25file4</li>
+<li><b>Differentiate TELL and ASK.</b> TELL adds information to the KB; ASK queries the KB for what follows/what action should be taken. fileciteturn25file1</li>
+<li><b>Name KR techniques.</b> Logical representation, semantic networks, frames and production rules. fileciteturn25file11</li>
+<li><b>Name knowledge types.</b> Meta, heuristic, procedural, declarative and structural knowledge. fileciteturn25file0</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>📚 Resource Alignment</h2>
+<p><b>VTU Module 1:</b> informed/heuristic search is covered in Module 1; this lab extends the sequence to A* and includes Knowledge Representation as requested in the syllabus.</p>
+<p><b>Reema Thareja — Artificial Intelligence: Beyond Classical AI:</b> Chapter 3 covers informed search including A*, while Chapter 4 covers Knowledge Representation, knowledge types, knowledge-based agents and KR techniques. fileciteturn25file10turn25file11</p>
+<p><b>Russell & Norvig — Artificial Intelligence: A Modern Approach:</b> the supplied text covers knowledge-based agents, TELL/ASK, logical agents and knowledge representation. fileciteturn25file3turn25file16</p>
+</section>
+
+<div class="card callout good"><b>Module 1 complete:</b> You have now covered AI fundamentals, types/history, intelligence comparison, agents, uninformed search, DLS/IDDFS, heuristic search, A* and Knowledge Representation.</div>
 </main>
-<footer class="site-footer"><div class="container footer-inner"><div>1BAIA103 / 203 · Module 1</div><div>Lesson 08: A* Search & Knowledge Extension</div></div></footer>
-<script src="../assets/js/progress.js"></script>
+<footer>1BAIA103/203 · Introduction to AI and Applications · Module 1 · Lab 08</footer>
 <script>
-const LESSON_ID="lab-08-a-star";
-function showAnswer(){document.getElementById("answer").style.display="block";}
-function completeLesson(){
-  AIProgress.markLessonComplete(LESSON_ID);
-  document.getElementById("lessonProgress").style.width="100%";
-  document.getElementById("progressText").textContent="Completed locally ✓";
-  document.getElementById("completeBtn").textContent="✓ Lesson Completed";
-  document.getElementById("completeBtn").disabled=true;
+const astarNodes=[
+ {id:'p0',name:'S',g:0,h:6},{id:'p1',name:'A',g:1,h:5},{id:'p4',name:'C',g:1,h:5},
+ {id:'p5',name:'D',g:2,h:4},{id:'p6',name:'E',g:3,h:2},{id:'p7',name:'F',g:4,h:1},{id:'p11',name:'G',g:5,h:0}
+];
+let ai=0;
+function clearA(){document.querySelectorAll('#astar .cell').forEach(e=>e.classList.remove('current','open'))}
+function nextA(){
+ if(ai>=astarNodes.length){document.getElementById('alog').textContent='🎯 Goal reached. Reset to run again.';return}
+ clearA();const n=astarNodes[ai++],e=document.getElementById(n.id);e.classList.add('current');
+ const f=n.g+n.h;document.getElementById('astat').innerHTML='<b>Current:</b> '+n.name+' · g='+n.g+' · h='+n.h+' · f='+f;
+ document.getElementById('fval').textContent=f;document.getElementById('fbar').style.width=Math.min(f*10,100)+'%';
+ document.getElementById('alog').textContent='Selected '+n.name+' in this teaching sequence.\\ng(n) = '+n.g+'\\nh(n) = '+n.h+'\\nf(n) = '+f+(n.name==='G'?'\\n🎯 Goal reached!':'');
 }
-document.addEventListener("DOMContentLoaded",()=>{
- const done=AIProgress.get(LESSON_ID)>=100;
- document.getElementById("lessonProgress").style.width=done?"100%":"0%";
- document.getElementById("progressText").textContent=done?"Completed locally ✓":"Lesson not completed";
- if(done){document.getElementById("completeBtn").textContent="✓ Lesson Completed";document.getElementById("completeBtn").disabled=true;}
-});
+function resetA(){ai=0;clearA();document.getElementById('astat').innerHTML='<b>Current:</b> S';document.getElementById('fval').textContent='6';document.getElementById('fbar').style.width='60%';document.getElementById('alog').textContent='A* starts at S. Press Next A* Step.'}
+function inferKB(){
+ let out=['Knowledge Base:'];
+ if(document.getElementById('diya').checked)out.push('• Student(Diya)');
+ if(document.getElementById('raj').checked)out.push('• Student(Raj)');
+ if(!document.getElementById('diya').checked&&!document.getElementById('raj').checked){document.getElementById('klog').textContent='Add at least one fact first.';return}
+ out.push('\\nRule: Student(x) → Bright(x)\\n\\nInference:');
+ if(document.getElementById('diya').checked)out.push('• Bright(Diya) derived');
+ if(document.getElementById('raj').checked)out.push('• Bright(Raj) derived');
+ document.getElementById('klog').textContent=out.join('\\n');
+}
+function resetKB(){document.getElementById('diya').checked=false;document.getElementById('raj').checked=false;document.getElementById('klog').textContent='Knowledge Base is empty. Select a fact and click Infer.'}
+function check(q,c,id){const v=document.querySelector('input[name="'+q+'"]:checked'),e=document.getElementById(id);e.style.display='block';e.textContent=!v?'Choose an answer first.':v.value===c?'✅ Correct!':'❌ Try again — review the concept above.'}
 </script>
-</body></html>
+</body>
+</html>
